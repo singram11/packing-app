@@ -14,6 +14,11 @@ def render_homepage():
 
     return 'Hello World'
 
+@app.route('/gear')
+    """Show gear info"""
+
+    
+
 
 
 if __name__ == '__main__':
