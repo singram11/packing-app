@@ -3,6 +3,7 @@
 from flask import Flask, render_template, flash, session, redirect
 
 from model import connect_to_db
+import crud
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -12,12 +13,22 @@ app.secret_key = "dev"
 def render_homepage():
     """ Shows homepage """
 
-    return 'Hello World'
+    return render_template('index.html')
 
-@app.route('/gear')
-    """Show gear info"""
+# @app.route('/gear')
+# def renter_gear_page():
+#     """ Shows 
+
+# @app.route('/usergear')
+# def get_gear_by_user():
+    #user = get from session 
+    
+    #run function from crud to return user gear
+    #turn that in to json and return 
 
     
+
+
 
 
 

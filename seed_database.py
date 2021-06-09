@@ -66,28 +66,30 @@ for item in sample_gear:
 
 
 #create list items 
-item_list = []
+list_items = []
 
 for item in sample_gear:
 
-    new_item = crud.create_list_item(sample_gear[item]["item"])
-    item_list.append(new_item)
+    name = sample_gear[item]["item"]
+    category = choice(item_cat)
+    new_item = crud.create_list_item(name=name, item_cat=category)
+    list_items.append(new_item)
 
-#create users
-i = 0
+# #create users
+# i = 0
 
-for n in range(10):
-    email = f'user{n}@test.com'  # Voila! A unique email!
-    password = 'test'
+# for n in range(10):
+#     email = f'user{n}@test.com'  # Voila! A unique email!
+#     password = 'test'
 
-    user = crud.create_user(email, password)
-    i = i + 1
+#     user = crud.create_user(email, password)
+#     i = i + 1
 
-    for n in range(2):
-        category = choice(list_cat)
-        list_no = i + n 
-        name = f"List no: {list_no}"
-        create_list(user, name, category)
-        
-         
-        #add 2 random items to list 
+#     for n in range(2):
+#         category = choice(list_cat)
+#         list_no = i + n 
+#         name = f"List no: {list_no}"
+#         create_list(user, name, category)
+
+
+#         #add 2 random items to list 

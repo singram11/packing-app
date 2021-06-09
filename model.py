@@ -87,7 +87,7 @@ class List_item(db.Model):
                         autoincrement=True,
                         primary_key=True)
     name = db.Column(db.String)
-    item_cat = db.Column(db.Integer, db.ForeignKey('item_categories.cat_id'))
+    cat_id = db.Column(db.Integer, db.ForeignKey('item_categories.cat_id'))
 
     item_category = db.relationship('Item_category')
     list_item_rel = db.relationship('List_item_rel')
@@ -96,7 +96,7 @@ class List_item(db.Model):
     def __repr__(self):
         return f'<List_item item_id={self.item_id} name={self.name}>'
 
-class List_item_rel(db.model):
+class List_item_rel(db.Model):
     """relational table between lists and list_items"""
     
     __tablename__ = 'list_item_rels'
@@ -108,7 +108,7 @@ class List_item_rel(db.model):
     item_id = db.Column(db.Integer, db.ForeignKey('list_items.item_id'))
 
     lists = db.relationship('List')
-    list_items = db.relationsip('List_item')
+    list_items = db.relationship('List_item')
 
 class Item_category(db.Model):
     """ List item category """
