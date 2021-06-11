@@ -75,21 +75,39 @@ for item in sample_gear:
     new_item = crud.create_list_item(name=name, item_cat=category)
     list_items.append(new_item)
 
-# #create users
+#create users
+list_users =[]
+list_user_lists =[]
 # i = 0
 
-# for n in range(10):
-#     email = f'user{n}@test.com'  # Voila! A unique email!
-#     password = 'test'
+for n in range(10):
+    email = f'user{n}@test.com'  # Voila! A unique email!
+    password = 'test'
+    fname = f'firstname{n}'
+    lname = f'lastname{n}'
 
-#     user = crud.create_user(email, password)
-#     i = i + 1
+    user = crud.create_user(fname, lname, email, password)
+    list_users.append(user)
+    # i = i + 1
 
-#     for n in range(2):
-#         category = choice(list_cat)
-#         list_no = i + n 
-#         name = f"List no: {list_no}"
-#         create_list(user, name, category)
+    for i in range(2):
+        category = choice(list_cat)
+        list_no = n
+        name = f"My list: {list_no}"
+        user_list = crud.create_list(user, name, category)
+        list_user_lists.append(user_list)
 
+# add items to list
+list_item_rels = []
 
-#         #add 2 random items to list 
+for list_obj in list_user_lists:
+    for i in range(2):
+        rand_item = choice(list_items)
+        list_rel = crud.create_list_item_relationship(list_obj,rand_item)
+         
+#associate gear with items 
+gear_item_rels = []
+for item  in list_items:
+    gear = choice(gear_list)
+    gear_item_rel = crud.associate_gear_to_item(gear,item)
+    gear_item_rels.append(gear_item_rel)
