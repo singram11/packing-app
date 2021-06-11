@@ -1,7 +1,8 @@
 """Models for Packing App"""
 
 ## get error - is that an issue
-## try backpopulates on the secondary ones (check the error)
+## try backpopulates on the secondary ones (check the error) 
+## did fix as mentor 
 
 
 from flask_sqlalchemy import SQLAlchemy
@@ -62,7 +63,7 @@ class List(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     
     category = db.relationship('List_category', back_populates='lists')
-    list_items = db.relationship('List_item', secondary='list_item_rels')
+    list_items = db.relationship('List_item', secondary='list_item_rels', back_populates='lists')
     user = db.relationship('User', back_populates="lists")
     #why do we do both?
 
@@ -85,8 +86,12 @@ class List_item(db.Model):
 
     item_category = db.relationship('Item_category',
                                     back_populates='items')
-    lists = db.relationship('List', secondary='list_item_rels')
-    gear = db.relationship('Gear', secondary='gear_items')
+    lists = db.relationship('List', 
+                            secondary='list_item_rels',
+                            back_populates='list_items')
+    gear = db.relationship('Gear', 
+                            secondary='gear_items',
+                            back_populates='list_items')
     
 
     def __repr__(self):
@@ -160,7 +165,9 @@ class Gear(db.Model):
     description = db.Column(db.Text)  
     img = db.Column(db.String)
 
-    list_items = db.relationship('List_item', secondary='gear_items')
+    list_items = db.relationship('List_item', 
+                                secondary='gear_items',
+                                back_populates='gear')
 
     def __repr__(self):
         return f'<Gear gear_id={self.gear_id} name={self.name}>'
