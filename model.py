@@ -112,6 +112,8 @@ class List_item_rel(db.Model):
     lists = db.relationship('List')
     list_items = db.relationship('List_item')
     
+    def __repr__(self):
+        return f'<List_item_rel item_id={self.list_item_rel_id}>'
 
 
 class Item_category(db.Model):

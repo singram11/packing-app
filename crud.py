@@ -1,7 +1,7 @@
 """CRUD operations"""
 
 from model import (db, User, List_category, List, List_item, Item_category, 
-                   List_item_rel, Gear_item, Gear)
+                   List_item_rel, Gear_item, Gear, connect_to_db)
 
 
 def create_user(fname, lname,email, password):
@@ -130,4 +130,61 @@ def associate_gear_to_item(gear, list_item):
 
     return gear_item_rel
 
+def get_user_object(email):
+    """Return user object based on email"""
 
+    user = db.session.query(User).filter(User.email == email).one()
+    
+    return user
+
+def get_lists_by_user(user):
+    """Get list of lists by user
+
+    Takes in a user object and returns a list 
+    of list objects"""
+
+    user_id = user.user_id
+    lists = db.session.query(List).filter(List.user_id==user_id).all()
+
+    return lists
+
+def get_gear_by_user(user):
+    """Return unique list of gear by user"""
+
+    user_id = user.user_id
+    
+    # all_list_items = []
+
+    # for user_list in user_lists: 
+    #     current_list_items = user_list.list_items
+    #     all_list_items = all_list_items + current_list_items
+        
+
+    # all_gear = []
+    # print(f'List_items{all_list_items}')
+    # for item in all_list_items:
+    #     all_gear.append(item.gear)
+
+    gear_items = (db.session.query(Gear_item)
+                .join(List_item).join(List_item_rel).join(List).join(User)
+                .filter(User.user_id==user_id).all())
+
+    user_gear = set()
+
+    for item in gear_items:
+        print(item.gear)
+        user_gear.add(item.gear)
+
+
+    return user_gear
+
+
+    #get user and lists 
+    #get all item + gear associated with those items 
+    #return gear objects 
+
+
+
+if __name__ == '__main__':
+    from server import app
+    connect_to_db(app)

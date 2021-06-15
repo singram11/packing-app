@@ -25,7 +25,7 @@ sample_gear = { "jetboil": {
                 },
                 "petzel 2 grigri": {
                     "name": "petzel 2 grigri",
-                    "item": "belay_device"
+                    "item": "belay device"
                 },
                 "nanopuff": {
                     "name":"nanopuff",
@@ -111,3 +111,6 @@ for item  in list_items:
     gear = choice(gear_list)
     gear_item_rel = crud.associate_gear_to_item(gear,item)
     gear_item_rels.append(gear_item_rel)
+
+
+crud.associate_gear_to_item(gear_list[0],list_items[0])
