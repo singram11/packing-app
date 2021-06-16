@@ -3,19 +3,20 @@ function Hello() {
 }
 
 function GearList(props) {
-    const gearData = props;
-    console.log(props)
+    const gearData = props.gear;
+    console.log(gearData)
     const gear = [];
     console.log(Object.values(gearData))
 
-    for (const item of Object.values(gearData)) {
+    for (const item in gearData) {
         console.log(item);
         const gearCard = (
             <GearItem
-                gearName={item.name}
-                description={item.description}
-                weight={item.weight}
-                img={item.img}
+                key={item}
+                gearName={gearData[item].name}
+                description={gearData[item].description}
+                weight={gearData[item].weight}
+                img={gearData[item].img}
             />
         );
 
