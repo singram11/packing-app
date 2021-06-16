@@ -30,25 +30,44 @@ def show_user_lists():
     user_lists = {}
 
     for user_list in lists:
-
-        list_info = {}
-        list_info["Name"] = user_list.name
-        list_info["Category"] = user_list.category.name
-        
+        user_lists[user_list.list_id] = {'name': user_list.name,
+                                        'category': user_list.category.name
+        }
+       
+            
         # need to get gear items by list and name 
 
-        gear_objs = user_list.list_items
+        # gear_objs = user_list.list_items
         
-        gear_list = []
-        for gear in gear_objs:
-            print(gear.name)
-            gear_list.append(gear.name)
+        # gear_list = []
+        # for gear in gear_objs:
+        #     print(gear.name)
+        #     gear_list.append(gear.name)
 
-        list_info["List Items"] = gear_list
-
-        user_lists[user_list.list_id] = list_info
+        # list_info["List Items"] = gear_list
 
     return jsonify(user_lists)
+
+@app.route('/userlist/items')
+def show_list_items():
+    
+    #find better way to pass list
+    user = crud.get_user_object('user1@test.com')
+    lists = crud.get_lists_by_user(user)
+
+
+    list_items = crud.get_list_items(lists[0])
+
+    list_item_data = {}
+
+    for item in list_items:
+
+        list_item_data[item.item_id] = {'name': item.name,
+                                        'category': item.item_category.name,
+                                        'gear': item.gear[0].name}
+
+    return jsonify(list_item_data)
+        
 
 @app.route('/usergear')
 def show_user_gear():

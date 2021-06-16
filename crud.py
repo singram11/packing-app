@@ -148,23 +148,23 @@ def get_lists_by_user(user):
 
     return lists
 
+def get_list_items(lst):
+    """Return a list of items by list 
+     
+     takes in a list object 
+     returns a list of item objects"""
+
+    list_id = lst.list_id
+
+    list_items = db.session.query(List_item).filter(list_id==list_id).all()
+
+    return list_items 
+
 def get_gear_by_user(user):
     """Return unique list of gear by user"""
 
     user_id = user.user_id
-    
-    # all_list_items = []
-
-    # for user_list in user_lists: 
-    #     current_list_items = user_list.list_items
-    #     all_list_items = all_list_items + current_list_items
-        
-
-    # all_gear = []
-    # print(f'List_items{all_list_items}')
-    # for item in all_list_items:
-    #     all_gear.append(item.gear)
-
+   
     gear_items = (db.session.query(Gear_item)
                 .join(List_item).join(List_item_rel).join(List).join(User)
                 .filter(User.user_id==user_id).all())
@@ -175,13 +175,9 @@ def get_gear_by_user(user):
         print(item.gear)
         user_gear.add(item.gear)
 
-
     return user_gear
 
 
-    #get user and lists 
-    #get all item + gear associated with those items 
-    #return gear objects 
 
 
 
