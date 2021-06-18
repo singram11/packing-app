@@ -4,9 +4,8 @@ function Hello() {
 
 function GearList(props) {
     const gearData = props.gear;
-    console.log(gearData)
     const gear = [];
-    console.log(Object.values(gearData))
+   
 
     for (const item in gearData) {
         console.log(item);
@@ -35,10 +34,42 @@ function GearItem(props) {
 
     return (
         <div className="gear-item">
-            <li>{gearName}</li>
-            <li>{weight}</li>
-            <li>{description}</li>
-            <li>{url}</li>
+            <p>{gearName}</p>
+            <p>{weight}</p>
+            <p>{description}</p>
+            <p>{url}</p>
+        </div>
+    )
+}
+
+function Lists(props) {
+    const lists = props.lists;
+    const listsArr = [];
+
+    for (const list in lists) {
+        const listCard = ( 
+            <ListCard
+                key={list}
+                name={lists[list].name}
+                category={lists[list].category}
+            />
+        );
+
+        listsArr.push(listCard);
+    }
+    
+    return <React.Fragment>
+        <div className="list-container">{listsArr}</div>
+    </React.Fragment>
+}
+
+function ListCard(props) {
+    const {name, category} = props;
+
+    return (
+        <div className="list-name">
+            <span>{name} </span>
+            <span>Category: {category}</span>
         </div>
     )
 }

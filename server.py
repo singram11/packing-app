@@ -21,6 +21,12 @@ def render_gear_page():
 
     return render_template('gear.html')
 
+@app.route('/lists')
+def render_list_page():
+    """Show list page template"""
+
+    return render_template('lists.html')
+
 @app.route('/userlists')
 def show_user_lists():
     # user = get from session 
