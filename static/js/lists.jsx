@@ -3,7 +3,7 @@ function ListsPage() {
     const [lists, setLists] = React.useState({});
 
     React.useEffect(()=> {
-        fetch('/userlists')
+        fetch('/api/userlists')
         .then((response) => response.json())
         .then((result) => {
             setLists(result);

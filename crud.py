@@ -148,15 +148,17 @@ def get_lists_by_user(user):
 
     return lists
 
-def get_list_items(lst):
+def get_list_items_by_id(list_id):
     """Return a list of items by list 
      
      takes in a list object 
      returns a list of item objects"""
 
-    list_id = lst.list_id
-
-    list_items = db.session.query(List_item).filter(list_id==list_id).all()
+    
+    # list_items = db.session.query(List_item).filter(list_id_test==list_id).all()
+    list_items = (db.session.query(List_item)
+                .join(List_item_rel).join(List)
+                .filter(List.list_id ==list_id).all())
 
     return list_items 
 

@@ -50,6 +50,7 @@ function Lists(props) {
         const listCard = ( 
             <ListCard
                 key={list}
+                id={list}
                 name={lists[list].name}
                 category={lists[list].category}
             />
@@ -64,11 +65,14 @@ function Lists(props) {
 }
 
 function ListCard(props) {
-    const {name, category} = props;
+    const {name, id, category} = props;
+    const url = `api/userlists/items/${id}`
+
+    console.log(url)
 
     return (
         <div className="list-name">
-            <span>{name} </span>
+            <a href={url}>{name}</a>
             <span>Category: {category}</span>
         </div>
     )

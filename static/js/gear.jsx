@@ -3,7 +3,7 @@ function GearPage() {
     const [gear, setGear] = React.useState({});
 
     React.useEffect(() => {
-        fetch('/usergear')
+        fetch('/api/usergear')
             .then((response) => response.json())
             .then((result) => {
                 setGear(result);

@@ -27,13 +27,15 @@ def render_lists_page():
 
     return render_template('lists.html')
 
-@app.route('/list/list-id')
-def render_list_details_page():
+@app.route('/list/list_details')
+def render_list_details_page(list_id):
     """Show list details page"""
+
+    print(f"list id: {list_id}")
 
     return render_template('list-details.html')
 
-@app.route('/userlists')
+@app.route('/api/userlists')
 def show_user_lists():
     # user = get from session 
     user = crud.get_user_object('user1@test.com')
@@ -48,15 +50,17 @@ def show_user_lists():
             
     return jsonify(user_lists)
 
-@app.route('/userlists/items')
-def show_list_items():
+@app.route('/api/userlists/items/<list_id>')
+def show_list_items(list_id):
     
-    #find better way to pass list
-    user = crud.get_user_object('user1@test.com')
-    lists = crud.get_lists_by_user(user)
+    #find better way to pass user obj
+    # user = crud.get_user_object('user1@test.com')
+    # lists = crud.get_lists_by_user(user)
 
+    print('BUUUUUUTTTTTTTTTTTTTTTTTTTTTTTTTTTTSSSSSSSSSSSSSS')
+    list_items = crud.get_list_items_by_id(list_id)
 
-    list_items = crud.get_list_items(lists[0])
+    print(f'/n/n/n {list_items} /n/n/n')
 
     list_item_data = {}
 
@@ -69,7 +73,7 @@ def show_list_items():
     return jsonify(list_item_data)
         
 
-@app.route('/usergear')
+@app.route('/api/usergear')
 def show_user_gear():
 
     # user = get from session 

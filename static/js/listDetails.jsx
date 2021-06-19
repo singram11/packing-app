@@ -3,7 +3,7 @@ function ListDetailsPage() {
     const [listItems, setListItems] = React.useState({});
 
     React.useEffect(()=> {
-        fetch('/userlists/items')
+        fetch('/api/userlists/items')
             .then((response) => response.json())
             .then((result) => {
                 setListItems(result);
