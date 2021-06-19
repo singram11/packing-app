@@ -73,3 +73,39 @@ function ListCard(props) {
         </div>
     )
 }
+
+function ShowListItems(props) {
+    const listItems = props.listItems;
+    console.log(listItems)
+    const listItemsArr = [];
+
+    for (const item in listItems) {
+        const listItemCard = (
+            <ItemCard 
+                key={item}
+                name={listItems[item].name}
+                category={listItems[item].category}
+                gear={listItems[item].gear}
+            />
+        );
+
+        listItemsArr.push(listItemCard);
+    }
+
+    return <React.Fragment>
+        <div className="list-item-container">{listItemsArr}</div>
+        </React.Fragment>
+}
+
+function ItemCard(props){
+    const {name, category, gear} = props;
+
+    return (
+        <div className="list-item">
+            <div className="item-name">{name}</div>
+            <div className="item-details">Category: {category}</div>
+            <div className="item-details">Gear: {gear}</div>
+
+        </div>
+    )
+}

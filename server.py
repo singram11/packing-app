@@ -22,10 +22,16 @@ def render_gear_page():
     return render_template('gear.html')
 
 @app.route('/lists')
-def render_list_page():
+def render_lists_page():
     """Show list page template"""
 
     return render_template('lists.html')
+
+@app.route('/list/list-id')
+def render_list_details_page():
+    """Show list details page"""
+
+    return render_template('list-details.html')
 
 @app.route('/userlists')
 def show_user_lists():
@@ -39,22 +45,10 @@ def show_user_lists():
         user_lists[user_list.list_id] = {'name': user_list.name,
                                         'category': user_list.category.name
         }
-       
             
-        # need to get gear items by list and name 
-
-        # gear_objs = user_list.list_items
-        
-        # gear_list = []
-        # for gear in gear_objs:
-        #     print(gear.name)
-        #     gear_list.append(gear.name)
-
-        # list_info["List Items"] = gear_list
-
     return jsonify(user_lists)
 
-@app.route('/userlist/items')
+@app.route('/userlists/items')
 def show_list_items():
     
     #find better way to pass list
