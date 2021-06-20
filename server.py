@@ -27,13 +27,13 @@ def render_lists_page():
 
     return render_template('lists.html')
 
-@app.route('/list/list_details')
-def render_list_details_page(list_id):
-    """Show list details page"""
+# @app.route('/list/list_details')
+# def render_list_details_page(list_id):
+#     """Show list details page"""
 
-    print(f"list id: {list_id}")
+#     print(f"list id: {list_id}")
 
-    return render_template('list-details.html')
+#     return render_template('list-details.html')
 
 @app.route('/api/userlists')
 def show_user_lists():
@@ -71,8 +71,9 @@ def show_list_items(list_id):
     return jsonify(list_item_data)
         
 
+
 @app.route('/api/usergear')
-def show_user_gear():
+def show_user_gear_list():
 
     # user = get from session 
     user = crud.get_user_object('user1@test.com')
@@ -82,10 +83,25 @@ def show_user_gear():
 
     for item in user_gear:
 
-        gear_data[item.gear_id] = {'name': item.name,
-                                    'weight': item.weight,
-                                    'description':item.description,
-                                    'img': item.img}
+        gear_data[item.gear_id] = {'name': item.name}
+                                    # 'weight': item.weight,
+                                    # 'description':item.description,
+                                    # 'img': item.img}
+    return jsonify(gear_data)
+
+@app.route('/api/usergear/details/<gear_id>')
+def show_user_gear_item(gear_id):
+
+    # user = get from session 
+    # user = crud.get_user_object('user1@test.com')
+    # user_gear = crud.get_gear_by_user(user)
+    gear = crud.get_gear_by_id(gear_id)
+
+    gear_data = {'name': gear.name,
+                'weight': gear.weight,
+                'description':gear.description,
+                'img': gear.img}
+
     return jsonify(gear_data)
 
 

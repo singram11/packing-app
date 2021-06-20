@@ -2,20 +2,18 @@ function Hello() {
     return (<p>hello world</p>);
 }
 
+
 function GearList(props) {
     const gearData = props.gear;
     const gear = [];
    
-
     for (const item in gearData) {
         console.log(item);
         const gearCard = (
             <GearItem
                 key={item}
+                id={item}
                 gearName={gearData[item].name}
-                description={gearData[item].description}
-                weight={gearData[item].weight}
-                img={gearData[item].img}
             />
         );
 
@@ -30,6 +28,30 @@ function GearList(props) {
 }
 
 function GearItem(props) {
+    const {id, gearName} = props;
+
+    const url = `/api/usergear/details/${id}`
+    return (
+        <ReactRouterDOM.Link to={url}>{gearName}</ReactRouterDOM.Link> 
+    )
+}
+
+function GearItemDetails(props) {
+    const gearDetail = props.gearDetail;
+    const {description, img, name, weight} = gearDetail;
+    console.log(name);
+    
+    return (
+        <React.Fragment>
+            <p>{name}</p>
+            <p>Weight:{weight}</p>
+            <p>Description:{description}</p>
+            <p>{img}</p>
+        </React.Fragment>
+    )
+}
+
+function GearItemDetailCard(props) {
     const {gearName, weight, description, url} = props;
 
     return (

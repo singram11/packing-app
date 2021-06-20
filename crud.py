@@ -179,7 +179,14 @@ def get_gear_by_user(user):
 
     return user_gear
 
+def get_gear_by_id(gear_id):
+    """Get gear by id# 
 
+    take in num and return gear obj"""
+
+    gear = db.session.query(Gear).filter(Gear.gear_id==gear_id).one()
+
+    return gear
 
 
 
