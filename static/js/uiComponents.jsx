@@ -66,15 +66,16 @@ function Lists(props) {
 
 function ListCard(props) {
     const {name, id, category} = props;
-    const url = `api/userlists/items/${id}`
+    const url = `/userlists/items/${id}`
 
     console.log(url)
 
     return (
-        <div className="list-name">
-            <a href={url}>{name}</a>
-            <span>Category: {category}</span>
-        </div>
+        // <div className="list-name">
+        //     <a href={url}>{name}</a>
+        //     <span>Category: {category}</span>
+        // </div>
+        <ReactRouterDOM.Link to={url}>{name}</ReactRouterDOM.Link>
     )
 }
 

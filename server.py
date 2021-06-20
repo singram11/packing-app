@@ -50,17 +50,15 @@ def show_user_lists():
             
     return jsonify(user_lists)
 
-@app.route('/api/userlists/items/<list_id>')
+@app.route('/userlists/items/<list_id>')
 def show_list_items(list_id):
     
     #find better way to pass user obj
     # user = crud.get_user_object('user1@test.com')
     # lists = crud.get_lists_by_user(user)
 
-    print('BUUUUUUTTTTTTTTTTTTTTTTTTTTTTTTTTTTSSSSSSSSSSSSSS')
+    
     list_items = crud.get_list_items_by_id(list_id)
-
-    print(f'/n/n/n {list_items} /n/n/n')
 
     list_item_data = {}
 
