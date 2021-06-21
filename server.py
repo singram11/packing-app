@@ -1,6 +1,6 @@
 """ Server for the packing app"""
 
-from flask import Flask, render_template, flash, session, redirect, jsonify
+from flask import Flask, render_template, flash, session, redirect, jsonify, request
 
 from model import connect_to_db
 import crud
@@ -105,15 +105,31 @@ def show_user_gear_item(gear_id):
     return jsonify(gear_data)
 
 
-    
-    #run function from crud to return user gear
-    #turn that in to json and return 
+@app.route("/new-list-item", methods=['POST'])
+def create_new_list_item():
+    """Add a new list item to the DB"""
 
-    
+    name = request.form.get('name')
+    category = request.form.get('category')
+
+    crud.create_list_item(name, category)
+    ## THIS ALSO NEEDS TO ADD THE RELEVANT LIST!!
+    return redirect('/')
 
 
+@app.route("/new-list", methods=['POST'])
+def create_new_list():
+    """Add a new list to the DB"""
 
+    # user = get from session 
+    user = crud.get_user_object('user1@test.com')
+    name = request.form.get('name')
+    category = request.form.get('category')
 
+    category_obj = crud.get_list_cat_by_name(category)
+    crud.create_list(user, name, category_obj)
+
+    return redirect('/')
 
 if __name__ == '__main__':
     connect_to_db(app)

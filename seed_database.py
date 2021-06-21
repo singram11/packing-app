@@ -92,9 +92,10 @@ for n in range(10):
 
     for i in range(2):
         category = choice(list_cat)
+        cat_name = category.name
         list_no = n
         name = f"My list: {list_no}"
-        user_list = crud.create_list(user, name, category)
+        user_list = crud.create_list(user, name, cat_name)
         list_user_lists.append(user_list)
 
 # add items to list

@@ -56,12 +56,26 @@ def create_item_category(name):
     
     return category
 
+def get_list_item_cat_by_name(name):
+    """Take in category name and return obj"""
 
+    category = db.session.query(Item_category).filter(Item_category.name==name).one()
 
-def create_list_item(name, item_cat):
+    return category
+
+def get_list_cat_by_name(name):
+    """Take in category name and return obj"""
+
+    category = db.session.query(List_category).filter(List_category.name==name).one()
+
+    return category
+
+def create_list_item(name, category):
     """Add a list item to a list"""
 
-    item_cat_id = item_cat.cat_id
+    cat_obj = get_list_item_cat_by_name(category)
+
+    item_cat_id = cat_obj.cat_id
 
     new_item = List_item(name=name, cat_id=item_cat_id)
     
