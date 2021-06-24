@@ -129,19 +129,44 @@ def create_new_list_item():
     return jsonify(list_item_data)
 
 
-@app.route("/new-list", methods=['POST'])
+@app.route('/new-list', methods=['POST'])
 def create_new_list():
     """Add a new list to the DB"""
 
     # user = get from session 
     user = crud.get_user_object('user1@test.com')
-    name = request.form.get('name')
-    category = request.form.get('category')
+    name = request.json.get('name')
+    category = request.json.get('category')
 
     category_obj = crud.get_list_cat_by_name(category)
-    crud.create_list(user, name, category_obj)
+    new_list = crud.create_list(user, name, category_obj)
 
-    return redirect('/')
+    new_list_data ={}
+    new_list_data[new_list.list_id] = {'name':new_list.name}
+
+    return jsonify(new_list_data)
+
+@app.route('/new-gear', methods=['POST'])
+def create_new_gear():
+
+    print(f"what is request.json: {request.json}")
+
+    gearName = request.json.get('name')
+    weight = request.json.get('weight')
+    description = request.json.get('description')
+    img = request.json.get('img')
+
+    new_gear = crud.create_gear(gearName, weight, description, img)
+
+    gear_data = {}
+    gear_data[new_gear.gear_id] = { 'name': new_gear.name,
+                                    'weight': new_gear.weight,
+                                    'description': new_gear.description,
+                                    'img': new_gear.img }
+
+    return jsonify(gear_data)
+
+
 
 if __name__ == '__main__':
     connect_to_db(app)

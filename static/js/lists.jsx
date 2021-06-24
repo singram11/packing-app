@@ -18,15 +18,21 @@ function ListsPage() {
     
     const [lists, setLists] = React.useState({});
 
-    React.useEffect(()=> {
+    function renderLists() {
         fetch('/api/userlists')
         .then((response) => response.json())
         .then((result) => {
             setLists(result);
         });
+    }
+
+    React.useEffect(()=> {renderLists()
     }, []);
     
-    return (<Lists lists={lists}/>)
+    return (<React.Fragment>
+                <Lists lists={lists}/>
+                <AddListForm onSubmit={renderLists}/>
+            </React.Fragment>)
 }
 
 function ListDetailsPage() {

@@ -36,60 +36,6 @@ function ShowGearDetails() {
 
 }
 
-function AddGearForm(props) {
-    const [gearName, setName] = React.useState('');
-    const [category, setCategory] = React.useState('');
-    const [weight, setWeight] = React.useState('');
-    const [description, setDescription] = React.useState('');
-    
-    function handleNameChange(event) {
-        setName(event.target.value);
-      }
-    
-    function handleCategoryChange(event) {
-        setCategory(event.target.value);
-    }
-
-    function handleWeightChange(event) {
-        setWeight(event.target.value);
-    }
-    
-    function handleDescriptionChange(event) {
-        setDescription(event.target.value);
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-     
-        const postBody = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({'name':itemName,
-                                'category':category,
-                                'weight': weight,
-                                'description': description})
-        };
-
-        fetch('new url here', postBody)
-            .then(() => props.onSubmit && props.onSubmit())
-    };
-
-    return( 
-            <form onSubmit={handleSubmit}>
-                <label>Gear Name</label>
-                <input type="text" value={gearName} onChange={handleNameChange}/>
-                <label>Category</label>
-                <input value={category} onChange={handleCategoryChange}/>
-                <label>Weight</label>
-                <input value={weight} onChange={handleWeightChange}/>
-                <label>Description</label>
-                <textarea value={description} onChange={handleDescriptionChange}/>
-                <input type="submit" value="Submit"/>
-            </form>
-        );
-}
-
-
 function ShowGear() {
 
     const [gear, setGear] = React.useState({});
@@ -111,5 +57,62 @@ function ShowGear() {
                 <AddGearForm onSubmit={renderGear}/>
             </React.Fragment>);
 }
+
+
+function AddGearForm(props) {
+    const [gearName, setName] = React.useState('');
+    const [img, setImage] = React.useState('');
+    const [weight, setWeight] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    
+    function handleNameChange(event) {
+        setName(event.target.value);
+      }
+
+    function handleWeightChange(event) {
+        setWeight(event.target.value);
+    }
+    
+    function handleDescriptionChange(event) {
+        setDescription(event.target.value);
+    }
+
+    function handleImageChange(event) {
+        setImage(event.target.value);
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        
+        const postBody = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({'name':gearName,
+                                'weight': weight,
+                                'description': description,
+                                'img': img})
+        };
+
+        fetch('/new-gear', postBody)
+            .then(() => props.onSubmit && props.onSubmit())
+    };
+
+    return( 
+            <form onSubmit={handleSubmit}>
+                <label>Gear Name</label>
+                <input type="text" value={gearName} onChange={handleNameChange}/>
+                <label>Weight</label>
+                <input value={weight} onChange={handleWeightChange}/>
+                <label>Description</label>
+                <textarea value={description} onChange={handleDescriptionChange}/>
+                <label>Image Link</label>
+                <input value={img} onChange={handleImageChange}/>
+                <input type="submit" value="Submit"/>
+            </form>
+        );
+}
+
+
+
 
 ReactDOM.render(<GearPage/>, document.getElementById('root'));

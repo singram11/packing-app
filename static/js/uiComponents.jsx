@@ -201,3 +201,41 @@ function AddListItemForm(props) {
             </form>
         );
 }
+
+function AddListForm(props) {
+    const [listName, setName] = React.useState('');
+    const [category, setCategory] = React.useState('');
+    
+
+    function handleListNameChange(event) {
+        setName(event.target.value);
+      }
+    
+    function handleCategoryChange(event) {
+        setCategory(event.target.value);
+    }
+    
+    function handleSubmit(event) {
+        event.preventDefault();
+     
+        const postBody = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({'name':listName,
+                                'category':category})
+        };
+
+        fetch('/new-list', postBody)
+            .then(() => props.onSubmit && props.onSubmit())
+    };
+
+    return( 
+            <form onSubmit={handleSubmit}>
+                <label>List Name</label>
+                <input type="text" value={listName} onChange={handleListNameChange}/>
+                <label>Category</label>
+                <input value={category} onChange={handleCategoryChange}/>
+                <input type="submit" value="Submit"/>
+            </form>
+        );
+}
