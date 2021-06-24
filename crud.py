@@ -100,9 +100,9 @@ def create_list_item_relationship(list_obj, list_item):
 
     return list_item_rel
 
-def add_item_to_list(list_obj, list_item):
-    """Check if the item exists, create the item, 
-    and return list_item_relationship"""
+# def add_item_to_list(list_obj, list_item):
+#     """Check if the item exists, create the item, 
+#     and return list_item_relationship"""
 
    
     # count = db.session.query(List_item).filter(List_item.name== item_name).all()
@@ -202,7 +202,14 @@ def get_gear_by_id(gear_id):
 
     return gear
 
+def get_list_by_id(list_id):
+    """Get list by list id
 
+    takes in integer, returns list object"""
+
+    list_obj = db.session.query(List).filter(List.list_id==list_id).one()
+
+    return list_obj
 
 if __name__ == '__main__':
     from server import app

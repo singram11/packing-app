@@ -27,13 +27,11 @@ def render_lists_page():
 
     return render_template('lists.html')
 
-# @app.route('/list/list_details')
-# def render_list_details_page(list_id):
-#     """Show list details page"""
+@app.route('/userlists/items/<list_id>')
+def render_list_details_page():
+    """Show list details page"""
 
-#     print(f"list id: {list_id}")
-
-#     return render_template('list-details.html')
+    return render_template('lists.html')
 
 @app.route('/api/userlists')
 def show_user_lists():
@@ -50,23 +48,28 @@ def show_user_lists():
             
     return jsonify(user_lists)
 
-@app.route('/userlists/items/<list_id>')
+@app.route('/api/userlists/items/<list_id>')
 def show_list_items(list_id):
     
     #find better way to pass user obj
     # user = crud.get_user_object('user1@test.com')
     # lists = crud.get_lists_by_user(user)
 
-    
     list_items = crud.get_list_items_by_id(list_id)
 
     list_item_data = {}
 
-    for item in list_items:
+    for item in list_items: 
 
-        list_item_data[item.item_id] = {'name': item.name,
-                                        'category': item.item_category.name,
-                                        'gear': item.gear[0].name}
+        if item.gear:
+            print("Made it to the gear section")                            #not all items will have gear need to deal with this 
+            list_item_data[item.item_id] = {'name': item.name,
+                                           'category': item.item_category.name,
+                                           'gear': item.gear[0].name}
+        else: 
+            print("made it to the non gear")
+            list_item_data[item.item_id]= {'name': item.name,
+                                           'category': item.item_category.name}
 
     return jsonify(list_item_data)
         
@@ -105,16 +108,26 @@ def show_user_gear_item(gear_id):
     return jsonify(gear_data)
 
 
-@app.route("/new-list-item", methods=['POST'])
+@app.route('/new-list-item', methods=['POST'])
 def create_new_list_item():
     """Add a new list item to the DB"""
-
-    name = request.form.get('name')
-    category = request.form.get('category')
-
-    crud.create_list_item(name, category)
+    
+    #need to figure out how to pul list id info in
+    list_obj = crud.get_list_by_id(3)
+    
+    name = request.json.get('name')
+    category = request.json.get('category')
+    
+    list_item = crud.create_list_item(name, category)
     ## THIS ALSO NEEDS TO ADD THE RELEVANT LIST!!
-    return redirect('/')
+    rel = crud.create_list_item_relationship(list_obj, list_item)
+    print(rel)
+
+    list_item_data = {}
+    list_item_data[list_item.item_id]= {'name': list_item.name,
+                                           'category': list_item.item_category.name}
+
+    return jsonify(list_item_data)
 
 
 @app.route("/new-list", methods=['POST'])

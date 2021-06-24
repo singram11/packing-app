@@ -106,15 +106,30 @@ function ShowListItems(props) {
     console.log(listItems)
     const listItemsArr = [];
 
+        
     for (const item in listItems) {
-        const listItemCard = (
-            <ItemCard 
-                key={item}
-                name={listItems[item].name}
-                category={listItems[item].category}
-                gear={listItems[item].gear}
-            />
-        );
+        let listItemCard = '';
+        if (listItems[item].gear) {
+            listItemCard = (
+                <ItemCardWithGear 
+                    key={item}
+                    name={listItems[item].name}
+                    category={listItems[item].category}
+                    gear={listItems[item].gear}
+                />
+            );
+        } else {
+            listItemCard = (
+                <ItemCardNoGear 
+                    key={item}
+                    name={listItems[item].name}
+                    category={listItems[item].category}
+                   
+                />
+            );
+        }
+        
+       
 
         listItemsArr.push(listItemCard);
     }
@@ -124,7 +139,18 @@ function ShowListItems(props) {
         </React.Fragment>
 }
 
-function ItemCard(props){
+function ItemCardNoGear(props){
+    const {name, category} = props;
+
+    return (
+        <div className="list-item">
+            <div className="item-name">{name}</div>
+            <div className="item-details">Category: {category}</div>
+        </div>
+    )
+}
+
+function ItemCardWithGear(props){
     const {name, category, gear} = props;
 
     return (
@@ -135,4 +161,43 @@ function ItemCard(props){
 
         </div>
     )
+}
+
+function AddListItemForm(props) {
+    const [itemName, setName] = React.useState('');
+    const [category, setCategory] = React.useState('');
+    
+
+    function handleListNameChange(event) {
+        setName(event.target.value);
+      }
+    
+    function handleCategoryChange(event) {
+        setCategory(event.target.value);
+    }
+    // need to move this function to the parent where I can use the 
+    // set result function to update the function thats loading the page
+    function handleSubmit(event) {
+        event.preventDefault();
+     
+        const postBody = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({'name':itemName,
+                                'category':category})
+        };
+
+        fetch('/new-list-item', postBody)
+            .then(() => props.onSubmit && props.onSubmit())
+    };
+
+    return( 
+            <form onSubmit={handleSubmit}>
+                <label>Item Name</label>
+                <input type="text" value={itemName} onChange={handleListNameChange}/>
+                <label>Category</label>
+                <input value={category} onChange={handleCategoryChange}/>
+                <input type="submit" value="Submit"/>
+            </form>
+        );
 }

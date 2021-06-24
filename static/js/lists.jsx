@@ -35,17 +35,23 @@ function ListDetailsPage() {
 
     const [listItems, setListItems] = React.useState({});
 
-    const url = `/userlists/items/${id}`
+    const url = `/api/userlists/items/${id}`
 
-    React.useEffect(()=> {
+    function renderListItems() {
         fetch(url)
             .then((response) => response.json())
             .then((result) => {
                 setListItems(result);
             });
-    }, []);
+    }
+
+    React.useEffect(()=> { renderListItems()
+        }, []);
   
-    return (<ShowListItems listItems={listItems}/>)
+    return (<React.Fragment>
+                <ShowListItems listItems={listItems}/>
+                <AddListItemForm onSubmit={renderListItems}></AddListItemForm>
+            </React.Fragment>)
 
 }
 
