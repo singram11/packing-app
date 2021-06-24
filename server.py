@@ -120,9 +120,8 @@ def create_new_list_item():
     
     list_item = crud.create_list_item(name, category)
     ## THIS ALSO NEEDS TO ADD THE RELEVANT LIST!!
-    rel = crud.create_list_item_relationship(list_obj, list_item)
-    print(rel)
-
+    crud.create_list_item_relationship(list_obj, list_item)
+  
     list_item_data = {}
     list_item_data[list_item.item_id]= {'name': list_item.name,
                                            'category': list_item.item_category.name}
