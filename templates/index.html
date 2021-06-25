@@ -3,26 +3,10 @@
 
 {% block body%} 
     <div id="root"></div>
-    <form action="/new-list-item" method="POST">
-      <label>Item Name</label>
-      <input type="text" name="name">
-      <label>Category</label>
-      <input type="text" name="category">
-      <input type="submit" value="Save">
-    </form>
-
-    <div id="root"></div>
-    <form action="/new-list" method="POST">
-      <label>List Name</label>
-      <input type="text" name="name">
-      <label>Category</label>
-      <input type="text" name="category">
-      <input type="submit" value="Save">
-    </form>
 {% endblock %}
 
 {% block js %} 
     <script type="text/jsx" src="/static/js/uiComponents.jsx"></script>
-    <script type="text/jsx" src="/static/js/listDetails.jsx"></script>
+    <script type="text/jsx" src="/static/js/login.jsx"></script>
     
 {% endblock %}

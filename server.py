@@ -15,10 +15,15 @@ def render_homepage():
 
     return render_template('index.html')
 
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def login_user():
     """log the user in or return an error"""
 
+    email = request.json.get('email')
+    password = request.json.get('password')
+
+    print(email)
+    print(password)
     #find user information by email 
     #check if user exists 
     #if the user does not exists 
