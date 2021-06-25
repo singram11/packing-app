@@ -15,6 +15,24 @@ def render_homepage():
 
     return render_template('index.html')
 
+@app.route('/login')
+def login_user():
+    """log the user in or return an error"""
+
+    #find user information by email 
+    #check if user exists 
+    #if the user does not exists 
+        #return an error message - that user does not exist 
+    #else
+        #if the users password is correct
+            # logg the user in 
+        #else 
+            #return another error message
+        #mesage make the format the same 
+
+
+
+
 @app.route('/gear')
 def render_gear_page():
     """ Shows my gear template """
@@ -51,10 +69,7 @@ def show_user_lists():
 @app.route('/api/userlists/items/<list_id>')
 def show_list_items(list_id):
     
-    #find better way to pass user obj
-    # user = crud.get_user_object('user1@test.com')
-    # lists = crud.get_lists_by_user(user)
-
+    
     list_items = crud.get_list_items_by_id(list_id)
 
     list_item_data = {}
@@ -112,14 +127,16 @@ def show_user_gear_item(gear_id):
 def create_new_list_item():
     """Add a new list item to the DB"""
     
-    #need to figure out how to pul list id info in
-    list_obj = crud.get_list_by_id(3)
+    #Need to handle categories that dont exist 
+    #organize by cat
     
+    list_id = request.json.get('id')
     name = request.json.get('name')
     category = request.json.get('category')
-    
+
+    list_obj = crud.get_list_by_id(list_id)
     list_item = crud.create_list_item(name, category)
-    ## THIS ALSO NEEDS TO ADD THE RELEVANT LIST!!
+    
     crud.create_list_item_relationship(list_obj, list_item)
   
     list_item_data = {}

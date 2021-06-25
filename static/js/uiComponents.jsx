@@ -164,6 +164,7 @@ function ItemCardWithGear(props){
 }
 
 function AddListItemForm(props) {
+    const id = props.id
     const [itemName, setName] = React.useState('');
     const [category, setCategory] = React.useState('');
     
@@ -175,8 +176,7 @@ function AddListItemForm(props) {
     function handleCategoryChange(event) {
         setCategory(event.target.value);
     }
-    // need to move this function to the parent where I can use the 
-    // set result function to update the function thats loading the page
+    
     function handleSubmit(event) {
         event.preventDefault();
      
@@ -184,7 +184,8 @@ function AddListItemForm(props) {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'name':itemName,
-                                'category':category})
+                                'category':category,
+                                'id': id})
         };
 
         fetch('/new-list-item', postBody)

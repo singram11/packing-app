@@ -38,7 +38,7 @@ function ListsPage() {
 function ListDetailsPage() {
 
     const { id } = ReactRouterDOM.useParams();
-
+    
     const [listItems, setListItems] = React.useState({});
 
     const url = `/api/userlists/items/${id}`
@@ -56,7 +56,7 @@ function ListDetailsPage() {
   
     return (<React.Fragment>
                 <ShowListItems listItems={listItems}/>
-                <AddListItemForm onSubmit={renderListItems}></AddListItemForm>
+                <AddListItemForm onSubmit={renderListItems} id={id}></AddListItemForm>
             </React.Fragment>)
 
 }
