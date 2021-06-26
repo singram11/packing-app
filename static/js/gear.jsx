@@ -1,9 +1,13 @@
 function GearPage() {
+    const loggedIn = localStorage.getItem('loggedIn')
+
+    const [loggedInUpdate, setLogin] = React.useState(loggedIn);
+
     return <ReactRouterDOM.BrowserRouter>
             
             <ReactRouterDOM.Switch>
                 <ReactRouterDOM.Route exact path='/gear'>
-                    <ShowGear />
+                    {loggedIn ? <ShowGear /> : <LoginForm/>}
                 </ReactRouterDOM.Route>
                 <ReactRouterDOM.Route path='/api/usergear/details/:id' children={<ShowGearDetails/>}>
                     <ShowGearDetails/>

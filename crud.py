@@ -11,7 +11,14 @@ def create_user(fname, lname,email, password):
 
     db.session.add(user)
     db.session.commit()
+    
+    return user
 
+def get_user_by_email(email):
+    """Find user object by email"""
+
+    user = db.session.query(User).filter(User.email==email).first()
+    
     return user
 
 

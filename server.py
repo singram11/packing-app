@@ -22,21 +22,27 @@ def login_user():
     email = request.json.get('email')
     password = request.json.get('password')
 
-    print(email)
-    print(password)
-    #find user information by email 
-    #check if user exists 
-    #if the user does not exists 
-        #return an error message - that user does not exist 
-    #else
-        #if the users password is correct
-            # logg the user in 
-        #else 
-            #return another error message
-        #mesage make the format the same 
+    message = ''
+    success = False
 
+    user = crud.get_user_by_email(email)
+    
+    if user:
+        if user.password == password:
+            session['email'] = email
+            message = 'Logged in'
+            success = True
+        else: 
+            message = 'Your username or password is incorrect'
+    else: 
+        message = 'Your username or password is incorrect'
 
-
+    response_data = {}
+    response_data['message'] = message
+    response_data['success'] = success
+    
+    return response_data
+ 
 
 @app.route('/gear')
 def render_gear_page():
@@ -59,7 +65,8 @@ def render_list_details_page():
 @app.route('/api/userlists')
 def show_user_lists():
     # user = get from session 
-    user = crud.get_user_object('user1@test.com')
+    email = session['email']
+    user = crud.get_user_object(email)
     lists = crud.get_lists_by_user(user)
     
     user_lists = {}
@@ -98,8 +105,8 @@ def show_list_items(list_id):
 @app.route('/api/usergear')
 def show_user_gear_list():
 
-    # user = get from session 
-    user = crud.get_user_object('user1@test.com')
+    email = session['email']
+    user = crud.get_user_object(email)
     user_gear = crud.get_gear_by_user(user)
     
     gear_data = {}
@@ -115,9 +122,6 @@ def show_user_gear_list():
 @app.route('/api/usergear/details/<gear_id>')
 def show_user_gear_item(gear_id):
 
-    # user = get from session 
-    # user = crud.get_user_object('user1@test.com')
-    # user_gear = crud.get_gear_by_user(user)
     gear = crud.get_gear_by_id(gear_id)
 
     gear_data = {'name': gear.name,
@@ -155,8 +159,9 @@ def create_new_list_item():
 def create_new_list():
     """Add a new list to the DB"""
 
-    # user = get from session 
-    user = crud.get_user_object('user1@test.com')
+    email = session['email']
+
+    user = crud.get_user_object(email)
     name = request.json.get('name')
     category = request.json.get('category')
 

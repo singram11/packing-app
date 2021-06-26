@@ -240,3 +240,60 @@ function AddListForm(props) {
             </form>
         );
 }
+
+function LoginForm(props) {
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
+    
+    function handleEmailChange(event) {
+        setEmail(event.target.value);
+      }
+
+    function handlePasswordChange(event) {
+        setPassword(event.target.value);
+    }
+   
+    function handleSubmit(event) {
+        event.preventDefault();
+        
+        const postBody = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({'email':email,
+                                'password': password})
+        };
+
+        fetch('/login', postBody)
+            .then((response) => response.json())
+            .then((jsonResponse)=> {
+                    if (jsonResponse.success) {
+                        localStorage.setItem('loggedIn', true);
+                        props.onSubmit(true)
+                    } else {
+                        console.log("noooope");
+                    }
+            })
+    };
+
+    return( 
+            <form onSubmit={handleSubmit}>
+                <label>Email:</label>
+                <input type="text" value={email} onChange={handleEmailChange}/>
+                <label>Password:</label>
+                <input value={password} onChange={handlePasswordChange}/>
+                <input type="submit" value="Log In"/>
+            </form>
+        );
+}
+
+// function Navbar() {
+//     // const { logo, brand, children, className } = props;
+  
+//     const navLinks = children.map((el, i) => {
+//       return (
+//         <div key={i} className="nav-item">
+//           {el}
+//         </div>
+//       );
+//     });

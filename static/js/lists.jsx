@@ -1,9 +1,13 @@
 function ListsAndMore() {
+    const loggedIn = localStorage.getItem('loggedIn')
+
+    const [loggedInUpdate, setLogin] = React.useState(loggedIn);
+
     return <ReactRouterDOM.BrowserRouter>
             
             <ReactRouterDOM.Switch>
                 <ReactRouterDOM.Route exact path='/lists'>
-                    <ListsPage />
+                    {loggedIn ? <ListsPage /> : <LoginForm onSubmit={setLogin}/> }
                 </ReactRouterDOM.Route>
                 <ReactRouterDOM.Route path='/userlists/items/:id' children={<ListDetailsPage/>}>
                     <ListDetailsPage />
