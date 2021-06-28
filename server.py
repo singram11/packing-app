@@ -70,12 +70,13 @@ def show_user_lists():
     lists = crud.get_lists_by_user(user)
     
     user_lists = {}
-
+    
     for user_list in lists:
+        print(f'user lists: {user_list}')
         user_lists[user_list.list_id] = {'name': user_list.name,
                                         'category': user_list.category.name
         }
-            
+          
     return jsonify(user_lists)
 
 @app.route('/api/userlists/items/<list_id>')
@@ -143,6 +144,14 @@ def create_new_list_item():
     name = request.json.get('name')
     category = request.json.get('category')
 
+    category_obj = crud.get_list_item_cat_by_name(category)
+
+    #maybe we want set categories???? #or make it more clear when 
+    # you are making a new one???
+    if not category_obj:
+        category_obj = crud.create_item_category(category)
+        category = category_obj.name
+
     list_obj = crud.get_list_by_id(list_id)
     list_item = crud.create_list_item(name, category)
     
@@ -166,6 +175,10 @@ def create_new_list():
     category = request.json.get('category')
 
     category_obj = crud.get_list_cat_by_name(category)
+
+    if not category_obj:
+        category_obj = crud.create_list_category(category)
+
     new_list = crud.create_list(user, name, category_obj)
 
     new_list_data ={}

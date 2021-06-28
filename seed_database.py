@@ -69,10 +69,11 @@ for item in sample_gear:
 list_items = []
 
 for item in sample_gear:
-
+    print(item_cat)
     name = sample_gear[item]["item"]
-    category = choice(item_cat)
-    new_item = crud.create_list_item(name=name, item_cat=category)
+    category_obj = choice(item_cat)
+    category = category_obj.name
+    new_item = crud.create_list_item(name, category)
     list_items.append(new_item)
 
 #create users
@@ -92,10 +93,9 @@ for n in range(10):
 
     for i in range(2):
         category = choice(list_cat)
-        cat_name = category.name
         list_no = n
         name = f"My list: {list_no}"
-        user_list = crud.create_list(user, name, cat_name)
+        user_list = crud.create_list(user, name, category)
         list_user_lists.append(user_list)
 
 # add items to list

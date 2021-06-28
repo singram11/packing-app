@@ -66,14 +66,14 @@ def create_item_category(name):
 def get_list_item_cat_by_name(name):
     """Take in category name and return obj"""
 
-    category = db.session.query(Item_category).filter(Item_category.name==name).one()
-
+    category = db.session.query(Item_category).filter(Item_category.name==name).first()
+    
     return category
 
 def get_list_cat_by_name(name):
     """Take in category name and return obj"""
 
-    category = db.session.query(List_category).filter(List_category.name==name).one()
+    category = db.session.query(List_category).filter(List_category.name==name).first()
 
     return category
 
