@@ -17,8 +17,6 @@ function GearPage() {
 }
 
 
-
-
 function ShowGearDetails() {
 
     const { id } = ReactRouterDOM.useParams();

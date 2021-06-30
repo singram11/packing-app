@@ -4,22 +4,18 @@ function ListsAndMore() {
     const [loggedInUpdate, setLogin] = React.useState(loggedIn);
 
     return <ReactRouterDOM.BrowserRouter>
-            
-            <ReactRouterDOM.Switch>
-                <ReactRouterDOM.Route exact path='/lists'>
-                    {loggedIn ? <ListsPage /> : <LoginForm onSubmit={setLogin}/> }
-                </ReactRouterDOM.Route>
-                <ReactRouterDOM.Route path='/userlists/items/:id' children={<ListDetailsPage/>}>
-                    <ListDetailsPage />
-                </ReactRouterDOM.Route>
-            </ReactRouterDOM.Switch>
+                <ReactRouterDOM.Switch>
+                    <ReactRouterDOM.Route exact path='/lists'>
+                        {loggedIn ? <ListsPage /> : <LoginForm onSubmit={setLogin}/> }
+                    </ReactRouterDOM.Route>
+                    <ReactRouterDOM.Route path='/userlists/items/:id' children={<ListDetailsPage/>}>
+                        <ListDetailsPage />
+                    </ReactRouterDOM.Route>
+                </ReactRouterDOM.Switch>
     </ReactRouterDOM.BrowserRouter>
 }
-
-
-
-function ListsPage() {
-    
+ 
+function ListsPage() {    
     const [lists, setLists] = React.useState({});
 
     function renderLists() {
@@ -34,7 +30,7 @@ function ListsPage() {
     }, []);
     
     return (<React.Fragment>
-                <Lists lists={lists}/>
+                <Lists refreshLists={renderLists} lists={lists}/>
                 <AddListForm onSubmit={renderLists}/>
             </React.Fragment>)
 }
@@ -59,7 +55,7 @@ function ListDetailsPage() {
         }, []);
   
     return (<React.Fragment>
-                <ShowListItems listItems={listItems}/>
+                <ShowListItems renderListItems={renderListItems} listItems={listItems}/>
                 <AddListItemForm onSubmit={renderListItems} id={id}></AddListItemForm>
             </React.Fragment>)
 

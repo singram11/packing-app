@@ -107,23 +107,6 @@ def create_list_item_relationship(list_obj, list_item):
 
     return list_item_rel
 
-# def add_item_to_list(list_obj, list_item):
-#     """Check if the item exists, create the item, 
-#     and return list_item_relationship"""
-
-   
-    # count = db.session.query(List_item).filter(List_item.name== item_name).all()
-    # print(count)
-    #check if item existist 
-    # if db.session.query(List_item).filter(List_item.name== 'item_name').count() == 0:
-    #     #this wont work now without a cateogry 
-    #     new_item = create_list_item(item_name)
-    # else:
-    #     list_item = db.session.query(List_item).filter(List_item == 'item_name').one()
-    #     rel = create_list_item_relationship(list_obj, list_item)
-
-    # return rel
-     
 
 def create_gear(name, weight, description, img):
     """Create and retrurn new piece of gear"""
@@ -217,6 +200,30 @@ def get_list_by_id(list_id):
     list_obj = db.session.query(List).filter(List.list_id==list_id).one()
 
     return list_obj
+
+def delete_list(list_obj):
+    """Delete list object 
+
+    takes in object to be deleted"""
+
+    db.session.delete(list_obj)
+    db.session.commit()
+
+def get_list_item_rel(list_item_id):
+    """Find a specific list item relationship"""   
+
+    list_item_rel = db.session.query(List_item_rel).filter(List_item_rel.item_id==list_item_id).one()
+    
+    return list_item_rel
+
+def delete_list_item_rel(list_item_rel):
+    """Delete list item relationship 
+
+    takes in the list item rel object"""
+
+    db.session.delete(list_item_rel)
+    db.session.commit()
+
 
 if __name__ == '__main__':
     from server import app

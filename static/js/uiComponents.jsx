@@ -1,7 +1,3 @@
-function Hello() {
-    return (<p>hello world</p>);
-}
-
 
 function GearList(props) {
     const gearData = props.gear;
@@ -68,6 +64,7 @@ function Lists(props) {
     const lists = props.lists;
     const listsArr = [];
 
+
     for (const list in lists) {
         const listCard = ( 
             <ListCard
@@ -75,6 +72,7 @@ function Lists(props) {
                 id={list}
                 name={lists[list].name}
                 category={lists[list].category}
+                refreshLists={props.refreshLists}
             />
         );
 
@@ -90,20 +88,39 @@ function ListCard(props) {
     const {name, id, category} = props;
     const url = `/userlists/items/${id}`
 
-    console.log(url)
 
     return (
-        // <div className="list-name">
-        //     <a href={url}>{name}</a>
-        //     <span>Category: {category}</span>
-        // </div>
-        <ReactRouterDOM.Link to={url}>{name}</ReactRouterDOM.Link>
+        <div>
+            <ReactRouterDOM.Link to={url}>{name}</ReactRouterDOM.Link>
+            <DeleteListButton refreshLists={props.refreshLists} id={id}></DeleteListButton>
+        </div>
     )
+}
+
+function DeleteListButton(props) {
+  
+    const id = props.id;
+
+    function deleteList(id, event) {
+        event.preventDefault();
+
+        const postBody = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id:id})
+        };
+
+        fetch('/remove-list', postBody)
+            .then((response) => response.json())
+            .then( () => props.refreshLists())
+
+    };
+
+    return <button onClick={(event) => deleteList(id, event)}>-</button>
 }
 
 function ShowListItems(props) {
     const listItems = props.listItems;
-    console.log(listItems)
     const listItemsArr = [];
 
         
@@ -116,6 +133,8 @@ function ShowListItems(props) {
                     name={listItems[item].name}
                     category={listItems[item].category}
                     gear={listItems[item].gear}
+                    id={item}
+                    renderListItems={props.renderListItems}
                 />
             );
         } else {
@@ -124,13 +143,12 @@ function ShowListItems(props) {
                     key={item}
                     name={listItems[item].name}
                     category={listItems[item].category}
-                   
+                    id={item}
+                    renderListItems={props.renderListItems}
                 />
             );
         }
         
-       
-
         listItemsArr.push(listItemCard);
     }
 
@@ -140,34 +158,58 @@ function ShowListItems(props) {
 }
 
 function ItemCardNoGear(props){
-    const {name, category} = props;
+    const {name, category, id} = props;
 
     return (
         <div className="list-item">
             <div className="item-name">{name}</div>
             <div className="item-details">Category: {category}</div>
+            <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>
         </div>
     )
 }
 
 function ItemCardWithGear(props){
-    const {name, category, gear} = props;
+    const {name, category, gear, id} = props;
 
     return (
         <div className="list-item">
             <div className="item-name">{name}</div>
             <div className="item-details">Category: {category}</div>
             <div className="item-details">Gear: {gear}</div>
-
+            <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>
         </div>
     )
 }
 
+function DeleteListItemButton(props) {
+  
+    const id = props.id;
+
+    function deleteListItem(id, event) {
+        event.preventDefault();
+
+        const postBody = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id:id})
+        };
+
+        fetch('/remove-list-item', postBody)
+            .then((response) => response.json())
+            .then( () => props.renderListItems())
+
+    };
+
+    return <button onClick={(event) => deleteListItem(id, event)}>-</button>
+}
+
 function AddListItemForm(props) {
-    const id = props.id
+   
     const [itemName, setName] = React.useState('');
     const [category, setCategory] = React.useState('');
-    
+  
+    const { id } = props;
 
     function handleListNameChange(event) {
         setName(event.target.value);
@@ -190,6 +232,9 @@ function AddListItemForm(props) {
 
         fetch('/new-list-item', postBody)
             .then(() => props.onSubmit && props.onSubmit())
+
+        setName('');
+        setCategory('');
     };
 
     return( 
@@ -228,6 +273,9 @@ function AddListForm(props) {
 
         fetch('/new-list', postBody)
             .then(() => props.onSubmit && props.onSubmit())
+
+        setName('');
+        setCategory('')
     };
 
     return( 
@@ -241,51 +289,7 @@ function AddListForm(props) {
         );
 }
 
-function LoginForm(props) {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
 
-    
-    function handleEmailChange(event) {
-        setEmail(event.target.value);
-      }
-
-    function handlePasswordChange(event) {
-        setPassword(event.target.value);
-    }
-   
-    function handleSubmit(event) {
-        event.preventDefault();
-        
-        const postBody = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({'email':email,
-                                'password': password})
-        };
-
-        fetch('/login', postBody)
-            .then((response) => response.json())
-            .then((jsonResponse)=> {
-                    if (jsonResponse.success) {
-                        localStorage.setItem('loggedIn', true);
-                        props.onSubmit(true)
-                    } else {
-                        console.log("noooope");
-                    }
-            })
-    };
-
-    return( 
-            <form onSubmit={handleSubmit}>
-                <label>Email:</label>
-                <input type="text" value={email} onChange={handleEmailChange}/>
-                <label>Password:</label>
-                <input value={password} onChange={handlePasswordChange}/>
-                <input type="submit" value="Log In"/>
-            </form>
-        );
-}
 
 // function Navbar() {
 //     // const { logo, brand, children, className } = props;

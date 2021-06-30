@@ -86,7 +86,7 @@ def show_list_items(list_id):
     list_items = crud.get_list_items_by_id(list_id)
 
     list_item_data = {}
-
+    #make the gear key 
     for item in list_items: 
 
         if item.gear:
@@ -148,6 +148,7 @@ def create_new_list_item():
 
     #maybe we want set categories???? #or make it more clear when 
     # you are making a new one???
+    #move to crud
     if not category_obj:
         category_obj = crud.create_item_category(category)
         category = category_obj.name
@@ -156,7 +157,8 @@ def create_new_list_item():
     list_item = crud.create_list_item(name, category)
     
     crud.create_list_item_relationship(list_obj, list_item)
-  
+    #make these to a helper function - crud or other file for this
+    #or on the classes
     list_item_data = {}
     list_item_data[list_item.item_id]= {'name': list_item.name,
                                            'category': list_item.item_category.name}
@@ -189,8 +191,6 @@ def create_new_list():
 @app.route('/new-gear', methods=['POST'])
 def create_new_gear():
 
-    print(f"what is request.json: {request.json}")
-
     gearName = request.json.get('name')
     weight = request.json.get('weight')
     description = request.json.get('description')
@@ -206,6 +206,33 @@ def create_new_gear():
 
     return jsonify(gear_data)
 
+@app.route('/remove-list', methods=['POST'])
+def remove_list():
+    """Remove list from DB"""
+
+    list_id = request.json.get('id')
+
+    list_obj = crud.get_list_by_id(list_id)
+    crud.delete_list(list_obj)
+
+    return jsonify({'message': 'item deleted'})
+    #remember for list item that other people might be using item
+    #will need to remove the relationship
+
+#list-item/item-id with delete methods 
+@app.route('/remove-list-item', methods=['POST'])
+def remove_list_items():
+    """Remove list item from user lists
+
+    delete list item rel in DB"""
+
+    list_item_id = request.json.get('id')
+
+    list_item_rel = crud.get_list_item_rel(list_item_id)
+    
+    crud.delete_list_item_rel(list_item_rel)
+    #do NOT delete list item (may appear in other lists)
+    return jsonify({'message':'item deleted'})
 
 
 if __name__ == '__main__':
