@@ -23,7 +23,9 @@ def get_user_by_email(email):
 
 
 def create_list_category(name):
-    """Create and return a new list category"""
+    """Create and return a new list category
+    
+    takes in a string as the name and returns the object"""
 
     category = List_category(name=name)
 
@@ -52,9 +54,9 @@ def create_list(user, name, category):
     
 
 def create_item_category(name):
-    """Create list item category 
+    """Create item category 
 
-    takes in only a category name"""
+    takes in a string and returns a category obj"""
 
     category = Item_category(name=name)
 
@@ -77,30 +79,34 @@ def get_list_cat_by_name(name):
 
     return category
 
-def create_list_item(name, category):
-    """Add a list item to a list"""
+def create_item(name, category):
+    """Add a list item to a list
+    
+    takes in a string as the name and category 
+    
+    returns an item object"""
 
     cat_obj = get_list_item_cat_by_name(category)
 
     item_cat_id = cat_obj.cat_id
 
-    new_item = List_item(name=name, cat_id=item_cat_id)
+    new_item = Item(name=name, cat_id=item_cat_id)
     
     db.session.add(new_item)
     db.session.commit()
 
     return new_item
 
-def create_list_item_relationship(list_obj, list_item):
+def create_list_item(list_obj, item_obj, gear_obj):
     """Create a list_item_relationship
     
     Takes in list and list_item objects creates list_item_rels
     object and returns that object"""
 
     list_id = list_obj.list_id
-    item_id = list_item.item_id
+    item_id = item.item_id
 
-    list_item_rel = List_item_rel(list_id=list_id, item_id=item_id)
+    list_item = List_item_rel(list_id=list_id, item_id=item_id)
     
     db.session.add(list_item_rel)
     db.session.commit()

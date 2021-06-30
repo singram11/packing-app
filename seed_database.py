@@ -36,74 +36,72 @@ model.connect_to_db(server.app)
 model.db.create_all()
 
 #create list default categories 
-
-list_cat = []
+default_list_cat = []
 
 for category in default_list_categories:
 
     new_cat = crud.create_list_category(category)
-    list_cat.append(new_cat)
+    default_list_cat.append(new_cat)
 
 
 #create item default categories
-item_cat = []
+default_item_cat = []
 
 for category in default_item_categories:
 
     new_cat = crud.create_item_category(category)
-    item_cat.append(new_cat)
+    default_item_cat.append(new_cat)
     
 
 #create gear 
-gear_list = []
+sample_gear_list = []
+
 for item in sample_gear:
 
     weight = None
     description = None
     img = None
     new_gear =  crud.create_gear(sample_gear[item]["name"], weight, description, img)
-    gear_list.append(new_gear)
+    sample_gear_list.append(new_gear)
 
 
 #create list items 
-list_items = []
+sample_list_items = []
 
 for item in sample_gear:
-    print(item_cat)
     name = sample_gear[item]["item"]
-    category_obj = choice(item_cat)
+    category_obj = choice(default_item_cat)
     category = category_obj.name
-    new_item = crud.create_list_item(name, category)
-    list_items.append(new_item)
+    new_item = crud.create_item(name, category)
+    sample_list_items.append(new_item)
 
 #create users
-list_users =[]
-list_user_lists =[]
+test_users =[]
+test_user_lists =[]
 # i = 0
 
 for n in range(10):
-    email = f'user{n}@test.com'  # Voila! A unique email!
+    email = f'user{n + 1}@test.com' 
     password = 'test'
-    fname = f'firstname{n}'
-    lname = f'lastname{n}'
+    fname = f'firstname{n + 1}'
+    lname = f'lastname{n + 1 }'
 
     user = crud.create_user(fname, lname, email, password)
-    list_users.append(user)
-    # i = i + 1
+    test_users.append(user)
+
 
     for i in range(2):
-        category = choice(list_cat)
-        list_no = n
-        name = f"My list: {list_no}"
+        category = choice(default_list_cat)
+        name = f"My list: {i} | User{n+1}"
         user_list = crud.create_list(user, name, category)
-        list_user_lists.append(user_list)
+        test_user_lists.append(user_list)
 
 # add items to list
-list_item_rels = []
+# test_list_item_rels = []
 
-for list_obj in list_user_lists:
+for list_obj in test_user_lists:
     for i in range(2):
-        rand_item = choice(list_items)
+        rand_item = choice(sample_list_items)
         list_rel = crud.create_list_item_relationship(list_obj,rand_item)
          
 #associate gear with items 
