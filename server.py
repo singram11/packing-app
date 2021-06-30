@@ -219,7 +219,7 @@ def remove_list():
     #remember for list item that other people might be using item
     #will need to remove the relationship
 
-#list-item/item-id with delete methods 
+    #list-item/item-id with delete methods 
 @app.route('/remove-list-item', methods=['POST'])
 def remove_list_items():
     """Remove list item from user lists
