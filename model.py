@@ -107,7 +107,7 @@ class List_item(db.Model):
     gear_id = db.Column(db.Integer, db.ForeignKey('gear.gear_id'))
 
     lists = db.relationship('List')
-    items = db.relationship('List_item')
+    items = db.relationship('Item')
     
     def __repr__(self):
         return f'<List_item_rel item_id={self.list_item_rel_id}>'

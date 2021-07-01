@@ -92,24 +92,19 @@ for n in range(10):
 
     for i in range(2):
         category = choice(default_list_cat)
-        name = f"My list: {i} | User{n+1}"
+        name = f"My list: {i + 1} | User{n+1}"
         user_list = crud.create_list(user, name, category)
         test_user_lists.append(user_list)
+   
 
 # add items to list
-# test_list_item_rels = []
 
 for list_obj in test_user_lists:
     for i in range(2):
         rand_item = choice(sample_list_items)
-        list_rel = crud.create_list_item_relationship(list_obj,rand_item)
+        list_item_obj = crud.create_list_item(list_obj,rand_item)
+        #add gear
+        gear = choice(sample_gear_list)
+        crud.add_gear_to_item(gear, list_item_obj)
          
-#associate gear with items 
-gear_item_rels = []
-for item  in list_items:
-    gear = choice(gear_list)
-    gear_item_rel = crud.associate_gear_to_item(gear,item)
-    gear_item_rels.append(gear_item_rel)
 
-
-crud.associate_gear_to_item(gear_list[0],list_items[0])

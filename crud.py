@@ -1,7 +1,7 @@
 """CRUD operations"""
 
 from model import (db, User, List_category, List, List_item, Item_category, 
-                   List_item_rel, Gear_item, Gear, connect_to_db)
+                   Item, Gear, connect_to_db)
 
 
 def create_user(fname, lname,email, password):
@@ -97,21 +97,21 @@ def create_item(name, category):
 
     return new_item
 
-def create_list_item(list_obj, item_obj, gear_obj):
+def create_list_item(list_obj, item_obj):
     """Create a list_item_relationship
     
     Takes in list and list_item objects creates list_item_rels
     object and returns that object"""
 
     list_id = list_obj.list_id
-    item_id = item.item_id
+    item_id = item_obj.item_id
 
-    list_item = List_item_rel(list_id=list_id, item_id=item_id)
+    list_item = List_item(list_id=list_id, item_id=item_id)
     
-    db.session.add(list_item_rel)
+    db.session.add(list_item)
     db.session.commit()
 
-    return list_item_rel
+    return list_item
 
 
 def create_gear(name, weight, description, img):
@@ -124,21 +124,17 @@ def create_gear(name, weight, description, img):
 
     return gear
 
-def associate_gear_to_item(gear, list_item):
-    """Create a relationship between gear and list item
+def add_gear_to_item(gear, list_item):
+    """Add gear to a list_item 
 
-    takes in a list_item and gear object and returns a 
-    gear_item relationship object"""
+    takes in a list_item and gear object"""
 
     gear_id = gear.gear_id
     item_id = list_item.item_id
 
-    gear_item_rel = Gear_item(gear_id=gear_id, item_id=item_id)
+    list_item.gear_id = gear_id
 
-    db.session.add(gear_item_rel)
-    db.session.commit()
-
-    return gear_item_rel
+    return list_item.gear_id
 
 def get_user_object(email):
     """Return user object based on email"""
