@@ -88,9 +88,16 @@ class Item(db.Model):
                             secondary='list_items',
                             back_populates='items')
     
+    def json_format(self):
+        """Return the Item information in a JSON serializable format"""
+
+        return {'id':self.item_id,
+                'name': self.name,
+                'category': self.item_category.name,}
+
 
     def __repr__(self):
-        return f'<List_item item_id={self.item_id} name={self.name}>'
+        return f'<Item item_id={self.item_id} name={self.name}>'
 
 
 class List_item(db.Model):
@@ -106,11 +113,12 @@ class List_item(db.Model):
     item_id = db.Column(db.Integer, db.ForeignKey('items.item_id'))
     gear_id = db.Column(db.Integer, db.ForeignKey('gear.gear_id'))
 
-    lists = db.relationship('List')
-    items = db.relationship('Item')
+    lst = db.relationship('List')
+    item = db.relationship('Item')
+    gear = db.relationship('Gear')
     
     def __repr__(self):
-        return f'<List_item_rel item_id={self.list_item_rel_id}>'
+        return f'<List_item item_id={self.list_item_id}>'
 
 
 class Item_category(db.Model):
@@ -148,6 +156,15 @@ class Gear(db.Model):
     items = db.relationship('Item', 
                             secondary='list_items',
                             back_populates='gear')
+
+    def json_format(self):
+        """Return gear information in json serializable format"""
+
+        return {'id': self.gear_id,
+                'name': self.name,
+                'weight': self.weight,
+                'description': self.description,
+                'img': self.img}
 
     def __repr__(self):
         return f'<Gear gear_id={self.gear_id} name={self.name}>'

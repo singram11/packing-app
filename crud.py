@@ -114,7 +114,7 @@ def create_list_item(list_obj, item_obj):
     return list_item
 
 
-def create_gear(name, weight, description, img):
+def create_gear(name, weight=None, description=None, img=None):
     """Create and retrurn new piece of gear"""
 
     gear = Gear(name=name, weight=weight, description=description, img=img)
@@ -154,19 +154,26 @@ def get_lists_by_user(user):
 
     return lists
 
-def get_list_items_by_id(list_id):
-    """Return a list of items by list 
+def get_list_details_by_list_id(list_id):
+    """Return a list of items + gear 
      
-     takes in a list object 
+     takes in a list id 
      returns a list of item objects"""
 
-    
-    # list_items = db.session.query(List_item).filter(list_id_test==list_id).all()
-    list_items = (db.session.query(List_item)
-                .join(List_item_rel).join(List)
-                .filter(List.list_id ==list_id).all())
+    list_items = db.session.query(List_item).filter(List_item.list_id==list_id).all()
 
-    return list_items 
+    list_data = {}
+    print(f'list items: {list_items}')
+    for list_item in list_items:
+
+        item = list_item.item
+        print(f'item {item}')
+        gear = item.gear[0]
+
+        list_data[item.item_id] = {'item': item.json_format(),
+                                    'gear': gear.json_format()}
+    print (list_data)
+    return list_data
 
 def get_gear_by_user(user):
     """Return unique list of gear by user"""

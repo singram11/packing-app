@@ -56,11 +56,11 @@ def render_lists_page():
 
     return render_template('lists.html')
 
-@app.route('/userlists/items/<list_id>')
-def render_list_details_page():
-    """Show list details page"""
+# @app.route('/userlists/items/<list_id>')
+# def render_list_details_page():
+#     """Show list details page"""
 
-    return render_template('lists.html')
+#     return render_template('lists.html')
 
 @app.route('/api/userlists')
 def show_user_lists():
@@ -83,23 +83,23 @@ def show_user_lists():
 def show_list_items(list_id):
     
     
-    list_items = crud.get_list_items_by_id(list_id)
+    list_data = crud.get_list_details_by_list_id(list_id)
 
-    list_item_data = {}
-    #make the gear key 
-    for item in list_items: 
+    # item_data = {}
+    # #make the gear key 
+    # for item in items: 
 
-        if item.gear:
-            print("Made it to the gear section")                            #not all items will have gear need to deal with this 
-            list_item_data[item.item_id] = {'name': item.name,
-                                           'category': item.item_category.name,
-                                           'gear': item.gear[0].name}
-        else: 
-            print("made it to the non gear")
-            list_item_data[item.item_id]= {'name': item.name,
-                                           'category': item.item_category.name}
+    #     if item.gear:
+    #         print("Made it to the gear section")                            #not all items will have gear need to deal with this 
+    #         list_item_data[item.item_id] = {'name': item.name,
+    #                                        'category': item.item_category.name,
+    #                                        'gear': item.gear[0].name}
+    #     else: 
+    #         print("made it to the non gear")
+    #         list_item_data[item.item_id]= {'name': item.name,
+    #                                        'category': item.item_category.name}
 
-    return jsonify(list_item_data)
+    return jsonify(list_data)
         
 
 
