@@ -23,7 +23,7 @@ function ShowGearDetails() {
     
     const [gearDetail, setGearDetail] = React.useState({});
 
-    const url = `/api/usergear/details/${id}`
+    const url = `api/usergear/details/${id}`
 
     React.useEffect(() => {
         fetch(url)

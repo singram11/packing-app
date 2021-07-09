@@ -46,7 +46,7 @@ function ListDetailsPage() {
     function renderListItems() {
         fetch(url)
             .then((response) => response.json())
-            .then((result) => {
+            .then((result) => { 
                 setListItems(result);
             });
     }

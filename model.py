@@ -86,7 +86,7 @@ class Item(db.Model):
                             back_populates='items')
     gear = db.relationship('Gear', 
                             secondary='list_items',
-                            back_populates='items')
+                            backref='items')
     
     def json_format(self):
         """Return the Item information in a JSON serializable format"""
@@ -117,6 +117,17 @@ class List_item(db.Model):
     item = db.relationship('Item')
     gear = db.relationship('Gear')
     
+    def json_format(self):
+        """Return List_item information in jsonable format"""
+        if self.gear: 
+            return {'id': self.list_item_id,
+                    'list': self.lst.name,
+                    'gear': self.gear.name}
+        else: 
+            return {'id': self.list_item_id,
+                    'list': self.lst.name}
+            
+
     def __repr__(self):
         return f'<List_item item_id={self.list_item_id}>'
 
@@ -153,9 +164,9 @@ class Gear(db.Model):
     description = db.Column(db.Text)  
     img = db.Column(db.String)
 
-    items = db.relationship('Item', 
-                            secondary='list_items',
-                            back_populates='gear')
+    # items = db.relationship('Item', 
+    #                         secondary='list_items',
+    #                         back_populates='gear')
 
     def json_format(self):
         """Return gear information in json serializable format"""

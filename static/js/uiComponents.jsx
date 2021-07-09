@@ -124,30 +124,20 @@ function ShowListItems(props) {
     const listItemsArr = [];
 
         
-    for (const item in listItems) {
+    for (const listItem in listItems) {
         let listItemCard = '';
-        if (listItems[item].gear) {
-            listItemCard = (
-                <ItemCardWithGear 
-                    key={item}
-                    name={listItems[item].name}
-                    category={listItems[item].category}
-                    gear={listItems[item].gear}
-                    id={item}
-                    renderListItems={props.renderListItems}
-                />
-            );
-        } else {
-            listItemCard = (
-                <ItemCardNoGear 
-                    key={item}
-                    name={listItems[item].name}
-                    category={listItems[item].category}
-                    id={item}
-                    renderListItems={props.renderListItems}
-                />
-            );
-        }
+
+        listItemCard = (
+            <ItemCard 
+                key={listItem}
+                name={listItems[listItem].item.name}
+                category={listItems[listItem].item.category}
+                gear = {listItems[listItem].gear ? listItems[listItem].gear.name : null}
+                id={listItem}
+                renderListItems={props.renderListItems}
+            />
+        );
+
         
         listItemsArr.push(listItemCard);
     }
@@ -157,26 +147,14 @@ function ShowListItems(props) {
         </React.Fragment>
 }
 
-function ItemCardNoGear(props){
-    const {name, category, id} = props;
-
-    return (
-        <div className="list-item">
-            <div className="item-name">{name}</div>
-            <div className="item-details">Category: {category}</div>
-            <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>
-        </div>
-    )
-}
-
-function ItemCardWithGear(props){
+function ItemCard(props){
     const {name, category, gear, id} = props;
 
     return (
         <div className="list-item">
             <div className="item-name">{name}</div>
             <div className="item-details">Category: {category}</div>
-            <div className="item-details">Gear: {gear}</div>
+            {gear ? <div className="item-details">Gear: {gear}</div> : "[add gear]"}
             <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>
         </div>
     )

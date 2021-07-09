@@ -137,33 +137,16 @@ def show_user_gear_item(gear_id):
 def create_new_list_item():
     """Add a new list item to the DB"""
     
-    #Need to handle categories that dont exist 
     #organize by cat
     
     list_id = request.json.get('id')
     name = request.json.get('name')
     category = request.json.get('category')
 
-    category_obj = crud.get_list_item_cat_by_name(category)
+    list_item = crud.add_item_to_list(list_id, name, category)
 
-    #maybe we want set categories???? #or make it more clear when 
-    # you are making a new one???
-    #move to crud
-    if not category_obj:
-        category_obj = crud.create_item_category(category)
-        category = category_obj.name
-
-    list_obj = crud.get_list_by_id(list_id)
-    list_item = crud.create_list_item(name, category)
     
-    crud.create_list_item_relationship(list_obj, list_item)
-    #make these to a helper function - crud or other file for this
-    #or on the classes
-    list_item_data = {}
-    list_item_data[list_item.item_id]= {'name': list_item.name,
-                                           'category': list_item.item_category.name}
-
-    return jsonify(list_item_data)
+    return jsonify(list_item)
 
 
 @app.route('/new-list', methods=['POST'])
@@ -228,9 +211,9 @@ def remove_list_items():
 
     list_item_id = request.json.get('id')
 
-    list_item_rel = crud.get_list_item_rel(list_item_id)
+    list_item = crud.get_list_item(list_item_id)
     
-    crud.delete_list_item_rel(list_item_rel)
+    crud.delete_list_item(list_item)
     #do NOT delete list item (may appear in other lists)
     return jsonify({'message':'item deleted'})
 
