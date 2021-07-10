@@ -19,7 +19,7 @@ function ListsPage() {
     const [lists, setLists] = React.useState({});
 
     function renderLists() {
-        fetch('/api/userlists')
+        fetch('/api/lists')
         .then((response) => response.json())
         .then((result) => {
             setLists(result);
@@ -41,7 +41,7 @@ function ListDetailsPage() {
     
     const [listItems, setListItems] = React.useState({});
 
-    const url = `/api/userlists/items/${id}`
+    const url = `/api/lists/${id}`
 
     function renderListItems() {
         fetch(url)

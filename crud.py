@@ -206,11 +206,11 @@ def get_list_details_by_list_id(list_id):
         item = list_item.item
         gear = list_item.gear ##need to test and confirm
         if gear:
-            list_data[item.item_id] = {'item': item.json_format(),
+            list_data[list_item.list_item_id] = {'item': item.json_format(),
                                         'gear': gear.json_format()}
         
         else: 
-             list_data[item.item_id] = {'item': item.json_format(),
+             list_data[list_item.list_item_id] = {'item': item.json_format(),
                                         'gear': None}
 
     return list_data
@@ -220,11 +220,6 @@ def get_gear_by_user(user):
 
     user_id = user.user_id
     
-    #get list_items by user ID 
-    #put that into set 
-    #set is now list of objs
-    #access list_items
-
     gear_items = (db.session.query(Gear)
                 .join(List_item).join(List)
                 .filter(List.user_id==user_id).all())
@@ -232,10 +227,6 @@ def get_gear_by_user(user):
     print(gear_items)
 
     user_gear = set(gear_items)
-
-    # for item in gear_items:
-    #     print(item.gear)
-    #     user_gear.add(item.gear)
 
     return user_gear
 
@@ -270,14 +261,14 @@ def get_list_item(list_item_id):
     
     Takes in the list_item id and returns an object"""   
 
-    list_item = db.session.query(List_item).filter(List_item.item_id==list_item_id).one()
+    list_item = db.session.query(List_item).filter(List_item.list_item_id==list_item_id).one()
     
     return list_item
 
 def delete_list_item(list_item):
     """Delete list item relationship 
 
-    takes in the list item rel object"""
+    takes in the list_item object"""
 
     db.session.delete(list_item)
     db.session.commit()

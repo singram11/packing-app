@@ -61,6 +61,12 @@ class List(db.Model):
     category = db.relationship('List_category', back_populates='lists')
     items = db.relationship('Item', secondary='list_items', back_populates='lists')
     user = db.relationship('User', back_populates="lists")
+
+    def json_format(self):
+        """return list information in a JSON serializable format"""
+
+        return {'name': self.name,
+                'category': self.category.name}
     
     def __repr__(self):
         return f'<List list_id={self.list_id} name={self.name}>'

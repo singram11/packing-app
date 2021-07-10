@@ -4,7 +4,7 @@ function GearList(props) {
     const gear = [];
    
     for (const item in gearData) {
-        console.log(item);
+       
         const gearCard = (
             <GearItem
                 key={item}
@@ -26,7 +26,7 @@ function GearList(props) {
 function GearItem(props) {
     const {id, gearName} = props;
 
-    const url = `/api/usergear/details/${id}`
+    const url = `/api/gear/${id}`
     return (
         <ReactRouterDOM.Link to={url}>{gearName}</ReactRouterDOM.Link> 
     )
@@ -35,7 +35,6 @@ function GearItem(props) {
 function GearItemDetails(props) {
     const gearDetail = props.gearDetail;
     const {description, img, name, weight} = gearDetail;
-    console.log(name);
     
     return (
         <React.Fragment>
@@ -104,13 +103,14 @@ function DeleteListButton(props) {
     function deleteList(id, event) {
         event.preventDefault();
 
-        const postBody = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({id:id})
-        };
+        // const postBody = {
+        //     method: 'POST',
+        //     headers: {'Content-Type': 'application/json'},
+        //     body: JSON.stringify({id:id})
+        // };
+        const url = `/api/lists/${id}`
 
-        fetch('/remove-list', postBody)
+        fetch(url, {method: 'DELETE'})
             .then((response) => response.json())
             .then( () => props.refreshLists())
 
@@ -167,13 +167,13 @@ function DeleteListItemButton(props) {
     function deleteListItem(id, event) {
         event.preventDefault();
 
-        const postBody = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({id:id})
-        };
-
-        fetch('/remove-list-item', postBody)
+        // const postBody = {
+        //     method: 'POST',
+        //     headers: {'Content-Type': 'application/json'},
+        //     body: JSON.stringify({id:id})
+        // };
+        const url = `/api/list-item/${id}`
+        fetch(url, {method:'DELETE'})
             .then((response) => response.json())
             .then( () => props.renderListItems())
 
@@ -208,7 +208,7 @@ function AddListItemForm(props) {
                                 'id': id})
         };
 
-        fetch('/new-list-item', postBody)
+        fetch('/api/list-item', postBody)
             .then(() => props.onSubmit && props.onSubmit())
 
         setName('');
@@ -249,7 +249,7 @@ function AddListForm(props) {
                                 'category':category})
         };
 
-        fetch('/new-list', postBody)
+        fetch('/api/lists', postBody)
             .then(() => props.onSubmit && props.onSubmit())
 
         setName('');
