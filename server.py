@@ -15,6 +15,12 @@ def render_homepage():
 
     return render_template('index.html')
 
+@app.route('/app')
+def render_app():
+    """Shows app"""
+
+    return render_template('app.html')
+
 @app.route('/login', methods=['POST'])
 def login_user():
     """log the user in or return an error"""
@@ -44,17 +50,17 @@ def login_user():
     return response_data
  
 
-@app.route('/gear')
-def render_gear_page():
-    """ Shows my gear template """
+# @app.route('/gear')
+# def render_gear_page():
+#     """ Shows my gear template """
 
-    return render_template('gear.html')
+#     return render_template('gear.html')
 
-@app.route('/lists')
-def render_lists_page():
-    """Show list page template"""
+# @app.route('/lists')
+# def render_lists_page():
+#     """Show list page template"""
 
-    return render_template('lists.html')
+#     return render_template('lists.html')
 
 
 @app.route('/api/lists')
