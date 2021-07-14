@@ -85,7 +85,7 @@ function Lists(props) {
 
 function ListCard(props) {
     const {name, id, category} = props;
-    const url = `/userlists/items/${id}`
+    const url = `/lists/items/${id}`
 
 
     return (
@@ -154,7 +154,7 @@ function ItemCard(props){
         <div className="list-item">
             <div className="item-name">{name}</div>
             <div className="item-details">Category: {category}</div>
-            {gear ? <div className="item-details">Gear: {gear}</div> : "[add gear]"}
+            {gear ? <div className="item-details">Gear: {gear}</div> : <AddGearForm listItemId={id} onSubmit={props.renderListItems}/>}
             <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>
         </div>
     )
@@ -280,6 +280,64 @@ function AddListForm(props) {
 //       );
 //     });
 
-function QuickTest() {
-    return "hello world"
+function AddGearForm(props) {
+
+    const listItemId = props.listItemId
+
+    console.log(listItemId)
+
+    const [gearName, setName] = React.useState('');
+    const [img, setImage] = React.useState('');
+    const [weight, setWeight] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    
+    function handleNameChange(event) {
+        setName(event.target.value);
+      }
+
+    function handleWeightChange(event) {
+        setWeight(event.target.value);
+    }
+    
+    function handleDescriptionChange(event) {
+        setDescription(event.target.value);
+    }
+
+    function handleImageChange(event) {
+        setImage(event.target.value);
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        
+        const postBody = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({'name':gearName,
+                                'weight': weight,
+                                'description': description,
+                                'img': img,
+                                'listItemId': listItemId})
+        };
+
+        fetch('/api/gear', postBody)
+            .then((response) => response.json())
+            .then( (results) => console.log(results))
+
+            // .then(() => props.onSubmit && props.onSubmit())
+    };
+
+    return( 
+            <form onSubmit={handleSubmit}>
+                <label>Gear Name</label>
+                <input type="text" value={gearName} onChange={handleNameChange}/>
+                <label>Weight</label>
+                <input value={weight} onChange={handleWeightChange}/>
+                <label>Description</label>
+                <textarea value={description} onChange={handleDescriptionChange}/>
+                <label>Image Link</label>
+                <input value={img} onChange={handleImageChange}/>
+                <input type="submit" value="Submit"/>
+            </form>
+        );
 }

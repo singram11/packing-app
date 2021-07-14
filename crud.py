@@ -127,6 +127,7 @@ def create_gear(name, weight=None, description=None, img=None):
 
     return gear
 
+
 def add_item_to_list(list_id, item_name, cat_name):
     """Add an item to a specified list
 
@@ -141,7 +142,8 @@ def add_item_to_list(list_id, item_name, cat_name):
     
     #create new item if needed 
     if not item_obj: 
-            item_obj = create_item(item_name, cat_name)
+        print('making new object')
+        item_obj = create_item(item_name, cat_name)
 
     #fetch list object 
     list_obj = get_list_by_id(list_id)
@@ -253,6 +255,16 @@ def delete_list(list_obj):
 
     takes in object to be deleted"""
 
+    list_id = list_obj.list_id
+
+    list_items = db.session.query(List_item).filter(List_item.list_id==list_id).all()
+
+    print(f"list_items: {list_items}")
+
+    for list_item in list_items:
+        db.session.delete(list_item)
+    db.session.commit()
+    
     db.session.delete(list_obj)
     db.session.commit()
 

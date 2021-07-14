@@ -1,19 +1,19 @@
-function ListsAndMore() {
-    const loggedIn = localStorage.getItem('loggedIn')
+// function ListsAndMore() {
+//     const loggedIn = localStorage.getItem('loggedIn')
 
-    const [loggedInUpdate, setLogin] = React.useState(loggedIn);
+//     const [loggedInUpdate, setLogin] = React.useState(loggedIn);
 
-    return <ReactRouterDOM.BrowserRouter>
-                <ReactRouterDOM.Switch>
-                    <ReactRouterDOM.Route exact path='/lists'>
-                        {loggedIn ? <ListsPage /> : <LoginForm onSubmit={setLogin}/> }
-                    </ReactRouterDOM.Route>
-                    <ReactRouterDOM.Route path='/userlists/items/:id' children={<ListDetailsPage/>}>
-                        <ListDetailsPage />
-                    </ReactRouterDOM.Route>
-                </ReactRouterDOM.Switch>
-    </ReactRouterDOM.BrowserRouter>
-}
+//     return <ReactRouterDOM.BrowserRouter>
+//                 <ReactRouterDOM.Switch>
+//                     <ReactRouterDOM.Route exact path='/lists'>
+//                         {loggedIn ? <ListsPage /> : <LoginForm onSubmit={setLogin}/> }
+//                     </ReactRouterDOM.Route>
+//                     <ReactRouterDOM.Route path='/userlists/items/:id' children={<ListDetailsPage/>}>
+//                         <ListDetailsPage />
+//                     </ReactRouterDOM.Route>
+//                 </ReactRouterDOM.Switch>
+//     </ReactRouterDOM.BrowserRouter>
+// }
  
 function ListsPage() {    
     const [lists, setLists] = React.useState({});
@@ -61,4 +61,4 @@ function ListDetailsPage() {
 
 }
 
-ReactDOM.render(<ListsAndMore/> , document.getElementById('root'));
+// ReactDOM.render(<ListsAndMore/> , document.getElementById('root'));

@@ -135,7 +135,7 @@ class List_item(db.Model):
             
 
     def __repr__(self):
-        return f'<List_item item_id={self.list_item_id}>'
+        return f'<List_item list_item_id={self.list_item_id}>'
 
 
 class Item_category(db.Model):

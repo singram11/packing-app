@@ -1,19 +1,19 @@
-function Nav(){
+function Nav(props){
+    function logOut() {
+        props.logOut(false);
+    }
 
     return (
         <nav>
             <ul className='nav-links'>
-                <ReactRouterDOM.Link to='/lists'>
+                <ReactRouterDOM.NavLink to='/lists'>
                     <li>Lists</li>
-                </ReactRouterDOM.Link>
-                <ReactRouterDOM.Link to='/gear'>
+                </ReactRouterDOM.NavLink>
+                <ReactRouterDOM.NavLink to='/gear'>
                     <li>Gear</li>
-                </ReactRouterDOM.Link>
-                <ReactRouterDOM.Link  to='/logout'>
-                    <li>Logout</li>
-                </ReactRouterDOM.Link>
-        
+                </ReactRouterDOM.NavLink>
             </ul>
+            <button className='logout' onClick={logOut}>Log Out</button>
         </nav>
     )
 

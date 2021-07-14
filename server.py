@@ -161,8 +161,23 @@ def create_new_gear():
     weight = request.json.get('weight')
     description = request.json.get('description')
     img = request.json.get('img')
+    list_item_id = request.json.get('listItemId')
 
+    print(f'list_item: {list_item_id}')
+  
     new_gear = crud.create_gear(gearName, weight, description, img)
+
+    print(f'gear: {new_gear}')
+
+    list_item = crud.get_list_item(list_item_id)
+
+  
+
+    list_item.gear = new_gear
+
+    # crud.add_gear_to_item(new_gear, list_item)
+
+    print(f'list item deets: {list_item.gear}')
 
     gear_data = {}
     gear_data[new_gear.gear_id] = { 'name': new_gear.name,
@@ -175,8 +190,10 @@ def create_new_gear():
 @app.route('/api/lists/<list_id>', methods=['DELETE'])
 def remove_list(list_id):
     """Remove list from DB"""
-
+    
+    
     list_obj = crud.get_list_by_id(list_id)
+    
     crud.delete_list(list_obj)
 
     return jsonify({'message': 'item deleted'})
