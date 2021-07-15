@@ -173,9 +173,12 @@ def create_new_gear():
 
   
 
-    list_item.gear = new_gear
+    # list_item.gear = new_gear
 
-    # crud.add_gear_to_item(new_gear, list_item)
+    details = crud.add_gear_to_item(new_gear, list_item)
+
+    
+    print(f'details: {details}')
 
     print(f'list item deets: {list_item.gear}')
 

@@ -163,6 +163,8 @@ def add_gear_to_item(gear, list_item):
 
     list_item.gear_id = gear_id
 
+    db.session.commit()
+
     return list_item.gear_id
 
 def get_user_object(email):
@@ -259,12 +261,11 @@ def delete_list(list_obj):
 
     list_items = db.session.query(List_item).filter(List_item.list_id==list_id).all()
 
-    print(f"list_items: {list_items}")
 
     for list_item in list_items:
         db.session.delete(list_item)
     db.session.commit()
-    
+
     db.session.delete(list_obj)
     db.session.commit()
 
