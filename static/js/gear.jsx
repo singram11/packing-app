@@ -36,10 +36,15 @@ function ShowGear(props) {
         }, []);
     
         
-    return (<React.Fragment>
+    return (<ReactRouterDOM.BrowserRouter>
                 <GearList gear={gear}/>
                 <AddGearForm onSubmit={renderGear}/>
-            </React.Fragment>);
+                <ReactRouterDOM.Switch>
+                    <ReactRouterDOM.Route path='/gear/:id'>
+                        <ShowGearDetails/>
+                    </ReactRouterDOM.Route>
+                </ReactRouterDOM.Switch>
+            </ReactRouterDOM.BrowserRouter>);
 }
 
 

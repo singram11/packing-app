@@ -9,13 +9,13 @@ app = Flask(__name__)
 app.secret_key = "dev"
 #do the thing - markov bot lab
 
+# @app.route('/')
+# def render_homepage():
+#     """ Shows homepage """
+
+#     return render_template('index.html')
+
 @app.route('/')
-def render_homepage():
-    """ Shows homepage """
-
-    return render_template('index.html')
-
-@app.route('/app')
 def render_app():
     """Shows app"""
 

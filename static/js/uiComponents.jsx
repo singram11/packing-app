@@ -26,7 +26,7 @@ function GearList(props) {
 function GearItem(props) {
     const {id, gearName} = props;
 
-    const url = `/api/gear/${id}`
+    const url = `/gear/${id}`
     return (
         <ReactRouterDOM.Link to={url}>{gearName}</ReactRouterDOM.Link> 
     )
@@ -90,7 +90,7 @@ function ListCard(props) {
 
     return (
         <div>
-            <ReactRouterDOM.Link to={url}>{name}</ReactRouterDOM.Link>
+            <ReactRouterDOM.NavLink to={url}>{name}</ReactRouterDOM.NavLink>
             <DeleteListButton refreshLists={props.refreshLists} id={id}></DeleteListButton>
         </div>
     )
@@ -341,3 +341,4 @@ function AddGearForm(props) {
             </form>
         );
 }
+

@@ -1,6 +1,6 @@
 function App() {
-
-    const [login, setLogin] = React.useState();
+        const loggedIn = localStorage.getItem('loggedIn')
+        const [login, setLogin] = React.useState(loggedIn);
 
 
     return (
@@ -12,15 +12,13 @@ function App() {
                 <ReactRouterDOM.Route path='/lists' exact>
                     <ListsPage/>
                 </ReactRouterDOM.Route>
-                <ReactRouterDOM.Route path='/lists/items/:id'>
-                    <ListDetailsPage/>
-                </ReactRouterDOM.Route>
                 <ReactRouterDOM.Route path='/gear' exact>
                     <ShowGear/>
                 </ReactRouterDOM.Route>
-                <ReactRouterDOM.Route path='/api/gear/:id'>
+                {/* <ReactRouterDOM.Route path='/api/gear/:id'>
+                    <ShowGear/>
                     <ShowGearDetails/>
-                </ReactRouterDOM.Route>
+                </ReactRouterDOM.Route> */}
             </ReactRouterDOM.Switch>
         </ReactRouterDOM.BrowserRouter>
         : <LoginForm onSubmit={setLogin}/> }
