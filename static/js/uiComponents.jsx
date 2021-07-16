@@ -284,8 +284,6 @@ function AddGearForm(props) {
 
     const listItemId = props.listItemId
 
-    console.log(listItemId)
-
     const [gearName, setName] = React.useState('');
     const [img, setImage] = React.useState('');
     const [weight, setWeight] = React.useState('');
@@ -322,9 +320,7 @@ function AddGearForm(props) {
 
         fetch('/api/gear', postBody)
             .then((response) => response.json())
-            .then( (results) => console.log(results))
-
-            // .then(() => props.onSubmit && props.onSubmit())
+            .then(() => props.onSubmit && props.onSubmit())
     };
 
     return( 
