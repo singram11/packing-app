@@ -16,7 +16,15 @@ app.secret_key = "dev"
 #     return render_template('index.html')
 
 @app.route('/')
+@app.route('/lists')
+@app.route('/gear')
 def render_app():
+    """Shows app"""
+
+    return render_template('app.html')
+
+@app.route('/<path>/<code>')
+def render_app_from_item(path, code):
     """Shows app"""
 
     return render_template('app.html')

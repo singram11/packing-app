@@ -82,7 +82,7 @@ function Lists(props) {
 
 function ListCard(props) {
     const {name, id, category} = props;
-    const url = `/lists/items/${id}`
+    const url = `/lists/${id}`
 
 
     return (

@@ -9,10 +9,10 @@ function App() {
         <ReactRouterDOM.BrowserRouter>
             <Nav logOut={setLogin}/>
             <ReactRouterDOM.Switch>
-                <ReactRouterDOM.Route path='/lists' exact>
+                <ReactRouterDOM.Route path='/lists' >
                     <ListsPage/>
                 </ReactRouterDOM.Route>
-                <ReactRouterDOM.Route path='/gear' exact>
+                <ReactRouterDOM.Route path='/gear' >
                     <ShowGear/>
                 </ReactRouterDOM.Route>
                 {/* <ReactRouterDOM.Route path='/api/gear/:id'>
