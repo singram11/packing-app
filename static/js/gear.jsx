@@ -38,7 +38,6 @@ function ShowGear(props) {
         
     return (<ReactRouterDOM.BrowserRouter>
                 <GearList gear={gear}/>
-                <AddGearForm onSubmit={renderGear}/>
                 <ReactRouterDOM.Switch>
                     <ReactRouterDOM.Route path='/gear/:id'>
                         <ShowGearDetails/>

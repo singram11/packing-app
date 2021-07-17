@@ -16,11 +16,7 @@ function GearList(props) {
         gear.push(gearCard);
     };
    
-    return (
-        <React.Fragment>
-            <div className="all-gear">{gear}</div>
-        </React.Fragment>
-    )
+    return <div className="all-gear">{gear}</div>
 }
 
 function GearItem(props) {
@@ -28,7 +24,9 @@ function GearItem(props) {
 
     const url = `/gear/${id}`
     return (
-        <ReactRouterDOM.Link to={url}>{gearName}</ReactRouterDOM.Link> 
+        <div className='gear-item'>
+            <ReactRouterDOM.Link to={url}>{gearName}</ReactRouterDOM.Link> 
+        </div>
     )
 }
 
@@ -78,9 +76,8 @@ function Lists(props) {
         listsArr.push(listCard);
     }
     
-    return <React.Fragment>
-        <div className="list-container">{listsArr}</div>
-    </React.Fragment>
+    return <div className="list-container">{listsArr}</div>
+    
 }
 
 function ListCard(props) {
@@ -227,9 +224,16 @@ function AddListItemForm(props) {
 }
 
 function AddListForm(props) {
+    // props.renderLists = (rerender lists)
+    //props.showForm = setShowForm
+
     const [listName, setName] = React.useState('');
     const [category, setCategory] = React.useState('');
     
+    // function onResponse(){
+    //     props.renderLists();
+    //     props.showForm(false);
+    // }
 
     function handleListNameChange(event) {
         setName(event.target.value);
@@ -250,8 +254,9 @@ function AddListForm(props) {
         };
 
         fetch('/api/lists', postBody)
-            .then(() => props.onSubmit && props.onSubmit())
-
+            .then(() => props.renderLists && props.renderLists())
+        
+        props.showForm(false);
         setName('');
         setCategory('')
     };
@@ -338,3 +343,28 @@ function AddGearForm(props) {
         );
 }
 
+function AddList(props){
+    // props.onSubmit = renderLists
+
+    const [showForm, setShowForm] = React.useState(false)
+    
+    // function onClick() {
+    //     setShowForm(!showF)
+    // }
+
+    return (<React.Fragment>
+                {showForm ? <AddListForm renderLists={props.renderLists} showForm={setShowForm}/>
+                 : <AddListButton handleClick={setShowForm}/> }
+            </React.Fragment>  )
+}
+
+function AddListButton(props) {
+    //props.handleClick = setShowForm 
+    function handleClick() {
+        props.handleClick(true)
+    }
+
+    return <button onClick={handleClick}>
+        Add List
+    </button>
+}

@@ -22,7 +22,8 @@ function ListsPage() {
   return (
     <ReactRouterDOM.BrowserRouter>
       <Lists refreshLists={renderLists} lists={lists} />
-      <AddListForm onSubmit={renderLists} />
+      {/* <AddListForm onSubmit={renderLists} /> */}
+      <AddList renderLists={renderLists}/>
       <ReactRouterDOM.Switch>
         <ReactRouterDOM.Route path="/lists/items/:id">
           <ListDetailsPage />
