@@ -1,3 +1,4 @@
+// const { func } = require("prop-types");
 
 function GearList(props) {
     const gearData = props.gear;
@@ -117,12 +118,15 @@ function DeleteListButton(props) {
 }
 
 function ShowListItems(props) {
+    // props renderListItems, ListItems
     const listItems = props.listItems;
     const listItemsArr = [];
 
-        
+  
+
     for (const listItem in listItems) {
         let listItemCard = '';
+        console.log(`ShowListItems: ${listItem}`)
 
         listItemCard = (
             <ItemCard 
@@ -147,11 +151,15 @@ function ShowListItems(props) {
 function ItemCard(props){
     const {name, category, gear, id} = props;
 
+console.log(`Item Card ${id}`)
+
     return (
         <div className="list-item">
             <div className="item-name">{name}</div>
             <div className="item-details">Category: {category}</div>
-            {gear ? <div className="item-details">Gear: {gear}</div> : <AddGearForm listItemId={id} onSubmit={props.renderListItems}/>}
+            {gear ? <div className="item-details">Gear: {gear}</div> : 
+            <AddGear listItemId={id} onSubmit={props.renderListItems}/> }
+            {/* // <AddGearForm listItemId={id} onSubmit={props.renderListItems}/> */}
             <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>
         </div>
     )
@@ -180,11 +188,11 @@ function DeleteListItemButton(props) {
 }
 
 function AddListItemForm(props) {
-   
+   // props = onSubmit, id, showForm
     const [itemName, setName] = React.useState('');
     const [category, setCategory] = React.useState('');
   
-    const { id } = props;
+    const id  = props.id;
 
     function handleListNameChange(event) {
         setName(event.target.value);
@@ -212,7 +220,7 @@ function AddListItemForm(props) {
         setCategory('');
     };
 
-    return( 
+    return(<React.Fragment>
             <form onSubmit={handleSubmit}>
                 <label>Item Name</label>
                 <input type="text" value={itemName} onChange={handleListNameChange}/>
@@ -220,6 +228,8 @@ function AddListItemForm(props) {
                 <input value={category} onChange={handleCategoryChange}/>
                 <input type="submit" value="Submit"/>
             </form>
+            <CloseFormButton showForm={props.showForm}/>
+            </React.Fragment> 
         );
 }
 
@@ -288,7 +298,7 @@ function AddListForm(props) {
 function AddGearForm(props) {
 
     const listItemId = props.listItemId
-
+    
     const [gearName, setName] = React.useState('');
     const [img, setImage] = React.useState('');
     const [weight, setWeight] = React.useState('');
@@ -328,18 +338,20 @@ function AddGearForm(props) {
             .then(() => props.onSubmit && props.onSubmit())
     };
 
-    return( 
-            <form onSubmit={handleSubmit}>
-                <label>Gear Name</label>
-                <input type="text" value={gearName} onChange={handleNameChange}/>
-                <label>Weight</label>
-                <input value={weight} onChange={handleWeightChange}/>
-                <label>Description</label>
-                <textarea value={description} onChange={handleDescriptionChange}/>
-                <label>Image Link</label>
-                <input value={img} onChange={handleImageChange}/>
-                <input type="submit" value="Submit"/>
-            </form>
+    return(<React.Fragment> 
+                <form onSubmit={handleSubmit}>
+                    <label>Gear Name</label>
+                    <input type="text" value={gearName} onChange={handleNameChange}/>
+                    <label>Weight</label>
+                    <input value={weight} onChange={handleWeightChange}/>
+                    <label>Description</label>
+                    <textarea value={description} onChange={handleDescriptionChange}/>
+                    <label>Image Link</label>
+                    <input value={img} onChange={handleImageChange}/>
+                    <input type="submit" value="Submit"/>
+                </form>
+                <CloseFormButton showForm={props.showForm}/>
+            </React.Fragment>
         );
 }
 
@@ -347,24 +359,55 @@ function AddList(props){
     // props.onSubmit = renderLists
 
     const [showForm, setShowForm] = React.useState(false)
-    
-    // function onClick() {
-    //     setShowForm(!showF)
-    // }
 
     return (<React.Fragment>
                 {showForm ? <AddListForm renderLists={props.renderLists} showForm={setShowForm}/>
-                 : <AddListButton handleClick={setShowForm}/> }
+                 : <AddButton handleClick={setShowForm} name={'List'}/> }
             </React.Fragment>  )
 }
 
-function AddListButton(props) {
+function AddButton(props) {
     //props.handleClick = setShowForm 
+    //props.name
     function handleClick() {
         props.handleClick(true)
     }
 
     return <button onClick={handleClick}>
-        Add List
+        Add {props.name}
     </button>
+}
+
+function AddListItems(props){
+    // props {onSubmit, id}
+    const [showForm, setShowForm] = React.useState(false)
+
+    return ( <React.Fragment>
+                {showForm 
+                ? <AddListItemForm onSubmit={props.onSubmit} id={props.id} showForm={setShowForm}/> 
+                : <AddButton handleClick={setShowForm} name={'Items'}/> }
+            </React.Fragment>
+    )
+}
+
+function CloseFormButton(props){
+    // props: showForm
+    function handleClick(){
+        props.showForm(false);
+    }
+    return <button onClick={handleClick}>x</button>
+}
+
+function AddGear(props){
+    //listItemId={id} onSubmit={props.renderListItems}
+    const [showForm, setShowForm] = React.useState(false)
+
+  
+    return (
+        <React.Fragment>
+            {showForm 
+            ? <AddGearForm listItemId={props.listItemId} onSubmit={props.onSubmit} showForm={setShowForm}/> :
+            <AddButton handleClick={setShowForm} name={'Gear'}/>}
+        </React.Fragment>
+    )
 }
