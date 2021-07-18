@@ -1,0 +1,27 @@
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: aliceblue;
+}
+
+.nav-links {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}
+
+/* .list-container {
+    display: flex;
+} */
+
+/* .sidebar {
+    background-color: sandybrown;
+    display: inline-block;
+}
+
+.main-panel {
+    display: inline-block;
+} */

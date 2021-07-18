@@ -1,8 +1,5 @@
 function Nav(props){
-    function logOut() {
-        props.logOut(false);
-    }
-
+   
     return (
         <nav>
             <ul className='nav-links'>
@@ -13,8 +10,18 @@ function Nav(props){
                     <li>Gear</li>
                 </ReactRouterDOM.NavLink>
             </ul>
-            <button className='logout' onClick={logOut}>Log Out</button>
+            <LogOutButton setLoginStatus={props.setLoginStatus}/>
         </nav>
     )
 
+}
+
+function LogOutButton(props){
+
+    function logOut() {
+        props.setLoginStatus(false);
+        localStorage.removeItem('loggedIn', undefined);
+        // decide if there is a way we want to tackle the session cookie 
+   }
+    return <button className='logout' onClick={logOut}>Log Out</button>
 }

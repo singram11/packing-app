@@ -17,22 +17,23 @@ function ListsPage() {
     renderLists();
   }, []);
 
-  // let {path, url } = useRouteMatch();
-
-  return (
+    return (
     <ReactRouterDOM.BrowserRouter>
-      <Lists refreshLists={renderLists} lists={lists} />
-      <ReactRouterDOM.Route exact path="/lists">
-        <AddList renderLists={renderLists}/>
-      </ReactRouterDOM.Route>
-      
-      {/* <AddListForm onSubmit={renderLists} /> */}
-     
-      <ReactRouterDOM.Switch>
-        <ReactRouterDOM.Route path="/lists/:id">
-          <ListDetailsPage />
-        </ReactRouterDOM.Route>
-      </ReactRouterDOM.Switch>
+      <div className="list-container">
+        <div className="sidebar">
+            <Lists refreshLists={renderLists} lists={lists} />
+        </div>
+        <ReactRouterDOM.Route exact path="/lists">
+            <AddList renderLists={renderLists}/>
+        </ReactRouterDOM.Route>    
+        <ReactRouterDOM.Switch>
+            <ReactRouterDOM.Route path="/lists/:id">
+                <div className="main-panel">
+                    <ListDetailsPage />
+                </div>
+            </ReactRouterDOM.Route>
+        </ReactRouterDOM.Switch>
+      </div>
     </ReactRouterDOM.BrowserRouter>
   );
 }

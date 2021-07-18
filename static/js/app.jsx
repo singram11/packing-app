@@ -1,13 +1,13 @@
 function App() {
-        const loggedIn = localStorage.getItem('loggedIn')
-        const [login, setLogin] = React.useState(loggedIn);
+        const loggedInCookie = localStorage.getItem('loggedIn')
+        const [login, setLogin] = React.useState(loggedInCookie);
 
 
     return (
     <React.Fragment>
         {login ?
         <ReactRouterDOM.BrowserRouter>
-            <Nav logOut={setLogin}/>
+            <Nav setLoginStatus={setLogin}/>
             <ReactRouterDOM.Switch>
                 <ReactRouterDOM.Route path='/lists' >
                     <ListsPage/>
@@ -15,10 +15,6 @@ function App() {
                 <ReactRouterDOM.Route path='/gear' >
                     <ShowGear/>
                 </ReactRouterDOM.Route>
-                {/* <ReactRouterDOM.Route path='/api/gear/:id'>
-                    <ShowGear/>
-                    <ShowGearDetails/>
-                </ReactRouterDOM.Route> */}
             </ReactRouterDOM.Switch>
         </ReactRouterDOM.BrowserRouter>
         : <LoginForm onSubmit={setLogin}/> }
