@@ -17,7 +17,7 @@ function App() {
                 </ReactRouterDOM.Route>
             </ReactRouterDOM.Switch>
         </ReactRouterDOM.BrowserRouter>
-        : <LoginForm onSubmit={setLogin}/> }
+        : <LoginPage onSubmit={setLogin}/> }
     </React.Fragment>
     )
 }
