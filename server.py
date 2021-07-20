@@ -9,11 +9,6 @@ app = Flask(__name__)
 app.secret_key = "dev"
 #do the thing - markov bot lab
 
-# @app.route('/')
-# def render_homepage():
-#     """ Shows homepage """
-
-#     return render_template('index.html')
 
 @app.route('/')
 @app.route('/lists')
@@ -56,20 +51,25 @@ def login_user():
     response_data['success'] = success
     
     return response_data
- 
 
-# @app.route('/gear')
-# def render_gear_page():
-#     """ Shows my gear template """
 
-#     return render_template('gear.html')
+@app.route('/new-account', methods=['POST'])
+def create_account():
 
-# @app.route('/lists')
-# def render_lists_page():
-#     """Show list page template"""
+    email = request.json.get('email')
+    password = request.json.get('password')
+    fname = request.json.get('fname')
+    lname = request.json.get('lname') 
 
-#     return render_template('lists.html')
+    response_message, user = crud.create_new_account(fname, lname, email, password)
 
+    print(response_message)
+    print(user)
+
+    if user:
+        session['email'] = user.email
+
+    return jsonify(response_message)
 
 @app.route('/api/lists')
 def show_user_lists():

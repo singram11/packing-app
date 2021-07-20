@@ -2,7 +2,9 @@
 //     const loggedIn = localStorage.getItem('loggedIn')
 //     const [loggedInUpdate, setLogin] = React.useState(loggedIn);
 
-const React = require("react");
+
+
+// const React = require("react");
 
 //     return <React.Fragment>
 //             {/* <ReactRouterDOM.BrowserRouter>
@@ -42,17 +44,26 @@ function LoginPage(props){
 
     const [ toggleReg, setToggleReg] = React.useState(false);
 
+    const [alertMessage, setAlertMessage] = React.useState('')
+
+    React.useEffect(()=> {
+        setAlertMessage('')
+    }, [toggleReg])
+
     function handleClick(){
         setToggleReg(true);
     }
     
 // toggle what screen is show by the toggle reg button?
     return <div>
-                
                 {toggleReg 
-                ? <CreateNewAccountForm closeForm={setToggleReg}/>
+                ? (<React.Fragment>
+                    <CreateNewAccountForm closeForm={setToggleReg} logIn={props.onSubmit} message={setAlertMessage}/>
+                    {alertMessage ? <AlertMessage message={alertMessage}/> : null}
+                </React.Fragment> )
                 : (<React.Fragment>
-                        <LoginForm onSubmit={props.onSubmit}/>
+                        <LoginForm onSubmit={props.onSubmit} message={setAlertMessage}/>
+                        {alertMessage ? <AlertMessage message={alertMessage}/> : null}
                         <a 
                         onClick={handleClick} 
                         style={{cursor: 'pointer'}}
@@ -65,6 +76,7 @@ function LoginPage(props){
 }
 
 function LoginForm(props) {
+    // onSubmit, message
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
@@ -95,6 +107,7 @@ function LoginForm(props) {
                         props.onSubmit(true)
                     } else {
                         console.log("noooope");
+                        props.message(jsonResponse.message)
                     }
             })
     };
@@ -102,16 +115,16 @@ function LoginForm(props) {
     return( 
             <form onSubmit={handleSubmit}>
                 <label>Email:</label>
-                <input type="text" value={email} onChange={handleEmailChange}/>
+                <input type='email' value={email} onChange={handleEmailChange}/>
                 <label>Password:</label>
-                <input value={password} onChange={handlePasswordChange}/>
+                <input type='password' value={password} onChange={handlePasswordChange}/>
                 <input type="submit" value="Log In"/>
             </form>
         );
 }
 
 function CreateNewAccountForm(props) {
-    // props: closeForm
+    // props: closeForm, logIn, message
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [fname, setFname] = React.useState('');
@@ -148,14 +161,15 @@ function CreateNewAccountForm(props) {
         fetch('/new-account', postBody)
             .then((response) => response.json())
             .then((jsonResponse)=> {
-                    // if (jsonResponse.success) {
-                    //     localStorage.setItem('loggedIn', true);
-                    //     props.onSubmit(true)
-                    // } else {
-                    //     console.log("noooope");
-                    // }
+                    if (jsonResponse.success) {
+                        localStorage.setItem('loggedIn', true);
+                        props.logIn(true)
+                    } else {
+                        props.message(jsonResponse.message)
+                        console.log("jsonResponse.message");
+                    }
             })
-        props.closeForm(false)
+       
         // maybe a way to make a better toggle ??
     };
 
@@ -163,11 +177,11 @@ function CreateNewAccountForm(props) {
         <React.Fragment>
             <form onSubmit={handleSubmit}>
                 <label>Email:</label>
-                <input type="text" value={email} onChange={handleEmailChange}/>
+                <input type='email' value={email} onChange={handleEmailChange}/>
                 <label>Password:</label>
-                <input value={password} onChange={handlePasswordChange}/>
+                <input type='password' value={password} onChange={handlePasswordChange}/>
                 <label>First Name:</label>
-                <input type="text" value={fname} onChange={handleFnameChange}/>
+                <input type='text' value={fname} onChange={handleFnameChange}/>
                 <label>Last Name</label>
                 <input value={lname} onChange={handleLnameChange}/>
                 <input type="submit" value="Create Account"/>
@@ -175,4 +189,10 @@ function CreateNewAccountForm(props) {
             <CloseFormButton showForm={props.closeForm}/>
         </React.Fragment>
     );
+}
+
+function AlertMessage(props){
+    //props message 
+    return <div>{props.message}</div>
+
 }

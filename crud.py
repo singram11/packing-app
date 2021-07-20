@@ -14,6 +14,32 @@ def create_user(fname, lname,email, password):
     
     return user
 
+def create_new_account(fname, lname,email, password):
+    """ Check for existing user and then create user if none exists
+    
+    take in fname, lname, email, password
+    
+    return user object"""
+
+    existing_user = get_user_by_email(email)
+
+    
+    response_message = {}
+
+    if existing_user:
+        response_message['success'] = False
+        response_message['message'] = 'This user already exists.'
+        user = None
+    else:
+        user = create_user(fname, lname, email, password)
+        response_message['success'] = True
+        response_message['message'] = 'This user was created.'
+         
+    return (response_message, user)
+        
+
+
+
 def get_user_by_email(email):
     """Find user object by email"""
 
