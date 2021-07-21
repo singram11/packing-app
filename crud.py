@@ -229,21 +229,71 @@ def get_list_details_by_list_id(list_id):
 
     list_items = db.session.query(List_item).filter(List_item.list_id==list_id).all()
 
-    list_data = {}
-  
-    for list_item in list_items:
+    categorized_items = order_item_by_category(list_items)
 
-        item = list_item.item
-        gear = list_item.gear ##need to test and confirm
-        if gear:
-            list_data[list_item.list_item_id] = {'item': item.json_format(),
-                                        'gear': gear.json_format()}
+    list_data = {}
+    
+    categories = categorized_items.keys()
+
+    for category in categories:
+        category_data = {}
+        for list_item in categorized_items[category]:
+
+            item = list_item.item
+            gear = list_item.gear 
+
+            if gear:
+                category_data[list_item.list_item_id] = {'item': item.json_format(),
+                                            'gear': gear.json_format()}
+            
+            else: 
+                category_data[list_item.list_item_id] = {'item': item.json_format(),
+                                            'gear': None}
+
+            list_data[category] = category_data
+    
+    print(f'data to be sent: {list_data}')
+    # for list_item in list_items:
+
+    #     item = list_item.item
+    #     gear = list_item.gear ##need to test and confirm
+    #     if gear:
+    #         list_data[list_item.list_item_id] = {'item': item.json_format(),
+    #                                     'gear': gear.json_format()}
         
-        else: 
-             list_data[list_item.list_item_id] = {'item': item.json_format(),
-                                        'gear': None}
+    #     else: 
+    #          list_data[list_item.list_item_id] = {'item': item.json_format(),
+    #                                     'gear': None}
 
     return list_data
+
+def order_item_by_category(list_items):
+    """Takes in a list of list_items and orders them by category 
+
+    returns an ordered list"""
+
+    categorized_items = {}
+  
+
+    for list_item in list_items: 
+
+        item = list_item.item
+        print(f'Item: {item}')
+        category = item.item_category.name
+
+        print(f'category name: {category}')
+        
+        if categorized_items.get(category):
+            categorized_items[category].append(list_item)
+            print(categorized_items)
+        else: 
+            categorized_items[category] = [list_item]
+            print("elseeee")
+
+    return categorized_items
+        
+
+
 
 def get_gear_by_user(user):
     """Return unique list of gear by user"""

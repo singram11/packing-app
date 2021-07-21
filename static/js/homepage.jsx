@@ -115,9 +115,9 @@ function LoginForm(props) {
     return( 
             <form onSubmit={handleSubmit}>
                 <label>Email:</label>
-                <input type='email' value={email} onChange={handleEmailChange}/>
+                <input type='email' required='required' value={email} onChange={handleEmailChange}/>
                 <label>Password:</label>
-                <input type='password' value={password} onChange={handlePasswordChange}/>
+                <input type='password' required='required' value={password} onChange={handlePasswordChange}/>
                 <input type="submit" value="Log In"/>
             </form>
         );
@@ -177,11 +177,11 @@ function CreateNewAccountForm(props) {
         <React.Fragment>
             <form onSubmit={handleSubmit}>
                 <label>Email:</label>
-                <input type='email' value={email} onChange={handleEmailChange}/>
+                <input type='email' required='required' value={email} onChange={handleEmailChange}/>
                 <label>Password:</label>
-                <input type='password' value={password} onChange={handlePasswordChange}/>
+                <input type='password' required='required' value={password} onChange={handlePasswordChange}/>
                 <label>First Name:</label>
-                <input type='text' value={fname} onChange={handleFnameChange}/>
+                <input type='text' required='required' value={fname} onChange={handleFnameChange}/>
                 <label>Last Name</label>
                 <input value={lname} onChange={handleLnameChange}/>
                 <input type="submit" value="Create Account"/>

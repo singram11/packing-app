@@ -1,5 +1,3 @@
-// const { func } = require("prop-types");
-
 function GearList(props) {
     const gearData = props.gear;
     const gear = [];
@@ -117,12 +115,37 @@ function DeleteListButton(props) {
     return <button onClick={(event) => deleteList(id, event)}>-</button>
 }
 
+function ShowItemCategories(props) {
+    // renderListItems, listDetails
+    const listDetails = props.listDetails;
+    const listCategories = [];
+
+
+    for (const category in listDetails) {
+        let categoryCard = '';
+
+        categoryCard = (
+            <ShowListItems
+                key={category}
+                name={category}
+                listItems = {listDetails[category]}
+                renderListItems = {props.renderListItems}
+            />
+        )
+       
+        listCategories.push(categoryCard);
+    }
+    return <React.Fragment>
+        <div className='category-container'>{listCategories}</div>
+    </React.Fragment>
+   
+
+}
+
 function ShowListItems(props) {
     // props renderListItems, ListItems
     const listItems = props.listItems;
     const listItemsArr = [];
-
-  
 
     for (const listItem in listItems) {
         let listItemCard = '';
@@ -144,6 +167,7 @@ function ShowListItems(props) {
     }
 
     return <React.Fragment>
+        <div className='category-name'>{props.name}</div>
         <div className="list-item-container">{listItemsArr}</div>
         </React.Fragment>
 }
@@ -156,7 +180,7 @@ console.log(`Item Card ${id}`)
     return (
         <div className="list-item">
             <div className="item-name">{name}</div>
-            <div className="item-details">Category: {category}</div>
+            {/* <div className="item-details">Category: {category}</div> */}
             {gear ? <div className="item-details">Gear: {gear}</div> : 
             <AddGear listItemId={id} onSubmit={props.renderListItems}/> }
             {/* // <AddGearForm listItemId={id} onSubmit={props.renderListItems}/> */}
@@ -223,7 +247,7 @@ function AddListItemForm(props) {
     return(<React.Fragment>
             <form onSubmit={handleSubmit}>
                 <label>Item Name</label>
-                <input type="text" value={itemName} onChange={handleListNameChange}/>
+                <input type="text" required='required' value={itemName} onChange={handleListNameChange}/>
                 <label>Category</label>
                 <input value={category} onChange={handleCategoryChange}/>
                 <input type="submit" value="Submit"/>
@@ -274,7 +298,7 @@ function AddListForm(props) {
     return( 
             <form onSubmit={handleSubmit}>
                 <label>List Name</label>
-                <input type="text" value={listName} onChange={handleListNameChange}/>
+                <input type="text" required='required' value={listName} onChange={handleListNameChange}/>
                 <label>Category</label>
                 <input value={category} onChange={handleCategoryChange}/>
                 <input type="submit" value="Submit"/>
@@ -341,9 +365,9 @@ function AddGearForm(props) {
     return(<React.Fragment> 
                 <form onSubmit={handleSubmit}>
                     <label>Gear Name</label>
-                    <input type="text" value={gearName} onChange={handleNameChange}/>
+                    <input type="text" required='required' value={gearName} onChange={handleNameChange}/>
                     <label>Weight</label>
-                    <input value={weight} onChange={handleWeightChange}/>
+                    <input type='number' value={weight} onChange={handleWeightChange}/>
                     <label>Description</label>
                     <textarea value={description} onChange={handleDescriptionChange}/>
                     <label>Image Link</label>
@@ -411,3 +435,4 @@ function AddGear(props){
         </React.Fragment>
     )
 }
+

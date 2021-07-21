@@ -61,7 +61,7 @@ function ListsPage() {
 function ListDetailsPage() {
   const { id } = ReactRouterDOM.useParams();
 
-  const [listItems, setListItems] = React.useState({});
+  const [listDetails, setListDetails] = React.useState({});
 
   const url = `/api/lists/${id}`;
 
@@ -69,7 +69,7 @@ function ListDetailsPage() {
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
-        setListItems(result);
+        setListDetails(result);
       });
   }
 
@@ -79,7 +79,8 @@ function ListDetailsPage() {
 
   return (
     <React.Fragment>
-      <ShowListItems renderListItems={renderListItems} listItems={listItems} />
+      <ShowItemCategories renderListItems={renderListItems} listDetails={listDetails}/>
+      {/* <ShowListItems renderListItems={renderListItems} listDetails={listDetails} /> */}
       {/* <AddListItemForm onSubmit={renderListItems} id={id}></AddListItemForm> */}
       <AddListItems onSubmit={renderListItems} id={id}/>
     </React.Fragment>
