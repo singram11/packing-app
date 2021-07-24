@@ -103,6 +103,7 @@ def show_user_gear_list():
     user = crud.get_user_object(email)
     user_gear = crud.get_gear_by_user(user)
     
+
     gear_data = {}
 
     for item in user_gear:
@@ -164,31 +165,20 @@ def create_new_list():
 
 @app.route('/api/gear', methods=['POST'])
 def create_new_gear():
+    """Create a new piece of gear and associate it with 
+    a list_item"""
 
     gearName = request.json.get('name')
     weight = request.json.get('weight')
     description = request.json.get('description')
     img = request.json.get('img')
     list_item_id = request.json.get('listItemId')
-
-    print(f'list_item: {list_item_id}')
   
     new_gear = crud.create_gear(gearName, weight, description, img)
 
-    print(f'gear: {new_gear}')
-
     list_item = crud.get_list_item(list_item_id)
 
-  
-
-    # list_item.gear = new_gear
-
     details = crud.add_gear_to_item(new_gear, list_item)
-
-    
-    print(f'details: {details}')
-
-    print(f'list item deets: {list_item.gear}')
 
     gear_data = {}
     gear_data[new_gear.gear_id] = { 'name': new_gear.name,
@@ -197,6 +187,29 @@ def create_new_gear():
                                     'img': new_gear.img }
 
     return jsonify(gear_data)
+
+@app.route('/api/list-item/add-gear', methods=['POST'])
+def add_gear_to_item():
+    """Associate existing gear with a list_item"""
+
+    gear_id = request.json.get('gear')
+    list_item_id = request.json.get('listItemId')
+
+    #might be able to use the ID directly 
+    gear_obj = crud.get_gear_by_id(gear_id)
+
+    list_item = crud.get_list_item(list_item_id)
+
+    association = crud.add_gear_to_item(gear_obj, list_item)
+
+    message = {}
+
+    if association:
+        message['message'] = 'Gear Added'
+    else:
+        message['message'] = 'This gear was not added'
+
+    return message
 
 @app.route('/api/lists/<list_id>', methods=['DELETE'])
 def remove_list(list_id):

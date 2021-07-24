@@ -10,7 +10,7 @@ function App() {
             <Nav setLoginStatus={setLogin}/>
             <ReactRouterDOM.Switch>
                 <ReactRouterDOM.Route path='/lists' >
-                    <ListsPage/>
+                    <ListsPage />
                 </ReactRouterDOM.Route>
                 <ReactRouterDOM.Route path='/gear' >
                     <ShowGear/>

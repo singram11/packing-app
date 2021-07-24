@@ -164,7 +164,8 @@ def add_item_to_list(list_id, item_name, cat_name):
     return list_item object"""
 
     #check if the item exists
-    item_obj = get_item_by_name(item_name)
+    #check for both the item name and category
+    item_obj = get_item_by_name_and_cat(item_name, cat_name)
     
     #create new item if needed 
     if not item_obj: 
@@ -211,13 +212,25 @@ def get_lists_by_user(user):
 
     return lists
 
-def get_item_by_name(name):
+def get_item_by_name_and_cat(name, category_name):
     """Check if there is an item by name 
 
     return item object if it exists 
     return none if no object by that name"""
 
-    item = db.session.query(Item).filter(Item.name==name).first()
+    category_obj = get_list_cat_by_name(category_name)
+
+    if category_obj:
+
+        cat_id = category_obj.cat_id
+
+        item = db.session.query(Item).filter(Item.name==name, Item.cat_id==cat_id).first()
+    
+    else:
+        
+        item = None
+
+    print(f"showt the item: {item}")
 
     return item
 
@@ -291,7 +304,35 @@ def order_item_by_category(list_items):
             print("elseeee")
 
     return categorized_items
+
+def order_gear_by_category_query(list):
+    """takes in the list_id and returns an organized list gear and items"""
+    pass
         
+
+# def order_gear_by_category(gear_obj_list):
+#     """Take in list of gear objects and return a dictionary 
+#     organized by category"""
+
+#     categorized_gear ={}
+
+#     for gear_obj in gear_obj_list:
+
+#         category = gear_obj.items
+#         gear_name = gear_obj.name
+
+#         print(f'gear_name)'
+
+#         print(f'category name: {category}')
+        
+#         if categorized_gear.get(category):
+#             categorized_gear[category].append(gear_obj)
+#             print(categorized_gear)
+#         else: 
+#             categorized_gear[category] = [gear_obj]
+#             print("elseeee")
+
+#     return categorized_gear
 
 
 
@@ -304,7 +345,7 @@ def get_gear_by_user(user):
                 .join(List_item).join(List)
                 .filter(List.user_id==user_id).all())
 
-    print(gear_items)
+    print(f'gear_items: {gear_items}')
 
     user_gear = set(gear_items)
 
@@ -361,6 +402,7 @@ def delete_list_item(list_item):
 
     db.session.delete(list_item)
     db.session.commit()
+
 
 
 if __name__ == '__main__':

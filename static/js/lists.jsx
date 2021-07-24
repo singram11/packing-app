@@ -1,9 +1,11 @@
-function ListsPage() {
+function ListsPage(props) {
   const loggedIn = localStorage.getItem("loggedIn");
 
   const [loggedInUpdate, setLogin] = React.useState(loggedIn);
 
   const [lists, setLists] = React.useState({});
+
+  // const { id } = ReactRouterDOM.useParams();
 
   function renderLists() {
     fetch("/api/lists")
@@ -29,7 +31,7 @@ function ListsPage() {
         <ReactRouterDOM.Switch>
             <ReactRouterDOM.Route path="/lists/:id">
                 <div className="main-panel">
-                    <ListDetailsPage />
+                    <ListDetailsPage/>
                 </div>
             </ReactRouterDOM.Route>
         </ReactRouterDOM.Switch>
@@ -65,7 +67,7 @@ function ListDetailsPage() {
 
   const url = `/api/lists/${id}`;
 
-  function renderListItems() {
+  function renderListItems(props) {
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
@@ -79,7 +81,9 @@ function ListDetailsPage() {
 
   return (
     <React.Fragment>
-      <ShowItemCategories renderListItems={renderListItems} listDetails={listDetails}/>
+      <ShowItemCategories 
+        renderListItems={renderListItems} 
+        listDetails={listDetails}/>
       {/* <ShowListItems renderListItems={renderListItems} listDetails={listDetails} /> */}
       {/* <AddListItemForm onSubmit={renderListItems} id={id}></AddListItemForm> */}
       <AddListItems onSubmit={renderListItems} id={id}/>
@@ -87,4 +91,3 @@ function ListDetailsPage() {
   );
 }
 
-// ReactDOM.render(<ListsAndMore/> , document.getElementById('root'));
