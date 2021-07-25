@@ -264,19 +264,6 @@ def get_list_details_by_list_id(list_id):
                                             'gear': None}
 
             list_data[category] = category_data
-    
-    print(f'data to be sent: {list_data}')
-    # for list_item in list_items:
-
-    #     item = list_item.item
-    #     gear = list_item.gear ##need to test and confirm
-    #     if gear:
-    #         list_data[list_item.list_item_id] = {'item': item.json_format(),
-    #                                     'gear': gear.json_format()}
-        
-    #     else: 
-    #          list_data[list_item.list_item_id] = {'item': item.json_format(),
-    #                                     'gear': None}
 
     return list_data
 
@@ -303,12 +290,7 @@ def order_item_by_category(list_items):
             categorized_items[category] = [list_item]
             print("elseeee")
 
-    return categorized_items
-
-def order_gear_by_category_query(list):
-    """takes in the list_id and returns an organized list gear and items"""
-    pass
-        
+    return categorized_items 
 
 # def order_gear_by_category(gear_obj_list):
 #     """Take in list of gear objects and return a dictionary 
@@ -402,6 +384,27 @@ def delete_list_item(list_item):
 
     db.session.delete(list_item)
     db.session.commit()
+
+def categorize_by_query(list_id):
+    """Select list_items in Category order by list ID"""
+
+    # list_items = db.session.query(List_item).filter(List_item.list_id==list_id).all()
+
+    ordered_list_items = (db.session.query(List_item, Item_category.name).select_from(List_item)
+                        .join(Item).join(Item_category)
+                        .filter(List_item.list_id==list_id).order_by(Item_category.name).all())
+
+    categorized_items = {}
+
+    for item in ordered_list_items:
+        if categorized_items.get(item[1]):
+            categorized_items[item[1]].append(item[0])
+            print(categorized_items)
+        else: 
+            categorized_items[item[1]] = [item[0]]
+            print("elseeee")
+    
+    return categorized_items
 
 
 
