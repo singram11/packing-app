@@ -235,3 +235,39 @@ function AddGearForm(props) {
             </React.Fragment>
         );
 }
+
+function AddImageForm(){
+    
+    const [ selectedImage, setSelectedImage] = React.useState('')
+
+    const [preview, setPreview] = React.useState()
+
+    function previewFile(file){
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend= () => {
+            setPreview(reader.result);
+        }
+
+    }
+    
+    function handleImageChange(event) {
+        setSelectedImage(event.target.value);
+        // preivewFile(selectedImage);
+    
+    } 
+
+    function handleSubmitFile(event){
+        event.preventDefault();
+        console.log(selectedImage)
+
+    }
+
+    
+
+    return <form onSubmit={handleSubmitFile}>
+        <input type='file' onChange={handleImageChange}/>
+        <button type='submit'>Select</button>
+        {/* {preview && ( <img src={preview} style={{height = '300px'}}/>)} */}
+    </form>
+}

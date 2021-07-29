@@ -87,6 +87,7 @@ function ListDetailsPage() {
       {/* <ShowListItems renderListItems={renderListItems} listDetails={listDetails} /> */}
       {/* <AddListItemForm onSubmit={renderListItems} id={id}></AddListItemForm> */}
       <AddListItems onSubmit={renderListItems} id={id}/>
+      <AddImageForm/>
     </React.Fragment>
   );
 }

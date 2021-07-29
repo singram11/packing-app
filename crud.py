@@ -391,8 +391,8 @@ def categorize_by_query(list_id):
     # list_items = db.session.query(List_item).filter(List_item.list_id==list_id).all()
 
     ordered_list_items = (db.session.query(List_item, Item_category.name).select_from(List_item)
-                        .join(Item).join(Item_category)
-                        .filter(List_item.list_id==list_id).order_by(Item_category.name).all())
+                        .join(Item).join(Item_category).join(Gear)
+                        .filter(List_item.list_id==list_id).group_by(Item_category.name).all())
 
     categorized_items = {}
 
