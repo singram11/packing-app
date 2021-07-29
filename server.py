@@ -3,11 +3,18 @@
 from flask import Flask, render_template, flash, session, redirect, jsonify, request
 
 from model import connect_to_db
+
 import crud
+import cloudinary.uploader
+import os
+
 
 app = Flask(__name__)
 app.secret_key = "dev"
 #do the thing - markov bot lab
+
+CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
+CLOUDINARY_KEY_SECRET = os.environ['CLOUDINARY_SECRET']
 
 
 @app.route('/')
@@ -238,6 +245,24 @@ def remove_list_items(list_item_id):
     crud.delete_list_item(list_item)
     #do NOT delete item (may appear in other lists)
     return jsonify({'message':'item deleted'})
+
+@app.route('/api/upload-image', methods=['POST'])
+def upload_gear_image():
+    """Upload gear image to cloudinary"""
+
+    file = request.json.get('file')
+
+    result = cloudinary.uploader.upload(file,
+                                        api_key=CLOUDINARY_KEY,
+                                        api_secret=CLOUDINARY_KEY_SECRET,
+                                        cloud_name='dpmxuctlw')
+
+    img_url = result['secure_url']
+
+    print(f'result: {result}')
+    print(f'image_url: {img_url}')
+
+    return {'message': 'success'}
 
 
 if __name__ == '__main__':
