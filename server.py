@@ -178,10 +178,20 @@ def create_new_gear():
     gearName = request.json.get('name')
     weight = request.json.get('weight')
     description = request.json.get('description')
-    img = request.json.get('img')
+    img_file = request.json.get('img')
     list_item_id = request.json.get('listItemId')
-  
-    new_gear = crud.create_gear(gearName, weight, description, img)
+    
+    print(f'image_file:{img_file}')
+
+    #cloudinary upload 
+    result = cloudinary.uploader.upload(img_file,
+                                        api_key=CLOUDINARY_KEY,
+                                        api_secret=CLOUDINARY_KEY_SECRET,
+                                        cloud_name='dpmxuctlw')
+    #make sure this is what I want
+    img_url = result['secure_url']
+    print(img_url)
+    new_gear = crud.create_gear(gearName, weight, description, img_url)
 
     list_item = crud.get_list_item(list_item_id)
 
@@ -250,9 +260,9 @@ def remove_list_items(list_item_id):
 def upload_gear_image():
     """Upload gear image to cloudinary"""
 
-    file = request.json.get('file')
+    img_file = request.json.get('file')
 
-    result = cloudinary.uploader.upload(file,
+    result = cloudinary.uploader.upload(img_file,
                                         api_key=CLOUDINARY_KEY,
                                         api_secret=CLOUDINARY_KEY_SECRET,
                                         cloud_name='dpmxuctlw')
@@ -262,7 +272,7 @@ def upload_gear_image():
     print(f'result: {result}')
     print(f'image_url: {img_url}')
 
-    return {'message': 'success'}
+    return {'image': image_url}
 
 
 if __name__ == '__main__':

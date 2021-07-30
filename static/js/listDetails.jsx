@@ -89,9 +89,10 @@ function ShowListItems(props) {
     const listItems = props.listItems;
     const listItemsArr = [];
 
+    console.log(listItems)
+
     for (const listItem in listItems) {
         let listItemCard = '';
-        console.log(`ShowListItems: ${listItem}`)
 
         listItemCard = (
             <ItemCard 
@@ -99,6 +100,7 @@ function ShowListItems(props) {
                 name={listItems[listItem].item.name}
                 category={listItems[listItem].item.category}
                 gear = {listItems[listItem].gear ? listItems[listItem].gear.name : null}
+                gear_img = {listItems[listItem].gear? listItems[listItem].gear.img: null}
                 id={listItem}
                 renderListItems={props.renderListItems}
             />
@@ -115,15 +117,14 @@ function ShowListItems(props) {
 }
 
 function ItemCard(props){
-    const {name, category, gear, id} = props;
-
-    console.log(`Item Card ${id}`)
+    const {name, category, gear, gear_img, id} = props;
 
     return (
         <div className="list-item">
             <div className="item-name">{name}</div>
             {/* <div className="item-details">Category: {category}</div> */}
-            {gear ? <div className="item-details">Gear: {gear}</div> : 
+            {gear ? <div><div className="item-details">Gear: {gear}</div> 
+            <img src={gear_img} style={{width: 300}}/> </div>: 
             <AddGear listItemId={id} onSubmit={props.renderListItems}/> }
             {/* // <AddGearForm listItemId={id} onSubmit={props.renderListItems}/> */}
             <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>

@@ -182,8 +182,9 @@ function AddGearForm(props) {
     
     const [gearName, setName] = React.useState('');
     const [img, setImage] = React.useState('');
-    const [weight, setWeight] = React.useState('');
+    const [weight, setWeight] = React.useState();
     const [description, setDescription] = React.useState('');
+    const [fileToSend, setFileToSend] = React.useState();
     
     function handleNameChange(event) {
         setName(event.target.value);
@@ -198,11 +199,17 @@ function AddGearForm(props) {
     }
 
     function handleImageChange(event) {
-        setImage(event.target.value);
+        setImage(event.target.files[0]);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
+
+        const reader = new FileReader()
+        reader.readAsDataURL(img);
+        reader.onloadend = () => {
+            setFileToSend(reader.result)
+        }
         
         const postBody = {
             method: 'POST',
@@ -210,7 +217,7 @@ function AddGearForm(props) {
             body: JSON.stringify({'name':gearName,
                                 'weight': weight,
                                 'description': description,
-                                'img': img,
+                                'img': fileToSend,
                                 'listItemId': listItemId})
         };
 
@@ -227,8 +234,9 @@ function AddGearForm(props) {
                     <input type='number' value={weight} onChange={handleWeightChange}/>
                     <label>Description</label>
                     <textarea value={description} onChange={handleDescriptionChange}/>
-                    <label>Image Link</label>
-                    <input value={img} onChange={handleImageChange}/>
+                    <label>Upload Image</label>
+                    {/* <input value={img} onChange={handleImageChange}/> */}
+                    <input type='file' onChange={handleImageChange}/>
                     <input type="submit" value="Submit"/>
                 </form>
                 <CloseFormButton showForm={props.showForm}/>

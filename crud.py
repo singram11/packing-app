@@ -392,7 +392,7 @@ def categorize_by_query(list_id):
 
     ordered_list_items = (db.session.query(List_item, Item_category.name).select_from(List_item)
                         .join(Item).join(Item_category).join(Gear)
-                        .filter(List_item.list_id==list_id).group_by(Item_category.name).all())
+                        .filter(List_item.list_id==list_id).order_by(Item_category.name).all())
 
     categorized_items = {}
 
@@ -403,7 +403,7 @@ def categorize_by_query(list_id):
         else: 
             categorized_items[item[1]] = [item[0]]
             print("elseeee")
-    
+
     return categorized_items
 
 
