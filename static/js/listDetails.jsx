@@ -124,7 +124,7 @@ function ItemCard(props){
             <div className="item-name">{name}</div>
             {/* <div className="item-details">Category: {category}</div> */}
             {gear ? <div><div className="item-details">Gear: {gear}</div> 
-            <img src={gear_img} style={{width: 300}}/> </div>: 
+            <img src={gear_img} style={{width: '300px'}}/> </div>: 
             <AddGear listItemId={id} onSubmit={props.renderListItems}/> }
             {/* // <AddGearForm listItemId={id} onSubmit={props.renderListItems}/> */}
             <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>

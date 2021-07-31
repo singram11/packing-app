@@ -13,7 +13,7 @@ function App() {
                     <ListsPage />
                 </ReactRouterDOM.Route>
                 <ReactRouterDOM.Route path='/gear' >
-                    <ShowGear/>
+                    <ShowGear />
                 </ReactRouterDOM.Route>
             </ReactRouterDOM.Switch>
         </ReactRouterDOM.BrowserRouter>

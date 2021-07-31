@@ -181,10 +181,10 @@ function AddGearForm(props) {
     const listItemId = props.listItemId
     
     const [gearName, setName] = React.useState('');
-    const [img, setImage] = React.useState('');
-    const [weight, setWeight] = React.useState();
-    const [description, setDescription] = React.useState('');
-    const [fileToSend, setFileToSend] = React.useState();
+    const [img, setImage] = React.useState(undefined);
+    const [weight, setWeight] = React.useState(undefined);
+    const [description, setDescription] = React.useState(undefined);
+    const [preview, setPreview] = React.useState()
     
     function handleNameChange(event) {
         setName(event.target.value);
@@ -199,17 +199,33 @@ function AddGearForm(props) {
     }
 
     function handleImageChange(event) {
-        setImage(event.target.files[0]);
+        const file = event.target.files[0];
+        setImage(file);
+        previewFile(file);
+    }
+
+    function previewFile(file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setPreview(reader.result)
+        }
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-
-        const reader = new FileReader()
-        reader.readAsDataURL(img);
-        reader.onloadend = () => {
-            setFileToSend(reader.result)
+        if (img) {const reader = new FileReader()
+            reader.readAsDataURL(img);
+            reader.onloadend = () => {
+                uploadGearData(reader.result)
+            }; 
+        } else {
+            uploadGearData(null);
         }
+       
+    }
+
+    function uploadGearData(imgString){
         
         const postBody = {
             method: 'POST',
@@ -217,7 +233,7 @@ function AddGearForm(props) {
             body: JSON.stringify({'name':gearName,
                                 'weight': weight,
                                 'description': description,
-                                'img': fileToSend,
+                                'img': imgString,
                                 'listItemId': listItemId})
         };
 
@@ -239,6 +255,7 @@ function AddGearForm(props) {
                     <input type='file' onChange={handleImageChange}/>
                     <input type="submit" value="Submit"/>
                 </form>
+                {preview && ( <img src={preview} style={{height: '150px'}}/>)}
                 <CloseFormButton showForm={props.showForm}/>
             </React.Fragment>
         );
@@ -252,20 +269,29 @@ function AddImageForm(){
 
     const [fileToSend, setFiletoSend] = React.useState()
 
-    function previewFile(file){
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend= () => {
-            setPreview(reader.result);
-        }
+    // function previewFile(file){
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onloadend= () => {
+    //         setPreview(reader.result);
+    //     }
 
-    }
+    // }
     
     function handleImageChange(event) {
         setSelectedImage(event.target.files[0]);
+        previewFile(event.target.files[0])
         // preivewFile(selectedImage);
     
     } 
+
+    function previewFile(file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setPreview(reader.result)
+        }
+    }
 
     // function getBase64Image(file){
     //     const reader = new FileReader()
@@ -284,15 +310,17 @@ function AddImageForm(){
         const reader = new FileReader()
         reader.readAsDataURL(selectedImage);
         reader.onloadend = () => {
-            setFiletoSend(reader.result)
+            uploadImage(reader.result)
         }
 
         console.log(selectedImage);
-
+    }
+    
+    function uploadImage(imgString) {
         const postBody = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({'file': fileToSend})
+            body: JSON.stringify({'file': imgString})
         };
         
         fetch('/api/upload-image',postBody)
@@ -305,6 +333,6 @@ function AddImageForm(){
     return <form onSubmit={handleSubmitFile}>
         <input type='file' onChange={handleImageChange}/>
         <button type='submit'>Select</button>
-        {/* {preview && ( <img src={preview} style={{height = '300px'}}/>)} */}
+        {preview && ( <img src={preview} style={{height: '150px'}}/>)}
     </form>
 }

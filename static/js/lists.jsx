@@ -31,7 +31,7 @@ function ListsPage(props) {
         <ReactRouterDOM.Switch>
             <ReactRouterDOM.Route path="/lists/:id">
                 <div className="main-panel">
-                    <ListDetailsPage/>
+                    <ListDetailsPage />
                 </div>
             </ReactRouterDOM.Route>
         </ReactRouterDOM.Switch>
@@ -40,34 +40,15 @@ function ListsPage(props) {
   );
 }
 
-// function ListsPage() {
-//     const [lists, setLists] = React.useState({});
 
-//     function renderLists() {
-//         fetch('/api/lists')
-//         .then((response) => response.json())
-//         .then((result) => {
-//             setLists(result);
-//         });
-//     }
-
-//     React.useEffect(()=> {renderLists()
-//     }, []);
-
-//     return (<React.Fragment>
-//                 <Lists refreshLists={renderLists} lists={lists}/>
-//                 <AddListForm onSubmit={renderLists}/>
-//             </React.Fragment>)
-// }
-
-function ListDetailsPage() {
+function ListDetailsPage(props) {
   const { id } = ReactRouterDOM.useParams();
 
   const [listDetails, setListDetails] = React.useState({});
 
   const url = `/api/lists/${id}`;
 
-  function renderListItems(props) {
+  function renderListItems() {
     fetch(url)
       .then((response) => response.json())
       .then((result) => {

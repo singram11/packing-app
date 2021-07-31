@@ -184,12 +184,15 @@ def create_new_gear():
     print(f'image_file:{img_file}')
 
     #cloudinary upload 
-    result = cloudinary.uploader.upload(img_file,
-                                        api_key=CLOUDINARY_KEY,
-                                        api_secret=CLOUDINARY_KEY_SECRET,
-                                        cloud_name='dpmxuctlw')
-    #make sure this is what I want
-    img_url = result['secure_url']
+    if img_file:
+        result = cloudinary.uploader.upload(img_file,
+                                            api_key=CLOUDINARY_KEY,
+                                            api_secret=CLOUDINARY_KEY_SECRET,
+                                            cloud_name='dpmxuctlw')
+        #make sure this is what I want
+        img_url = result['secure_url']
+    else: 
+        img_url = None
     print(img_url)
     new_gear = crud.create_gear(gearName, weight, description, img_url)
 
@@ -256,23 +259,23 @@ def remove_list_items(list_item_id):
     #do NOT delete item (may appear in other lists)
     return jsonify({'message':'item deleted'})
 
-@app.route('/api/upload-image', methods=['POST'])
-def upload_gear_image():
-    """Upload gear image to cloudinary"""
+# @app.route('/api/upload-image', methods=['POST'])
+# def upload_gear_image():
+#     """Upload gear image to cloudinary"""
 
-    img_file = request.json.get('file')
+#     img_file = request.json.get('file')
 
-    result = cloudinary.uploader.upload(img_file,
-                                        api_key=CLOUDINARY_KEY,
-                                        api_secret=CLOUDINARY_KEY_SECRET,
-                                        cloud_name='dpmxuctlw')
+#     result = cloudinary.uploader.upload(img_file,
+#                                         api_key=CLOUDINARY_KEY,
+#                                         api_secret=CLOUDINARY_KEY_SECRET,
+#                                         cloud_name='dpmxuctlw')
 
-    img_url = result['secure_url']
+#     img_url = result['secure_url']
 
-    print(f'result: {result}')
-    print(f'image_url: {img_url}')
+#     print(f'result: {result}')
+#     print(f'image_url: {img_url}')
 
-    return {'image': image_url}
+#     return {'image': img_url}
 
 
 if __name__ == '__main__':

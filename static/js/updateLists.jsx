@@ -22,8 +22,8 @@ function DeleteListItemButton(props) {
 
 function AddListItemForm(props) {
    // props = onSubmit, id, showForm
-    const [itemName, setName] = React.useState('');
-    const [category, setCategory] = React.useState('');
+    const [itemName, setName] = React.useState();
+    const [category, setCategory] = React.useState();
   
     const id  = props.id;
 
