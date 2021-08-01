@@ -3,7 +3,7 @@ function Nav(props){
     return (
         <nav>
             <ul className='nav-links'>
-                <ReactRouterDOM.NavLink to='/lists'>
+                <ReactRouterDOM.NavLink to='/lists' >
                     <li>Lists</li>
                 </ReactRouterDOM.NavLink>
                 <ReactRouterDOM.NavLink to='/gear'>
@@ -17,11 +17,12 @@ function Nav(props){
 }
 
 function LogOutButton(props){
+    const history = ReactRouterDOM.useHistory();
 
     function logOut() {
         props.setLoginStatus(false);
         localStorage.removeItem('loggedIn', undefined);
-        // decide if there is a way we want to tackle the session cookie 
+        history.push('/')
    }
     return <button className='logout' onClick={logOut}>Log Out</button>
 }

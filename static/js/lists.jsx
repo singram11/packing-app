@@ -20,23 +20,26 @@ function ListsPage(props) {
   }, []);
 
     return (
-    <ReactRouterDOM.BrowserRouter>
+    // <ReactRouterDOM.BrowserRouter>
+
       <div className="list-container">
         <div className="sidebar">
             <Lists refreshLists={renderLists} lists={lists} />
-        </div>
-        <ReactRouterDOM.Route exact path="/lists">
             <AddList renderLists={renderLists}/>
-        </ReactRouterDOM.Route>    
+        </div>  
         <ReactRouterDOM.Switch>
-            <ReactRouterDOM.Route path="/lists/:id">
+            {/* <ReactRouterDOM.Route exact path="lists">
+              <p>please select a topic</p>
+            </ReactRouterDOM.Route> */}
+            {/* <ReactRouterDOM.Route path="/lists/:id">
                 <div className="main-panel">
                     <ListDetailsPage />
                 </div>
-            </ReactRouterDOM.Route>
+            </ReactRouterDOM.Route> */}
         </ReactRouterDOM.Switch>
       </div>
-    </ReactRouterDOM.BrowserRouter>
+    
+    // </ReactRouterDOM.BrowserRouter>
   );
 }
 
@@ -68,7 +71,6 @@ function ListDetailsPage(props) {
       {/* <ShowListItems renderListItems={renderListItems} listDetails={listDetails} /> */}
       {/* <AddListItemForm onSubmit={renderListItems} id={id}></AddListItemForm> */}
       <AddListItems onSubmit={renderListItems} id={id}/>
-      <AddImageForm/>
     </React.Fragment>
   );
 }

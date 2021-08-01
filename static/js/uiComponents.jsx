@@ -261,78 +261,78 @@ function AddGearForm(props) {
         );
 }
 
-function AddImageForm(){
+// function AddImageForm(){
     
-    const [ selectedImage, setSelectedImage] = React.useState('')
+//     const [ selectedImage, setSelectedImage] = React.useState('')
 
-    const [preview, setPreview] = React.useState()
+//     const [preview, setPreview] = React.useState()
 
-    const [fileToSend, setFiletoSend] = React.useState()
+//     const [fileToSend, setFiletoSend] = React.useState()
 
-    // function previewFile(file){
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     reader.onloadend= () => {
-    //         setPreview(reader.result);
-    //     }
+//     // function previewFile(file){
+//     //     const reader = new FileReader();
+//     //     reader.readAsDataURL(file);
+//     //     reader.onloadend= () => {
+//     //         setPreview(reader.result);
+//     //     }
 
-    // }
+//     // }
     
-    function handleImageChange(event) {
-        setSelectedImage(event.target.files[0]);
-        previewFile(event.target.files[0])
-        // preivewFile(selectedImage);
+//     function handleImageChange(event) {
+//         setSelectedImage(event.target.files[0]);
+//         previewFile(event.target.files[0])
+//         // preivewFile(selectedImage);
     
-    } 
+//     } 
 
-    function previewFile(file) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            setPreview(reader.result)
-        }
-    }
+//     function previewFile(file) {
+//         const reader = new FileReader();
+//         reader.readAsDataURL(file);
+//         reader.onloadend = () => {
+//             setPreview(reader.result)
+//         }
+//     }
 
-    // function getBase64Image(file){
-    //     const reader = new FileReader()
-    //     reader.readAsDataURL(file);
-    //     reader.onloadend = () => {
-    //         console.log(reader.result)
-    //     }
-    // }
+//     // function getBase64Image(file){
+//     //     const reader = new FileReader()
+//     //     reader.readAsDataURL(file);
+//     //     reader.onloadend = () => {
+//     //         console.log(reader.result)
+//     //     }
+//     // }
 
-    function handleSubmitFile(event){
-        event.preventDefault();
-        console.log(selectedImage)
+//     function handleSubmitFile(event){
+//         event.preventDefault();
+//         console.log(selectedImage)
 
-        // const reader = new FileReader();
-        // reader.readAsDataURL(selectedImage);
-        const reader = new FileReader()
-        reader.readAsDataURL(selectedImage);
-        reader.onloadend = () => {
-            uploadImage(reader.result)
-        }
+//         // const reader = new FileReader();
+//         // reader.readAsDataURL(selectedImage);
+//         const reader = new FileReader()
+//         reader.readAsDataURL(selectedImage);
+//         reader.onloadend = () => {
+//             uploadImage(reader.result)
+//         }
 
-        console.log(selectedImage);
-    }
+//         console.log(selectedImage);
+//     }
     
-    function uploadImage(imgString) {
-        const postBody = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({'file': imgString})
-        };
+//     function uploadImage(imgString) {
+//         const postBody = {
+//             method: 'POST',
+//             headers: {'Content-Type': 'application/json'},
+//             body: JSON.stringify({'file': imgString})
+//         };
         
-        fetch('/api/upload-image',postBody)
-            .then((response) => response.json())
-            .then(() => console.log(response))
+//         fetch('/api/upload-image',postBody)
+//             .then((response) => response.json())
+//             .then(() => console.log(response))
 
-    }
+//     }
 
     
-    return <form onSubmit={handleSubmitFile}>
-        <input type='file' onChange={handleImageChange}/>
-        <button type='submit'>Select</button>
-        {preview && ( <img src={preview} style={{height: '150px'}}/>)}
-    </form>
-}
+//     return <form onSubmit={handleSubmitFile}>
+//         <input type='file' onChange={handleImageChange}/>
+//         <button type='submit'>Select</button>
+//         {preview && ( <img src={preview} style={{height: '150px'}}/>)}
+//     </form>
+// }
