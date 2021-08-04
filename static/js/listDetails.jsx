@@ -54,7 +54,9 @@ function DeleteListButton(props) {
 
     };
 
-    return <button onClick={(event) => deleteList(id, event)}>-</button>
+    return <ReactBootstrap.Button className="trash-can" onClick={(event) => deleteList(id, event)}>
+            <img src="/static/images/icons/trash-fill.svg"/>
+            </ReactBootstrap.Button>
 }
 
 function ShowItemCategories(props) {
@@ -120,15 +122,23 @@ function ItemCard(props){
     const {name, category, gear, gear_img, id} = props;
 
     return (
-        <div className="list-item">
-            <div className="item-name">{name}</div>
+        // <div className="list-item">
+        <ReactBootstrap.Container>
+            <ReactBootstrap.Row>
+                <ReactBootstrap.Col>
+                    <div className="item-name">{name}</div>
+                </ReactBootstrap.Col>
+                <ReactBootstrap.Col>
+                    <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>
+                </ReactBootstrap.Col>
+            </ReactBootstrap.Row>
             {/* <div className="item-details">Category: {category}</div> */}
             {gear ? <div><div className="item-details">Gear: {gear}</div> 
             <img src={gear_img} style={{width: '300px'}}/> </div>: 
             <AddGear listItemId={id} onSubmit={props.renderListItems}/> }
             {/* // <AddGearForm listItemId={id} onSubmit={props.renderListItems}/> */}
-            <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>
-        </div>
+        </ReactBootstrap.Container>
+        // </div>
     )
 }
 

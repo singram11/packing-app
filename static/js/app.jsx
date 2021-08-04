@@ -7,20 +7,30 @@ function App() {
     <React.Fragment>
         {login ?
         <ReactRouterDOM.BrowserRouter>
+            
             <Nav setLoginStatus={setLogin}/>
             {/* <ContainerTest/> */}
             {/* <ReactRouterDOM.Switch> */}
-                <ReactRouterDOM.Route path='/lists' >
-                    <ListsPage />
-                </ReactRouterDOM.Route>
-                <ReactRouterDOM.Route path="/lists/:id">
-                    <div className="main-panel">
-                        <ListDetailsPage />
-                    </div>
-                </ReactRouterDOM.Route>
+            <ReactBootstrap.Container>
+                <ReactBootstrap.Row>
+                    <ReactRouterDOM.Route path='/lists' >
+                        <ReactBootstrap.Col xs={5}>
+                            <ListsPage />
+                        </ReactBootstrap.Col>
+                    </ReactRouterDOM.Route>
+                    <ReactRouterDOM.Route path="/lists/:id">
+                        <ReactBootstrap.Col>
+                            <ListDetailsPage />
+                        </ReactBootstrap.Col>
+                    </ReactRouterDOM.Route>
+                </ReactBootstrap.Row>
                 <ReactRouterDOM.Route path='/gear' >
                     <ShowGear />
                 </ReactRouterDOM.Route>
+                <ReactRouterDOM.Route path='/gear/:id'>
+                        <ShowGearDetails/>
+                </ReactRouterDOM.Route>
+            </ReactBootstrap.Container>
             {/* </ReactRouterDOM.Switch> */}
         </ReactRouterDOM.BrowserRouter>
         : <LoginPage onSubmit={setLogin}/> }
@@ -34,9 +44,9 @@ function App() {
 // }
 
 // function ContainerTest(){
-//     return <ReactBootstrap.Container>
+//     return <ReactBootstrap.Button>
 //         Does this work?
-//     </ReactBootstrap.Container>
+//     </ReactBootstrap.Button>
 // }
 
 

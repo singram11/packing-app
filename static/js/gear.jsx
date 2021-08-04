@@ -36,14 +36,16 @@ function ShowGear(props) {
         }, []);
     
         
-    return (<ReactRouterDOM.BrowserRouter>
+    return (
+    // <ReactRouterDOM.BrowserRouter>
                 <GearList gear={gear}/>
-                <ReactRouterDOM.Switch>
+                /* <ReactRouterDOM.Switch>
                     <ReactRouterDOM.Route path='/gear/:id'>
                         <ShowGearDetails/>
                     </ReactRouterDOM.Route>
-                </ReactRouterDOM.Switch>
-            </ReactRouterDOM.BrowserRouter>);
+                </ReactRouterDOM.Switch> */
+            // </ReactRouterDOM.BrowserRouter>
+            );
 }
 
 

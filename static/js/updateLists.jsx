@@ -17,7 +17,9 @@ function DeleteListItemButton(props) {
 
     };
 
-    return <button onClick={(event) => deleteListItem(id, event)}>-</button>
+    return <ReactBootstrap.Button className="trash-can" onClick={(event) => deleteListItem(id, event)}>
+            <img src="/static/images/icons/trash-fill.svg"/>
+        </ReactBootstrap.Button>
 }
 
 function AddListItemForm(props) {
@@ -54,13 +56,30 @@ function AddListItemForm(props) {
     };
 
     return(<React.Fragment>
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
                 <label>Item Name</label>
                 <input type="text" required='required' value={itemName} onChange={handleListNameChange}/>
                 <label>Category</label>
                 <input value={category} onChange={handleCategoryChange}/>
                 <input type="submit" value="Submit"/>
-            </form>
+            </form> */}
+            <ReactBootstrap.Form onSubmit={handleSubmit}>
+                <ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Form.Label>Item Name</ReactBootstrap.Form.Label>
+                    <ReactBootstrap.Form.Control 
+                        type="text" 
+                        required='required' 
+                        value={itemName} 
+                        onChange={handleListNameChange}/>
+                </ReactBootstrap.Form.Group>
+                <ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Form.Label>Category</ReactBootstrap.Form.Label>
+                    <ReactBootstrap.Form.Control 
+                        value={category} 
+                        onChange={handleCategoryChange}/>
+                </ReactBootstrap.Form.Group>
+                <ReactBootstrap.Button type="submit">Submit</ReactBootstrap.Button>
+            </ReactBootstrap.Form>
             <CloseFormButton showForm={props.showForm}/>
             </React.Fragment> 
         );
@@ -105,13 +124,30 @@ function AddListForm(props) {
     };
 
     return( 
-            <form onSubmit={handleSubmit}>
-                <label>List Name</label>
-                <input type="text" required='required' value={listName} onChange={handleListNameChange}/>
-                <label>Category</label>
-                <input value={category} onChange={handleCategoryChange}/>
-                <input type="submit" value="Submit"/>
-            </form>
+            // <form onSubmit={handleSubmit}>
+            //     <label>List Name</label>
+            //     <input type="text" required='required' value={listName} onChange={handleListNameChange}/>
+            //     <label>Category</label>
+            //     <input value={category} onChange={handleCategoryChange}/>
+            //     <input type="submit" value="Submit"/>
+            // </form>
+            <ReactBootstrap.Form onSubmit={handleSubmit}>
+                <ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Form.Label>List Name</ReactBootstrap.Form.Label>
+                    <ReactBootstrap.Form.Control 
+                        type="text" 
+                        required='required' 
+                        value={listName} 
+                        onChange={handleListNameChange}/>
+                </ReactBootstrap.Form.Group>
+                <ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Form.Label>Category</ReactBootstrap.Form.Label>
+                    <ReactBootstrap.Form.Control value={category} onChange={handleCategoryChange}/>
+                    <ReactBootstrap.Form.Text>Optional</ReactBootstrap.Form.Text>
+                </ReactBootstrap.Form.Group>
+                <ReactBootstrap.Button type="submit">Submit</ReactBootstrap.Button>
+            </ReactBootstrap.Form>
+
         );
 }
 function AddList(props){

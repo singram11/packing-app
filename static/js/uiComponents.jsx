@@ -79,9 +79,9 @@ function AddButton(props) {
         props.handleClick(true)
     }
 
-    return <button onClick={handleClick}>
+    return <ReactBootstrap.Button onClick={handleClick}>
         Add {props.name}
-    </button>
+    </ReactBootstrap.Button>
 }
 
 
@@ -90,7 +90,7 @@ function CloseFormButton(props){
     function handleClick(){
         props.showForm(false);
     }
-    return <button onClick={handleClick}>x</button>
+    return <ReactBootstrap.Button variant="outline-primary" onClick={handleClick}>Cancel</ReactBootstrap.Button>
 }
 
 function AddGear(props){
@@ -168,11 +168,11 @@ function AddGearDropDown(props){
     return <form>
         Gear:
         <br/>
-        <select onChange={handleGearChange}>
+        <ReactBootstrap.Form.Select onChange={handleGearChange}>
             <option value='Select Your Gear'>--Select Your Gear--</option>
             {gearArr.map((gearArr)=> <option key={gearArr.key} value={gearArr.key}>{gearArr.name}</option>)}
-        </select>
-        <button type="submit" onClick={handleSubmit}>Select</button>
+        </ReactBootstrap.Form.Select>
+        <ReactBootstrap.Button type="submit" onClick={handleSubmit}>Select</ReactBootstrap.Button> 
     </form>
 }
 
@@ -243,7 +243,7 @@ function AddGearForm(props) {
     };
 
     return(<React.Fragment> 
-                <form onSubmit={handleSubmit}>
+                {/* <form onSubmit={handleSubmit}>
                     <label>Gear Name</label>
                     <input type="text" required='required' value={gearName} onChange={handleNameChange}/>
                     <label>Weight</label>
@@ -252,9 +252,41 @@ function AddGearForm(props) {
                     <textarea value={description} onChange={handleDescriptionChange}/>
                     <label>Upload Image</label>
                     {/* <input value={img} onChange={handleImageChange}/> */}
-                    <input type='file' onChange={handleImageChange}/>
+                    {/* <input type='file' onChange={handleImageChange}/>
                     <input type="submit" value="Submit"/>
-                </form>
+                </form> */} 
+                <ReactBootstrap.Form onSubmit={handleSubmit}>
+                    <ReactBootstrap.Form.Group>
+                        <ReactBootstrap.Form.Label>Gear Name</ReactBootstrap.Form.Label>
+                        <ReactBootstrap.Form.Control 
+                            type="text" 
+                            required='required' 
+                            value={gearName} 
+                            onChange={handleNameChange}/>
+                    </ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Form.Group>
+                        <ReactBootstrap.Form.Label>Weight</ReactBootstrap.Form.Label>
+                        <ReactBootstrap.Form.Control 
+                            type='number' 
+                            value={weight} 
+                            onChange={handleWeightChange} />
+                    </ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Form.Group>
+                        <ReactBootstrap.Form.Label>Description</ReactBootstrap.Form.Label>
+                        <ReactBootstrap.Form.Label 
+                            as="textarea" 
+                            rows={3}
+                            value={description} 
+                            onChange={handleDescriptionChange} />
+                      </ReactBootstrap.Form.Group>
+                      <ReactBootstrap.Form.Group>
+                        <ReactBootstrap.Form.Label>Upload Image</ReactBootstrap.Form.Label>
+                        <ReactBootstrap.Form.Control 
+                            type='file' 
+                            onChange={handleImageChange}/>
+                    </ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Button type="submit">Submit</ReactBootstrap.Button>
+                </ReactBootstrap.Form>
                 {preview && ( <img src={preview} style={{height: '150px'}}/>)}
                 <CloseFormButton showForm={props.showForm}/>
             </React.Fragment>

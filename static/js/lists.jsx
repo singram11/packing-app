@@ -27,7 +27,7 @@ function ListsPage(props) {
             <Lists refreshLists={renderLists} lists={lists} />
             <AddList renderLists={renderLists}/>
         </div>  
-        <ReactRouterDOM.Switch>
+        {/* <ReactRouterDOM.Switch> */}
             {/* <ReactRouterDOM.Route exact path="lists">
               <p>please select a topic</p>
             </ReactRouterDOM.Route> */}
@@ -36,7 +36,7 @@ function ListsPage(props) {
                     <ListDetailsPage />
                 </div>
             </ReactRouterDOM.Route> */}
-        </ReactRouterDOM.Switch>
+        {/* </ReactRouterDOM.Switch> */}
       </div>
     
     // </ReactRouterDOM.BrowserRouter>

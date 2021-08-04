@@ -1,17 +1,21 @@
 function Nav(props){
    
     return (
-        <nav>
-            <ul className='nav-links'>
-                <ReactRouterDOM.NavLink to='/lists' >
-                    <li>Lists</li>
+        <ReactBootstrap.Navbar>
+            <ReactBootstrap.Container>
+            <ReactBootstrap.Nav className="me-auto">
+            {/* <ul className='nav-links'> fix this!!!!*/ }
+                <ReactRouterDOM.NavLink to='/lists' >  
+                    Lists
                 </ReactRouterDOM.NavLink>
                 <ReactRouterDOM.NavLink to='/gear'>
-                    <li>Gear</li>
+                    Gear
                 </ReactRouterDOM.NavLink>
-            </ul>
+            {/* </ul> */}
+            </ReactBootstrap.Nav>
             <LogOutButton setLoginStatus={props.setLoginStatus}/>
-        </nav>
+            </ReactBootstrap.Container>
+        </ReactBootstrap.Navbar>
     )
 
 }
@@ -24,5 +28,5 @@ function LogOutButton(props){
         localStorage.removeItem('loggedIn', undefined);
         history.push('/')
    }
-    return <button className='logout' onClick={logOut}>Log Out</button>
+    return <ReactBootstrap.Button className='logout' onClick={logOut}>Log Out</ReactBootstrap.Button>
 }
