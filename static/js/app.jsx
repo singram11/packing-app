@@ -1,20 +1,27 @@
 function App() {
         const loggedInCookie = localStorage.getItem('loggedIn')
         const [login, setLogin] = React.useState(loggedInCookie);
+        const [userInfo, setUserInfo] = React.useState('');
 
-        // React.useEffect(()=> {
-        //     if (!login) {
+        function getUserInfo(){
+            fetch('/api/user/me')
+                .then((response) => response.json())
+                .then((result) => {setUserInfo(result);
+                });
+        }
 
-        //     }else {
+        React.useEffect(()=> {
+            if (login) {
+                getUserInfo()
+            }
+        }, [login])
 
-        //     }
-        // }, [login])
     return (
     <React.Fragment>
         {login ?
         <ReactRouterDOM.BrowserRouter>
             
-            <Nav setLoginStatus={setLogin}/>
+            <Nav userInfo={userInfo} login={login} setLoginStatus={setLogin}/>
             {/* <ContainerTest/> */}
             {/* <ReactRouterDOM.Switch> */}
             <ReactBootstrap.Container fluid>
@@ -39,21 +46,10 @@ function App() {
             </ReactBootstrap.Container>
             {/* </ReactRouterDOM.Switch> */}
         </ReactRouterDOM.BrowserRouter>
-        : <LoginPage onSubmit={setLogin}/> }
+        : <LoginPage 
+            onSubmit={setLogin}/> }
     </React.Fragment>
     )
 }
-
-// export default function testExport(){
-//     return hello
-
-// }
-
-// function ContainerTest(){
-//     return <ReactBootstrap.Button>
-//         Does this work?
-//     </ReactBootstrap.Button>
-// }
-
 
 ReactDOM.render(<App/>, document.getElementById('root'));

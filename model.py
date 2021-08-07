@@ -21,6 +21,13 @@ class User(db.Model):
 
     lists = db.relationship('List', back_populates='user')
 
+    def json_format(self):
+        """return user information in a JSON serializable format"""
+
+        return {'email': self.email,
+                'first_name': self.fname,
+                'last_name':self.lname}
+
 
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'

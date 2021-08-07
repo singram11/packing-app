@@ -59,6 +59,15 @@ def login_user():
     
     return response_data
 
+@app.route('/api/user/me')
+def ger_user_details():
+    """return the user details"""
+
+    email = session['email']
+    user = crud.get_user_object(email)
+
+    return user.json_format()
+
 
 @app.route('/new-account', methods=['POST'])
 def create_account():

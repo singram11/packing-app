@@ -1,5 +1,6 @@
 function Nav(props){
-   
+//    user = props.userInfo;
+//    email = user.email
     return (
         <ReactBootstrap.Navbar >
             <ReactBootstrap.Container>
@@ -15,7 +16,7 @@ function Nav(props){
                     </ReactRouterDOM.NavLink>
                 </ReactBootstrap.Nav.Link>
             </ReactBootstrap.Nav>
-            <ReactBootstrap.Navbar.Text className='ml-3'>Your username here</ReactBootstrap.Navbar.Text>
+            <ReactBootstrap.Navbar.Text className='ml-3'>{props.userInfo['email']} | </ReactBootstrap.Navbar.Text>
             <LogOutButton setLoginStatus={props.setLoginStatus}/>
             </ReactBootstrap.Container>
         </ReactBootstrap.Navbar>

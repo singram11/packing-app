@@ -27,7 +27,9 @@ function LoginPage(props){
                     {alertMessage ? <AlertMessage message={alertMessage}/> : null}
                 </React.Fragment> )
                 : (<React.Fragment>
-                        <LoginForm onSubmit={props.onSubmit} message={setAlertMessage}/>
+                        <LoginForm 
+                            onSubmit={props.onSubmit} 
+                            message={setAlertMessage}/>
                         {alertMessage ? <AlertMessage message={alertMessage}/> : null}
                         <a
                         className='m-4 new-account-link' 
@@ -73,6 +75,7 @@ function LoginForm(props) {
                     if (jsonResponse.success) {
                         localStorage.setItem('loggedIn', true);
                         props.onSubmit(true)
+                        props.setShowEmail()
                     } else {
                         console.log("noooope");
                         props.message(jsonResponse.message)

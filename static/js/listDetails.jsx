@@ -138,11 +138,11 @@ function ItemCard(props){
             
             {gear ? 
             <ReactBootstrap.Row className="justify-content-between">
-                <ReactBootstrap.Col sm='auto'> 
-                    <img className="gear-image-sm" src={gear_img} style={{width: '50px'}}/>
-                </ReactBootstrap.Col>
                 <ReactBootstrap.Col>
                     <div className="item-details">{gear}</div>
+                </ReactBootstrap.Col>
+                <ReactBootstrap.Col sm='auto'> 
+                    <img className="gear-image-sm" src={gear_img} style={{width: '50px'}}/>
                 </ReactBootstrap.Col>
             </ReactBootstrap.Row> 
             : <ReactBootstrap.Row>
