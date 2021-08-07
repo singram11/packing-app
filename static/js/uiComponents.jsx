@@ -79,7 +79,7 @@ function AddButton(props) {
         props.handleClick(true)
     }
 
-    return <ReactBootstrap.Button onClick={handleClick}>
+    return <ReactBootstrap.Button size='sm' onClick={handleClick}>
         Add {props.name}
     </ReactBootstrap.Button>
 }
@@ -90,7 +90,7 @@ function CloseFormButton(props){
     function handleClick(){
         props.showForm(false);
     }
-    return <ReactBootstrap.Button variant="outline-primary" onClick={handleClick}>Cancel</ReactBootstrap.Button>
+    return <ReactBootstrap.Button className='mr-4 mb-4' variant="outline-primary" onClick={handleClick}>Cancel</ReactBootstrap.Button>
 }
 
 function AddGear(props){

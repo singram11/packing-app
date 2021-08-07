@@ -28,7 +28,7 @@ function ListCard(props) {
 
     return (
         <div>
-            <ReactRouterDOM.NavLink to={url}>{name}</ReactRouterDOM.NavLink>
+            <ReactRouterDOM.NavLink activeClassName='selected' to={url}>{name}</ReactRouterDOM.NavLink>
             <DeleteListButton refreshLists={props.refreshLists} id={id}></DeleteListButton>
         </div>
     )
@@ -113,7 +113,7 @@ function ShowListItems(props) {
     }
 
     return <React.Fragment>
-        <div className='category-name'>{props.name}</div>
+        <div className='category-name font-weight-bold'>{props.name}</div>
         <div className="list-item-container">{listItemsArr}</div>
         </React.Fragment>
 }
@@ -123,21 +123,35 @@ function ItemCard(props){
 
     return (
         // <div className="list-item">
-        <ReactBootstrap.Container>
-            <ReactBootstrap.Row>
-                <ReactBootstrap.Col>
-                    <div className="item-name">{name}</div>
+        <ReactBootstrap.Card className='mb-2'>
+            <ReactBootstrap.Card.Body className='p-1'>
+            <ReactBootstrap.Row className="justify-content-between">
+                <ReactBootstrap.Col >
+                    <div className="item-name font-weight-bold">{name}</div>
                 </ReactBootstrap.Col>
-                <ReactBootstrap.Col>
-                    <DeleteListItemButton renderListItems={props.renderListItems} id={id}>-</DeleteListItemButton>
+                <ReactBootstrap.Col sm='auto'>
+                    <DeleteListItemButton 
+                    renderListItems={props.renderListItems} 
+                    id={id}>-</DeleteListItemButton>
                 </ReactBootstrap.Col>
             </ReactBootstrap.Row>
-            {/* <div className="item-details">Category: {category}</div> */}
-            {gear ? <div><div className="item-details">Gear: {gear}</div> 
-            <img src={gear_img} style={{width: '300px'}}/> </div>: 
-            <AddGear listItemId={id} onSubmit={props.renderListItems}/> }
-            {/* // <AddGearForm listItemId={id} onSubmit={props.renderListItems}/> */}
-        </ReactBootstrap.Container>
+            
+            {gear ? 
+            <ReactBootstrap.Row className="justify-content-between">
+                <ReactBootstrap.Col sm='auto'> 
+                    <img className="gear-image-sm" src={gear_img} style={{width: '50px'}}/>
+                </ReactBootstrap.Col>
+                <ReactBootstrap.Col>
+                    <div className="item-details">{gear}</div>
+                </ReactBootstrap.Col>
+            </ReactBootstrap.Row> 
+            : <ReactBootstrap.Row>
+                <ReactBootstrap.Col>
+                <AddGear listItemId={id} onSubmit={props.renderListItems}/> 
+                </ReactBootstrap.Col>
+            </ReactBootstrap.Row>}
+            </ReactBootstrap.Card.Body>
+        </ReactBootstrap.Card>
         // </div>
     )
 }

@@ -20,26 +20,10 @@ function ListsPage(props) {
   }, []);
 
     return (
-    // <ReactRouterDOM.BrowserRouter>
-
-      <div className="list-container">
         <div className="sidebar">
             <Lists refreshLists={renderLists} lists={lists} />
             <AddList renderLists={renderLists}/>
         </div>  
-        {/* <ReactRouterDOM.Switch> */}
-            {/* <ReactRouterDOM.Route exact path="lists">
-              <p>please select a topic</p>
-            </ReactRouterDOM.Route> */}
-            {/* <ReactRouterDOM.Route path="/lists/:id">
-                <div className="main-panel">
-                    <ListDetailsPage />
-                </div>
-            </ReactRouterDOM.Route> */}
-        {/* </ReactRouterDOM.Switch> */}
-      </div>
-    
-    // </ReactRouterDOM.BrowserRouter>
   );
 }
 
@@ -65,12 +49,19 @@ function ListDetailsPage(props) {
 
   return (
     <React.Fragment>
+      <ReactBootstrap.Row className='justify-content-between mt-2'>
+        <ReactBootstrap.Col>
+          List Title Here
+        </ReactBootstrap.Col>
+        <ReactBootstrap.Col sm='auto'>
+          <AddListItems onSubmit={renderListItems} id={id}/>
+        </ReactBootstrap.Col>
+      </ReactBootstrap.Row>
       <ShowItemCategories 
         renderListItems={renderListItems} 
         listDetails={listDetails}/>
       {/* <ShowListItems renderListItems={renderListItems} listDetails={listDetails} /> */}
       {/* <AddListItemForm onSubmit={renderListItems} id={id}></AddListItemForm> */}
-      <AddListItems onSubmit={renderListItems} id={id}/>
     </React.Fragment>
   );
 }

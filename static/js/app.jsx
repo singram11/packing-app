@@ -2,7 +2,13 @@ function App() {
         const loggedInCookie = localStorage.getItem('loggedIn')
         const [login, setLogin] = React.useState(loggedInCookie);
 
+        // React.useEffect(()=> {
+        //     if (!login) {
 
+        //     }else {
+
+        //     }
+        // }, [login])
     return (
     <React.Fragment>
         {login ?
@@ -11,10 +17,10 @@ function App() {
             <Nav setLoginStatus={setLogin}/>
             {/* <ContainerTest/> */}
             {/* <ReactRouterDOM.Switch> */}
-            <ReactBootstrap.Container>
+            <ReactBootstrap.Container fluid>
                 <ReactBootstrap.Row>
                     <ReactRouterDOM.Route path='/lists' >
-                        <ReactBootstrap.Col xs={5}>
+                        <ReactBootstrap.Col fluid xs={3}>
                             <ListsPage />
                         </ReactBootstrap.Col>
                     </ReactRouterDOM.Route>

@@ -14,7 +14,10 @@ function LoginPage(props){
     }
     
 // toggle what screen is show by the toggle reg button?
-    return <ReactBootstrap.Container>
+    return <section className="login-page d-flex align-items-center justify-content-center">
+            <ReactBootstrap.Container md='auto' className='login-overlay mx-auto align-middle flex-column'>
+                <ReactBootstrap.Row className='align-items-center'>
+                <ReactBootstrap.Col className='align-self-center align-items-center'>
                 {toggleReg 
                 ? (<React.Fragment>
                     <CreateNewAccountForm 
@@ -26,15 +29,18 @@ function LoginPage(props){
                 : (<React.Fragment>
                         <LoginForm onSubmit={props.onSubmit} message={setAlertMessage}/>
                         {alertMessage ? <AlertMessage message={alertMessage}/> : null}
-                        <a 
+                        <a
+                        className='m-4 new-account-link' 
                         onClick={handleClick} 
                         style={{cursor: 'pointer'}}
                         href={void (0)}>
                             Create a New Account
                     </a>
                   </React.Fragment>) }
-        
-            </ReactBootstrap.Container>
+                  </ReactBootstrap.Col>
+                  </ReactBootstrap.Row>
+                  </ReactBootstrap.Container>
+            </section>
 }
 
 function LoginForm(props) {
@@ -83,7 +89,7 @@ function LoginForm(props) {
             //     <input type="submit" value="Log In"/>
             // </form>
          
-            <ReactBootstrap.Form onSubmit={handleSubmit}>
+            <ReactBootstrap.Form onSubmit={handleSubmit} className='m-4'>
                 <ReactBootstrap.Form.Group 
                     className='mb-3 mt-3' 
                     as={ReactBootstrap.Row} 
@@ -179,7 +185,7 @@ function CreateNewAccountForm(props) {
                 <input value={lname} onChange={handleLnameChange}/>
                 <input type="submit" value="Create Account"/>
             </form> */}
-            <ReactBootstrap.Form onSubmit={handleSubmit}>
+            <ReactBootstrap.Form onSubmit={handleSubmit} className='m-4'>
                 <ReactBootstrap.Form.Group 
                     className='mt-3 mb-3'
                     as={ReactBootstrap.Row} 

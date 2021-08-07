@@ -1,18 +1,21 @@
 function Nav(props){
    
     return (
-        <ReactBootstrap.Navbar>
+        <ReactBootstrap.Navbar >
             <ReactBootstrap.Container>
             <ReactBootstrap.Nav className="me-auto">
-            {/* <ul className='nav-links'> fix this!!!!*/ }
-                <ReactRouterDOM.NavLink to='/lists' >  
-                    Lists
-                </ReactRouterDOM.NavLink>
-                <ReactRouterDOM.NavLink to='/gear'>
-                    Gear
-                </ReactRouterDOM.NavLink>
-            {/* </ul> */}
+                <ReactBootstrap.Nav.Link >
+                    <ReactRouterDOM.NavLink activeClassName='selected' to='/lists' >  
+                        Lists
+                    </ReactRouterDOM.NavLink>
+                </ReactBootstrap.Nav.Link>
+                <ReactBootstrap.Nav.Link >
+                    <ReactRouterDOM.NavLink activeClassName='selected' to='/gear'>
+                        Gear
+                    </ReactRouterDOM.NavLink>
+                </ReactBootstrap.Nav.Link>
             </ReactBootstrap.Nav>
+            <ReactBootstrap.Navbar.Text className='ml-3'>Your username here</ReactBootstrap.Navbar.Text>
             <LogOutButton setLoginStatus={props.setLoginStatus}/>
             </ReactBootstrap.Container>
         </ReactBootstrap.Navbar>
@@ -28,5 +31,5 @@ function LogOutButton(props){
         localStorage.removeItem('loggedIn', undefined);
         history.push('/')
    }
-    return <ReactBootstrap.Button className='logout' onClick={logOut}>Log Out</ReactBootstrap.Button>
+    return <ReactBootstrap.Button size='sm' className='logout' onClick={logOut}>Log Out</ReactBootstrap.Button>
 }
