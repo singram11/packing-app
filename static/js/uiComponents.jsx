@@ -102,10 +102,6 @@ function AddGear(props) {
         <React.Fragment>
             {showForm ? (
                 <React.Fragment>
-                    <AddGearDropDown
-                        listItemId={props.listItemId}
-                        renderListItems={props.onSubmit}
-                    />
                     {showNewGearForm ? (
                         <AddGearForm
                             listItemId={props.listItemId}
@@ -113,7 +109,13 @@ function AddGear(props) {
                             showForm={setShowForm}
                         />
                     ) : (
-                        <NewGearButton onClick={setShowNewGearForm} />
+                        <div>
+                            <AddGearDropDown
+                                listItemId={props.listItemId}
+                                renderListItems={props.onSubmit}
+                            />
+                            <NewGearButton onClick={setShowNewGearForm} />
+                        </div>
                     )}
                 </React.Fragment>
             ) : (
@@ -122,8 +124,6 @@ function AddGear(props) {
         </React.Fragment>
     );
 }
-
-function ToggleAddGearOptions(props) {}
 
 function NewGearButton(props) {
     function onClick() {
