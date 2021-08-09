@@ -55,17 +55,10 @@ function AddListItemForm(props) {
         setCategory('');
     };
 
-    return(<React.Fragment>
-            {/* <form onSubmit={handleSubmit}>
-                <label>Item Name</label>
-                <input type="text" required='required' value={itemName} onChange={handleListNameChange}/>
-                <label>Category</label>
-                <input value={category} onChange={handleCategoryChange}/>
-                <input type="submit" value="Submit"/>
-            </form> */}
-            <ReactBootstrap.Form onSubmit={handleSubmit}>
+    return(<ReactBootstrap.Container fluid className='list-item-form'>
+            <ReactBootstrap.Form fluid onSubmit={handleSubmit}>
                 <ReactBootstrap.Form.Group>
-                    <ReactBootstrap.Form.Label>Item Name</ReactBootstrap.Form.Label>
+                    <ReactBootstrap.Form.Label>Item Name:</ReactBootstrap.Form.Label>
                     <ReactBootstrap.Form.Control 
                         type="text" 
                         required='required' 
@@ -73,15 +66,17 @@ function AddListItemForm(props) {
                         onChange={handleListNameChange}/>
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Group>
-                    <ReactBootstrap.Form.Label>Category</ReactBootstrap.Form.Label>
+                    <ReactBootstrap.Form.Label>Category:</ReactBootstrap.Form.Label>
                     <ReactBootstrap.Form.Control 
                         value={category} 
                         onChange={handleCategoryChange}/>
                 </ReactBootstrap.Form.Group>
-                <ReactBootstrap.Button type="submit">Submit</ReactBootstrap.Button>
+                <ReactBootstrap.Button className="mt-2" type="submit">Submit</ReactBootstrap.Button>
             </ReactBootstrap.Form>
-            <CloseFormButton showForm={props.showForm}/>
-            </React.Fragment> 
+            <ReactBootstrap.Col>
+                <CloseFormButton showForm={props.showForm}/>
+            </ReactBootstrap.Col>
+            </ReactBootstrap.Container> 
         );
 }
 
@@ -123,14 +118,7 @@ function AddListForm(props) {
         setCategory('')
     };
 
-    return( 
-            // <form onSubmit={handleSubmit}>
-            //     <label>List Name</label>
-            //     <input type="text" required='required' value={listName} onChange={handleListNameChange}/>
-            //     <label>Category</label>
-            //     <input value={category} onChange={handleCategoryChange}/>
-            //     <input type="submit" value="Submit"/>
-            // </form>
+    return(
             <ReactBootstrap.Form onSubmit={handleSubmit}>
                 <ReactBootstrap.Form.Group>
                     <ReactBootstrap.Form.Label>List Name</ReactBootstrap.Form.Label>
@@ -167,8 +155,15 @@ function AddListItems(props){
 
     return ( <React.Fragment>
                 {showForm 
-                ? <AddListItemForm onSubmit={props.onSubmit} id={props.id} showForm={setShowForm}/> 
-                : <AddButton handleClick={setShowForm} name={'Items'}/> }
+                ? <ReactBootstrap.Row fluid >
+                        <AddListItemForm
+                        onSubmit={props.onSubmit} 
+                        id={props.id} 
+                        showForm={setShowForm}/> 
+                    </ReactBootstrap.Row>
+                : <AddButton 
+                    handleClick={setShowForm} 
+                    name={'Items'}/> }
             </React.Fragment>
     )
 }

@@ -27,7 +27,7 @@ function App() {
             <ReactBootstrap.Container fluid>
                 <ReactBootstrap.Row>
                     <ReactRouterDOM.Route path='/lists' >
-                        <ReactBootstrap.Col fluid xs={3}>
+                        <ReactBootstrap.Col className='pr-4 sidebar pads' fluid xs={3}>
                             <ListsPage />
                         </ReactBootstrap.Col>
                     </ReactRouterDOM.Route>

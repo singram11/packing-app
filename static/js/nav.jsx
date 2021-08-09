@@ -16,7 +16,7 @@ function Nav(props){
                     </ReactRouterDOM.NavLink>
                 </ReactBootstrap.Nav.Link>
             </ReactBootstrap.Nav>
-            <ReactBootstrap.Navbar.Text className='ml-3'>{props.userInfo['email']} | </ReactBootstrap.Navbar.Text>
+            <ReactBootstrap.Navbar.Text className='ml-3'>{props.userInfo['email']} |</ReactBootstrap.Navbar.Text>
             <LogOutButton setLoginStatus={props.setLoginStatus}/>
             </ReactBootstrap.Container>
         </ReactBootstrap.Navbar>
@@ -32,5 +32,5 @@ function LogOutButton(props){
         localStorage.removeItem('loggedIn', undefined);
         history.push('/')
    }
-    return <ReactBootstrap.Button size='sm' className='logout' onClick={logOut}>Log Out</ReactBootstrap.Button>
+    return <ReactBootstrap.Button variant='link' size='sm' className='logout' onClick={logOut}>Log Out</ReactBootstrap.Button>
 }

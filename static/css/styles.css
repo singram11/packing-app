@@ -32,12 +32,12 @@ button.trash-can.btn {
     height: 100%;
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
-  }
+}
 
-.login-overlay{
+.login-overlay {
     background: rgba(16, 10, 4, 0.6);
     min-height: 50%;
-    max-width: 60%; 
+    max-width: 60%;
     /* line-height: 1.3;
     position: fixed;
     /*height: 100%;*/
@@ -45,10 +45,10 @@ button.trash-can.btn {
     bottom: auto; */
     /*bottom: 40px;
     left: 40px;
-    right: 40px; */ 
+    right: 40px; */
     color: #ffffff;
     border-radius: 3px;
-  }
+}
 
 a.new-account-link {
     color: #ffffff;
@@ -57,7 +57,6 @@ a.new-account-link {
 .sidebar {
     border-right: solid 1px teal;
     height: 100%;
-    
 }
 
 .item-name {
@@ -71,6 +70,19 @@ a.new-account-link {
 .category-name {
     font-weight: bold;
     text-transform: capitalize;
+}
+
+.list-item-form {
+    background-color: #6edbaa;
+    width: 75vw;
+}
+
+.pads {
+    padding-right: 0;
+}
+
+.image-preview {
+    border-radius: 2px;
 }
 /* .list-container {
     display: flex;

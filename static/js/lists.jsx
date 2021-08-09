@@ -53,15 +53,13 @@ function ListDetailsPage(props) {
         <ReactBootstrap.Col>
           List Title Here
         </ReactBootstrap.Col>
-        <ReactBootstrap.Col sm='auto'>
+        <ReactBootstrap.Col md='auto'>
           <AddListItems onSubmit={renderListItems} id={id}/>
         </ReactBootstrap.Col>
       </ReactBootstrap.Row>
       <ShowItemCategories 
         renderListItems={renderListItems} 
         listDetails={listDetails}/>
-      {/* <ShowListItems renderListItems={renderListItems} listDetails={listDetails} /> */}
-      {/* <AddListItemForm onSubmit={renderListItems} id={id}></AddListItemForm> */}
     </React.Fragment>
   );
 }
