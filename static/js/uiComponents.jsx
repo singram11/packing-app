@@ -77,14 +77,16 @@ function AddButton(props) {
 }
 
 function CloseFormButton(props) {
-    // props: showForm
+    // props: showForm buttonVariant
     function handleClick() {
         props.showForm(false);
     }
     return (
         <ReactBootstrap.Button
-            className="mr-4 mb-4"
-            variant="outline-primary"
+            className={props.buttonClass}
+            // className="mr-4"
+            variant={props.buttonVariant}
+            size={props.buttonSize}
             onClick={handleClick}
         >
             Cancel
@@ -98,16 +100,27 @@ function AddGear(props) {
 
     const [showNewGearForm, setShowNewGearForm] = React.useState(false);
 
+    React.useEffect(() => {
+        setShowNewGearForm(false);
+    }, [showForm]);
+
     return (
         <React.Fragment>
             {showForm ? (
                 <React.Fragment>
                     {showNewGearForm ? (
-                        <AddGearForm
-                            listItemId={props.listItemId}
-                            renderListItems={props.onSubmit}
-                            showForm={setShowForm}
-                        />
+                        <React.Fragment>
+                            <AddGearForm
+                                listItemId={props.listItemId}
+                                renderListItems={props.onSubmit}
+                            />
+                            <CloseFormButton
+                                showForm={setShowForm}
+                                buttonVariant={'outline-primary'}
+                                buttonSize={''}
+                                buttonClass={'gear-form-close'}
+                            />
+                        </React.Fragment>
                     ) : (
                         <div>
                             <AddGearDropDown
@@ -115,6 +128,12 @@ function AddGear(props) {
                                 renderListItems={props.onSubmit}
                             />
                             <NewGearButton onClick={setShowNewGearForm} />
+                            <CloseFormButton
+                                showForm={setShowForm}
+                                buttonVariant={'link'}
+                                buttonSize={'sm'}
+                                buttonClass={'gear-close'}
+                            />
                         </div>
                     )}
                 </React.Fragment>
@@ -333,8 +352,6 @@ function AddGearForm(props) {
                     Submit
                 </ReactBootstrap.Button>
             </ReactBootstrap.Form>
-
-            <CloseFormButton showForm={props.showForm} />
         </React.Fragment>
     );
 }
