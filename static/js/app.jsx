@@ -28,7 +28,10 @@ function App() {
                     />
                     {/* <ContainerTest/> */}
                     {/* <ReactRouterDOM.Switch> */}
-                    <ReactBootstrap.Container fluid>
+                    <ReactBootstrap.Container className="offset" fluid>
+                        <ReactRouterDOM.Route exact path="/">
+                            <LandingPage />
+                        </ReactRouterDOM.Route>
                         <ReactBootstrap.Row>
                             <ReactRouterDOM.Route path="/lists">
                                 <ReactBootstrap.Col
@@ -45,12 +48,18 @@ function App() {
                                 </ReactBootstrap.Col>
                             </ReactRouterDOM.Route>
                         </ReactBootstrap.Row>
-                        <ReactRouterDOM.Route path="/gear">
-                            <ShowGear />
-                        </ReactRouterDOM.Route>
-                        <ReactRouterDOM.Route path="/gear/:id">
-                            <ShowGearDetails />
-                        </ReactRouterDOM.Route>
+                        <ReactBootstrap.Row>
+                            <ReactBootstrap.Col xs={4}>
+                                <ReactRouterDOM.Route path="/gear">
+                                    <ShowGear />
+                                </ReactRouterDOM.Route>
+                            </ReactBootstrap.Col>
+                            <ReactBootstrap.Col>
+                                <ReactRouterDOM.Route path="/gear/:id">
+                                    <ShowGearDetails />
+                                </ReactRouterDOM.Route>
+                            </ReactBootstrap.Col>
+                        </ReactBootstrap.Row>
                     </ReactBootstrap.Container>
                     {/* </ReactRouterDOM.Switch> */}
                 </ReactRouterDOM.BrowserRouter>

@@ -19,7 +19,9 @@ function GearItem(props) {
     const url = `/gear/${id}`;
     return (
         <div className="gear-item">
-            <ReactRouterDOM.Link to={url}>{gearName}</ReactRouterDOM.Link>
+            <ReactRouterDOM.NavLink activeClassName="selected" to={url}>
+                {gearName}
+            </ReactRouterDOM.NavLink>
         </div>
     );
 }
@@ -27,29 +29,56 @@ function GearItem(props) {
 function GearItemDetails(props) {
     const gearDetail = props.gearDetail;
     const { description, img, name, weight } = gearDetail;
+    const [showWeight, setShowWeight] = React.useState(false);
+
+    React.useEffect(() => {
+        if (weight != null) {
+            setShowWeight(true);
+        }
+    }, [weight]);
+
+    // const noShowWeight = weight != null;
+    console.log(`weight: ${weight}`);
+    console.log(`showWeight: ${showWeight}`);
 
     return (
-        <React.Fragment>
-            <p>{name}</p>
-            <p>Weight:{weight}</p>
-            <p>Description:{description}</p>
-            <p>{img}</p>
-        </React.Fragment>
+        <ReactBootstrap.Card style={{ width: '25rem' }}>
+            <ReactBootstrap.Card.Img
+                variant="top"
+                src={img}
+                style={{ width: 'auto' }}
+            />
+            <ReactBootstrap.Card.Body>
+                <ReactBootstrap.Card.Title>{name}</ReactBootstrap.Card.Title>
+                <ReactBootstrap.Card.Text>
+                    {description}
+                </ReactBootstrap.Card.Text>
+            </ReactBootstrap.Card.Body>
+            <ReactBootstrap.ListGroup className="list-group-flush">
+                {{ showWeight } ? (
+                    <ReactBootstrap.ListGroupItem>
+                        Weight: {weight} oz
+                    </ReactBootstrap.ListGroupItem>
+                ) : (
+                    ''
+                )}
+            </ReactBootstrap.ListGroup>
+        </ReactBootstrap.Card>
     );
 }
 
-function GearItemDetailCard(props) {
-    const { gearName, weight, description, url } = props;
+// function GearItemDetailCard(props) {
+//     const { gearName, weight, description, url } = props;
 
-    return (
-        <div className="gear-item">
-            <p>{gearName}</p>
-            <p>{weight}</p>
-            <p>{description}</p>
-            <p>{url}</p>
-        </div>
-    );
-}
+//     return (
+//         <div className="gear-item">
+//             <p>{gearName}</p>
+//             <p>{weight}</p>
+//             <p>{description}</p>
+//             <p>{url}</p>
+//         </div>
+//     );
+// }
 
 // function Navbar() {
 //     // const { logo, brand, children, className } = props;
@@ -233,7 +262,7 @@ function AddGearForm(props) {
 
     const [gearName, setName] = React.useState('');
     const [img, setImage] = React.useState(undefined);
-    const [weight, setWeight] = React.useState(undefined);
+    const [weight, setWeight] = React.useState(null);
     const [description, setDescription] = React.useState(undefined);
     const [preview, setPreview] = React.useState();
 
@@ -353,5 +382,36 @@ function AddGearForm(props) {
                 </ReactBootstrap.Button>
             </ReactBootstrap.Form>
         </React.Fragment>
+    );
+}
+
+function LandingPage(props) {
+    return (
+        <ReactBootstrap.Container fluid className="landing-page m-0 p-0">
+            <ReactBootstrap.Container>
+                <ReactBootstrap.Row className="my-4">
+                    <h1>Get Ready For Your Next Adventure</h1>
+                </ReactBootstrap.Row>
+                <ReactBootstrap.Row className="landing-page-links">
+                    <ReactBootstrap.Col>
+                        {/* <ReactBootstrap.Button variant="outline-primary"> */}
+                        <ReactRouterDOM.Link
+                            as={ReactBootstrap.Button}
+                            to="/lists"
+                        >
+                            Update Your Lists
+                        </ReactRouterDOM.Link>
+                        {/* </ReactBootstrap.Button> */}
+                    </ReactBootstrap.Col>
+                    <ReactBootstrap.Col>
+                        <ReactBootstrap.Button variant="outline-primary">
+                            <ReactRouterDOM.Link to="/gear">
+                                Review Your Gear
+                            </ReactRouterDOM.Link>
+                        </ReactBootstrap.Button>
+                    </ReactBootstrap.Col>
+                </ReactBootstrap.Row>
+            </ReactBootstrap.Container>
+        </ReactBootstrap.Container>
     );
 }

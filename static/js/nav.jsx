@@ -3,9 +3,20 @@ function Nav(props) {
     //    email = user.email
     return (
         <ReactBootstrap.Navbar fixed="top">
-            <ReactBootstrap.Container>
+            <ReactBootstrap.Container fluid className="mx-2 px-2">
                 <ReactBootstrap.Nav className="me-auto">
-                    <ReactBootstrap.Nav.Link>
+                    <ReactBootstrap.Navbar.Brand>
+                        <ReactRouterDOM.NavLink to="/">
+                            <img
+                                src="/static/images/icons/tree.svg"
+                                width="25"
+                                height="25"
+                                className="d-inline-block align-bottom"
+                                alt="React Bootstrap logo"
+                            />
+                        </ReactRouterDOM.NavLink>
+                    </ReactBootstrap.Navbar.Brand>
+                    <ReactBootstrap.Nav.Link className="mx-3">
                         <ReactRouterDOM.NavLink
                             activeClassName="selected"
                             to="/lists"
@@ -13,7 +24,7 @@ function Nav(props) {
                             Lists
                         </ReactRouterDOM.NavLink>
                     </ReactBootstrap.Nav.Link>
-                    <ReactBootstrap.Nav.Link>
+                    <ReactBootstrap.Nav.Link className="mx-3">
                         <ReactRouterDOM.NavLink
                             activeClassName="selected"
                             to="/gear"

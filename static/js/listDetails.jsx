@@ -24,7 +24,7 @@ function ListCard(props) {
     const url = `/lists/${id}`;
 
     return (
-        <div>
+        <div className="list-row">
             <ReactRouterDOM.NavLink activeClassName="selected" to={url}>
                 {name}
             </ReactRouterDOM.NavLink>

@@ -1,4 +1,4 @@
-body {
+.offset {
     padding-top: 9.1vh;
 }
 
@@ -26,7 +26,8 @@ button.trash-can.btn {
     background-color: teal;
 } */
 
-.login-page {
+.login-page,
+.landing-page {
     background-image: url(/static/images/whitney.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -78,7 +79,7 @@ a.new-account-link {
 
 .list-item-form {
     background-color: #6edbaa;
-    width: 75vw;
+    width: 72vw;
 }
 
 .pads {
@@ -87,6 +88,19 @@ a.new-account-link {
 
 .image-preview {
     border-radius: 2px;
+}
+
+.list-row a,
+.nav-link a,
+.gear-item a,
+.landing-page-links a {
+    text-decoration: none;
+}
+
+.list-row a.selected,
+.nav-link a.selected,
+.gear-item a.selected {
+    text-decoration: underline;
 }
 /* .list-container {
     display: flex;
