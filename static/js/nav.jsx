@@ -2,7 +2,7 @@ function Nav(props) {
     //    user = props.userInfo;
     //    email = user.email
     return (
-        <ReactBootstrap.Navbar fixed="top">
+        <ReactBootstrap.Navbar variant="dark" fixed="top">
             <ReactBootstrap.Container fluid className="mx-2 px-2">
                 <ReactBootstrap.Nav className="me-auto">
                     <ReactBootstrap.Navbar.Brand>
@@ -16,22 +16,24 @@ function Nav(props) {
                             />
                         </ReactRouterDOM.NavLink>
                     </ReactBootstrap.Navbar.Brand>
-                    <ReactBootstrap.Nav.Link className="mx-3">
-                        <ReactRouterDOM.NavLink
-                            activeClassName="selected"
-                            to="/lists"
-                        >
-                            Lists
-                        </ReactRouterDOM.NavLink>
-                    </ReactBootstrap.Nav.Link>
-                    <ReactBootstrap.Nav.Link className="mx-3">
-                        <ReactRouterDOM.NavLink
-                            activeClassName="selected"
-                            to="/gear"
-                        >
-                            Gear
-                        </ReactRouterDOM.NavLink>
-                    </ReactBootstrap.Nav.Link>
+                    {/* <ReactBootstrap.Nav.Link className="mx-3"> */}
+                    <ReactRouterDOM.NavLink
+                        activeClassName="selected"
+                        to="/lists"
+                        className="mx-3 pt-2 nav-link"
+                    >
+                        Lists
+                    </ReactRouterDOM.NavLink>
+                    {/* </ReactBootstrap.Nav.Link> */}
+                    {/* <ReactBootstrap.Nav.Link className="mx-3"> */}
+                    <ReactRouterDOM.NavLink
+                        activeClassName="selected"
+                        to="/gear"
+                        className="mx-3 pt-2 nav-link"
+                    >
+                        Gear
+                    </ReactRouterDOM.NavLink>
+                    {/* </ReactBootstrap.Nav.Link> */}
                 </ReactBootstrap.Nav>
                 <ReactBootstrap.Navbar.Text className="ml-3">
                     {props.userInfo['email']} |

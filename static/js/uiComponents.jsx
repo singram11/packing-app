@@ -42,7 +42,11 @@ function GearItemDetails(props) {
     console.log(`showWeight: ${showWeight}`);
 
     return (
-        <ReactBootstrap.Card style={{ width: '25rem' }}>
+        <ReactBootstrap.Card
+            md="auto"
+            className="mt-2 gear-card"
+            style={{ width: '25rem' }}
+        >
             <ReactBootstrap.Card.Img
                 variant="top"
                 src={img}
@@ -99,7 +103,11 @@ function AddButton(props) {
     }
 
     return (
-        <ReactBootstrap.Button variant="link" size="sm" onClick={handleClick}>
+        <ReactBootstrap.Button
+            variant={props.buttonVariant}
+            size="sm"
+            onClick={handleClick}
+        >
             Add {props.name}
         </ReactBootstrap.Button>
     );
@@ -167,7 +175,11 @@ function AddGear(props) {
                     )}
                 </React.Fragment>
             ) : (
-                <AddButton handleClick={setShowForm} name={'Gear'} />
+                <AddButton
+                    buttonVariant={'link'}
+                    handleClick={setShowForm}
+                    name={'Gear'}
+                />
             )}
         </React.Fragment>
     );
@@ -177,7 +189,6 @@ function NewGearButton(props) {
     function onClick() {
         props.onClick(true);
     }
-
     return (
         <ReactBootstrap.Button variant="link" size="sm" onClick={onClick}>
             Add New Gear
@@ -382,36 +393,5 @@ function AddGearForm(props) {
                 </ReactBootstrap.Button>
             </ReactBootstrap.Form>
         </React.Fragment>
-    );
-}
-
-function LandingPage(props) {
-    return (
-        <ReactBootstrap.Container fluid className="landing-page m-0 p-0">
-            <ReactBootstrap.Container>
-                <ReactBootstrap.Row className="my-4">
-                    <h1>Get Ready For Your Next Adventure</h1>
-                </ReactBootstrap.Row>
-                <ReactBootstrap.Row className="landing-page-links">
-                    <ReactBootstrap.Col>
-                        {/* <ReactBootstrap.Button variant="outline-primary"> */}
-                        <ReactRouterDOM.Link
-                            as={ReactBootstrap.Button}
-                            to="/lists"
-                        >
-                            Update Your Lists
-                        </ReactRouterDOM.Link>
-                        {/* </ReactBootstrap.Button> */}
-                    </ReactBootstrap.Col>
-                    <ReactBootstrap.Col>
-                        <ReactBootstrap.Button variant="outline-primary">
-                            <ReactRouterDOM.Link to="/gear">
-                                Review Your Gear
-                            </ReactRouterDOM.Link>
-                        </ReactBootstrap.Button>
-                    </ReactBootstrap.Col>
-                </ReactBootstrap.Row>
-            </ReactBootstrap.Container>
-        </ReactBootstrap.Container>
     );
 }

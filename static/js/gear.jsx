@@ -32,5 +32,10 @@ function ShowGear(props) {
         renderGear();
     }, []);
 
-    return <GearList gear={gear} />;
+    return (
+        <div className="mt-4">
+            <p>My Gear:</p>
+            <GearList gear={gear} />
+        </div>
+    );
 }

@@ -32,34 +32,44 @@ function App() {
                         <ReactRouterDOM.Route exact path="/">
                             <LandingPage />
                         </ReactRouterDOM.Route>
-                        <ReactBootstrap.Row>
-                            <ReactRouterDOM.Route path="/lists">
-                                <ReactBootstrap.Col
-                                    className="pr-4 sidebar pads align-items-stretch"
-                                    fluid
-                                    xs={3}
-                                >
-                                    <ListsPage />
-                                </ReactBootstrap.Col>
-                            </ReactRouterDOM.Route>
-                            <ReactRouterDOM.Route path="/lists/:id">
-                                <ReactBootstrap.Col>
-                                    <ListDetailsPage />
-                                </ReactBootstrap.Col>
-                            </ReactRouterDOM.Route>
-                        </ReactBootstrap.Row>
-                        <ReactBootstrap.Row>
-                            <ReactBootstrap.Col xs={4}>
+                        <ReactBootstrap.Container
+                            className="content-container"
+                            fluid
+                        >
+                            <ReactBootstrap.Row>
+                                <ReactRouterDOM.Route path="/lists">
+                                    <ReactBootstrap.Col
+                                        className="pr-4 sidebar pads align-items-stretch"
+                                        fluid
+                                        xs={3}
+                                    >
+                                        <ListsPage />
+                                    </ReactBootstrap.Col>
+                                </ReactRouterDOM.Route>
+                                <ReactRouterDOM.Route path="/lists/:id">
+                                    <ReactBootstrap.Col>
+                                        <ListDetailsPage />
+                                    </ReactBootstrap.Col>
+                                </ReactRouterDOM.Route>
+                            </ReactBootstrap.Row>
+                            <ReactBootstrap.Row>
                                 <ReactRouterDOM.Route path="/gear">
-                                    <ShowGear />
+                                    <ReactBootstrap.Col
+                                        xs={4}
+                                        className="pr-4 sidebar pads align-items-stretch"
+                                        fluid
+                                    >
+                                        <ShowGear />
+                                    </ReactBootstrap.Col>
                                 </ReactRouterDOM.Route>
-                            </ReactBootstrap.Col>
-                            <ReactBootstrap.Col>
+
                                 <ReactRouterDOM.Route path="/gear/:id">
-                                    <ShowGearDetails />
+                                    <ReactBootstrap.Col>
+                                        <ShowGearDetails />
+                                    </ReactBootstrap.Col>
                                 </ReactRouterDOM.Route>
-                            </ReactBootstrap.Col>
-                        </ReactBootstrap.Row>
+                            </ReactBootstrap.Row>
+                        </ReactBootstrap.Container>
                     </ReactBootstrap.Container>
                     {/* </ReactRouterDOM.Switch> */}
                 </ReactRouterDOM.BrowserRouter>

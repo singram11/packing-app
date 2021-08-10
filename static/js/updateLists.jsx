@@ -62,7 +62,11 @@ function AddListItemForm(props) {
     }
 
     return (
-        <ReactBootstrap.Container fluid className="list-item-form">
+        <ReactBootstrap.Card
+            className="ml-3 list-item-form"
+            style={{ width: '70vw' }}
+        >
+            {/* <ReactBootstrap.Container fluid className="list-item-form"> */}
             <ReactBootstrap.Form fluid onSubmit={handleSubmit}>
                 <ReactBootstrap.Form.Group>
                     <ReactBootstrap.Form.Label>
@@ -91,7 +95,8 @@ function AddListItemForm(props) {
             <ReactBootstrap.Col>
                 <CloseFormButton showForm={props.showForm} />
             </ReactBootstrap.Col>
-        </ReactBootstrap.Container>
+            {/* </ReactBootstrap.Container> */}
+        </ReactBootstrap.Card>
     );
 }
 
@@ -134,7 +139,10 @@ function AddListForm(props) {
     }
 
     return (
-        <ReactBootstrap.Form onSubmit={handleSubmit} className="pr-4">
+        <ReactBootstrap.Form
+            onSubmit={handleSubmit}
+            className="mr-4 add-list-form"
+        >
             <ReactBootstrap.Form.Group as={ReactBootstrap.Row} className="pr-5">
                 <ReactBootstrap.Col>
                     <ReactBootstrap.Form.Label>
@@ -159,7 +167,7 @@ function AddListForm(props) {
             </ReactBootstrap.Form.Group>
             <ReactBootstrap.Row>
                 <ReactBootstrap.Col className="justify-content-start" md="auto">
-                    <ReactBootstrap.Button className="mr-2" type="submit">
+                    <ReactBootstrap.Button className="mr-2 mb-2" type="submit">
                         Submit
                     </ReactBootstrap.Button>
                 </ReactBootstrap.Col>
@@ -188,7 +196,11 @@ function AddList(props) {
                     showForm={setShowForm}
                 />
             ) : (
-                <AddButton handleClick={setShowForm} name={'List'} />
+                <AddButton
+                    buttonVariant={'primary'}
+                    handleClick={setShowForm}
+                    name={'List'}
+                />
             )}
         </React.Fragment>
     );
@@ -209,7 +221,11 @@ function AddListItems(props) {
                     />
                 </ReactBootstrap.Row>
             ) : (
-                <AddButton handleClick={setShowForm} name={'Items'} />
+                <AddButton
+                    buttonVariant={'primary'}
+                    handleClick={setShowForm}
+                    name={'Items'}
+                />
             )}
         </React.Fragment>
     );
