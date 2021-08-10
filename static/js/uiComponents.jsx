@@ -126,7 +126,7 @@ function CloseFormButton(props) {
             size={props.buttonSize}
             onClick={handleClick}
         >
-            Cancel
+            {props.content}
         </ReactBootstrap.Button>
     );
 }
@@ -156,6 +156,7 @@ function AddGear(props) {
                                 buttonVariant={'outline-primary'}
                                 buttonSize={''}
                                 buttonClass={'gear-form-close'}
+                                content={'Cancel'}
                             />
                         </React.Fragment>
                     ) : (
@@ -170,6 +171,7 @@ function AddGear(props) {
                                 buttonVariant={'link'}
                                 buttonSize={'sm'}
                                 buttonClass={'gear-close'}
+                                content={'Cancel'}
                             />
                         </div>
                     )}
@@ -393,5 +395,29 @@ function AddGearForm(props) {
                 </ReactBootstrap.Button>
             </ReactBootstrap.Form>
         </React.Fragment>
+    );
+}
+
+function ToastMessage(props) {
+    return (
+        <ReactBootstrap.ToastContainer className="p-3" position="top-end">
+            <ReactBootstrap.Toast
+                // bg="success"
+                onClose={() => props.setShow(false)}
+                show={props.show}
+                delay={10000}
+                autohide
+            >
+                <ReactBootstrap.Toast.Header>
+                    {/* <img
+        src="holder.js/20x20?text=%20"
+        className="rounded me-2"
+        alt=""
+      /> */}
+                    <strong className="toast-text me-auto">Item Added!</strong>
+                </ReactBootstrap.Toast.Header>
+                <ReactBootstrap.Toast.Body></ReactBootstrap.Toast.Body>
+            </ReactBootstrap.Toast>
+        </ReactBootstrap.ToastContainer>
     );
 }

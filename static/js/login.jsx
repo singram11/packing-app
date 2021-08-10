@@ -293,6 +293,7 @@ function CreateNewAccountForm(props) {
                             buttonSize={''}
                             buttonVariant={'outline-primary'}
                             buttonClass={'close-registration mb-4 ml-4'}
+                            content={'Cancel'}
                         />
                     </ReactBootstrap.Col>
                 </ReactBootstrap.Row>

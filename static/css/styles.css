@@ -144,13 +144,22 @@ a.nav-links {
     background-color: rgba(150, 162, 168, 0.1);
 }
 
+.toast-container {
+    z-index: 99999;
+}
+
+.toast-text {
+    color: #214233;
+}
+
 /*Bootstrap button styles override */
 .btn-primary {
     background-color: #63c498;
     border-color: #63c498;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus {
     background-color: #5eb990;
     border-color: #5eb990;
 }
@@ -160,7 +169,8 @@ a.nav-links {
     color: #63c498;
 }
 
-.btn-outline-primary:hover {
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
     background-color: #63c498;
     border-color: #63c498;
 }

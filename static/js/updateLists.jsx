@@ -29,6 +29,7 @@ function AddListItemForm(props) {
     // props = onSubmit, id, showForm
     const [itemName, setName] = React.useState();
     const [category, setCategory] = React.useState();
+    const [showToast, setShowToast] = React.useState(false);
 
     const id = props.id;
 
@@ -59,65 +60,74 @@ function AddListItemForm(props) {
 
         setName('');
         setCategory('');
+        setShowToast(true);
     }
 
     return (
-        <ReactBootstrap.Card
-            className="ml-3 list-item-form"
-            style={{ width: '70vw' }}
-            md="auto"
-        >
-            {/* <ReactBootstrap.Container fluid className="list-item-form"> */}
-            <ReactBootstrap.Form fluid className="my-2" onSubmit={handleSubmit}>
-                <ReactBootstrap.Form.Group>
-                    <ReactBootstrap.Form.Label>
-                        Item Name:
-                    </ReactBootstrap.Form.Label>
-                    <ReactBootstrap.Form.Control
-                        type="text"
-                        required="required"
-                        value={itemName}
-                        onChange={handleListNameChange}
-                    />
-                </ReactBootstrap.Form.Group>
-                <ReactBootstrap.Form.Group>
-                    <ReactBootstrap.Form.Label>
-                        Category:
-                    </ReactBootstrap.Form.Label>
-                    <ReactBootstrap.Form.Control
-                        value={category}
-                        onChange={handleCategoryChange}
-                    />
-                </ReactBootstrap.Form.Group>
-                <ReactBootstrap.Row>
-                    <ReactBootstrap.Col
-                        className="justify-content-start"
-                        md="auto"
-                    >
-                        <ReactBootstrap.Button
-                            size="sm"
-                            className="mt-2"
-                            type="submit"
-                        >
-                            Submit
-                        </ReactBootstrap.Button>
-                    </ReactBootstrap.Col>
-                    <ReactBootstrap.Col
-                        className="justify-content-start"
-                        md="auto"
-                    >
-                        <CloseFormButton
-                            buttonClass={'mt-2'}
-                            buttonVariant={'outline-primary'}
-                            buttonSize={'sm'}
-                            showForm={props.showForm}
+        <React.Fragment>
+            <ToastMessage setShow={setShowToast} show={showToast} />
+            <ReactBootstrap.Card
+                className="ml-3 list-item-form"
+                style={{ width: '70vw' }}
+                md="auto"
+            >
+                {/* <ReactBootstrap.Container fluid className="list-item-form"> */}
+                <ReactBootstrap.Form
+                    fluid
+                    className="my-2"
+                    onSubmit={handleSubmit}
+                >
+                    <ReactBootstrap.Form.Group>
+                        <ReactBootstrap.Form.Label>
+                            Item Name:
+                        </ReactBootstrap.Form.Label>
+                        <ReactBootstrap.Form.Control
+                            type="text"
+                            required="required"
+                            value={itemName}
+                            onChange={handleListNameChange}
                         />
-                    </ReactBootstrap.Col>
-                </ReactBootstrap.Row>
-            </ReactBootstrap.Form>
+                    </ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Form.Group>
+                        <ReactBootstrap.Form.Label>
+                            Category:
+                        </ReactBootstrap.Form.Label>
+                        <ReactBootstrap.Form.Control
+                            value={category}
+                            onChange={handleCategoryChange}
+                        />
+                    </ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Row>
+                        <ReactBootstrap.Col
+                            className="justify-content-start"
+                            md="auto"
+                        >
+                            <ReactBootstrap.Button
+                                size="sm"
+                                className="mt-2"
+                                type="submit"
+                            >
+                                Submit
+                            </ReactBootstrap.Button>
+                        </ReactBootstrap.Col>
+                        <ReactBootstrap.Col
+                            className="justify-content-start"
+                            md="auto"
+                        >
+                            <CloseFormButton
+                                buttonClass={'mt-2'}
+                                buttonVariant={'outline-primary'}
+                                buttonSize={'sm'}
+                                showForm={props.showForm}
+                                content={'Done'}
+                            />
+                        </ReactBootstrap.Col>
+                    </ReactBootstrap.Row>
+                </ReactBootstrap.Form>
 
-            {/* </ReactBootstrap.Container> */}
-        </ReactBootstrap.Card>
+                {/* </ReactBootstrap.Container> */}
+            </ReactBootstrap.Card>
+        </React.Fragment>
     );
 }
 
@@ -202,6 +212,7 @@ function AddListForm(props) {
                         buttonVariant={'outline-primary'}
                         buttonSize={'sm'}
                         showForm={props.showForm}
+                        content={'Cancel'}
                     />
                 </ReactBootstrap.Col>
             </ReactBootstrap.Row>
