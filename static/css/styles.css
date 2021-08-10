@@ -1,5 +1,5 @@
 .offset {
-    padding-top: 9vh;
+    padding-top: 57px;
     padding-right: 0;
     padding-left: 0;
 }
@@ -82,7 +82,8 @@ a.new-account-link {
     text-transform: capitalize;
 }
 
-.gear-sidebar {
+.gear-sidebar,
+.lists-sidebar {
     color: rgba(255, 255, 255, 0.7);
 }
 .list-item-form {

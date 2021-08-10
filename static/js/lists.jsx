@@ -20,7 +20,8 @@ function ListsPage(props) {
     }, []);
 
     return (
-        <div className="mt-2">
+        <div className="mt-2 lists-sidebar">
+            <p>My Lists:</p>
             <Lists refreshLists={renderLists} lists={lists} />
             <AddList renderLists={renderLists} />
         </div>
