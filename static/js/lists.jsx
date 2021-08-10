@@ -49,7 +49,11 @@ function ListDetailsPage(props) {
     return (
         <React.Fragment>
             <ReactBootstrap.Row className="justify-content-between mt-2">
-                <ReactBootstrap.Col>List Title Here</ReactBootstrap.Col>
+                <ReactBootstrap.Col>
+                    <h4 style={{ color: '#214233' }}>
+                        {listDetails['list_name']}
+                    </h4>
+                </ReactBootstrap.Col>
                 <ReactBootstrap.Col md="auto">
                     <AddListItems onSubmit={renderListItems} id={id} />
                 </ReactBootstrap.Col>

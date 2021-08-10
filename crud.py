@@ -240,11 +240,15 @@ def get_list_details_by_list_id(list_id):
      takes in a list id 
      returns a list of item objects"""
 
+    list_obj = get_list_by_id(list_id)
+
+    list_name = list_obj.name
+
     list_items = db.session.query(List_item).filter(List_item.list_id==list_id).all()
 
     categorized_items = order_item_by_category(list_items)
 
-    list_data = {}
+    list_content = {}
     
     categories = categorized_items.keys()
 
@@ -263,7 +267,11 @@ def get_list_details_by_list_id(list_id):
                 category_data[list_item.list_item_id] = {'item': item.json_format(),
                                             'gear': None}
 
-            list_data[category] = category_data
+            list_content[category] = category_data
+    
+    list_data = {"list_id": list_id,
+                "list_name": list_name,
+                "list_content": list_content}
 
     return list_data
 
@@ -274,22 +282,18 @@ def order_item_by_category(list_items):
 
     categorized_items = {}
   
-
     for list_item in list_items: 
 
         item = list_item.item
-        print(f'Item: {item}')
+    
         category = item.item_category.name
-
-        print(f'category name: {category}')
         
         if categorized_items.get(category):
             categorized_items[category].append(list_item)
             print(categorized_items)
         else: 
             categorized_items[category] = [list_item]
-            print("elseeee")
-
+        
     return categorized_items 
 
 # def order_gear_by_category(gear_obj_list):

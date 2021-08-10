@@ -16,7 +16,7 @@ function Lists(props) {
         listsArr.push(listCard);
     }
 
-    return <div className="list-container">{listsArr}</div>;
+    return <div className="list-container mb-3">{listsArr}</div>;
 }
 
 function ListCard(props) {
@@ -66,7 +66,9 @@ function DeleteListButton(props) {
 
 function ShowItemCategories(props) {
     // renderListItems, listDetails, gear, renderGear
-    const listDetails = props.listDetails;
+    const listDetails = props.listDetails['list_content'];
+
+    console.log(listDetails);
     const listCategories = [];
 
     for (const category in listDetails) {

@@ -13,7 +13,6 @@ function ShowGearDetails() {
             });
     }, [id]);
 
-    console.log(`gearDetail: ${gearDetail}`);
     return <GearItemDetails gearDetail={gearDetail} />;
 }
 
@@ -33,7 +32,7 @@ function ShowGear(props) {
     }, []);
 
     return (
-        <div className="mt-4">
+        <div className="mt-4 gear-sidebar">
             <p>My Gear:</p>
             <GearList gear={gear} />
         </div>

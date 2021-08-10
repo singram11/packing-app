@@ -28,7 +28,8 @@ function App() {
                     />
                     {/* <ContainerTest/> */}
                     {/* <ReactRouterDOM.Switch> */}
-                    <ReactBootstrap.Container className="offset" fluid>
+                    <div className="offset">
+                        {/* <ReactBootstrap.Container fluid> */}
                         <ReactRouterDOM.Route exact path="/">
                             <LandingPage />
                         </ReactRouterDOM.Route>
@@ -70,8 +71,9 @@ function App() {
                                 </ReactRouterDOM.Route>
                             </ReactBootstrap.Row>
                         </ReactBootstrap.Container>
-                    </ReactBootstrap.Container>
-                    {/* </ReactRouterDOM.Switch> */}
+                        {/* </ReactBootstrap.Container> */}
+                        {/* </ReactRouterDOM.Switch> */}
+                    </div>
                 </ReactRouterDOM.BrowserRouter>
             ) : (
                 <LoginPage onSubmit={setLogin} />

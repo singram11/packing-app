@@ -1,5 +1,5 @@
 .offset {
-    padding-top: 8.8vh;
+    padding-top: 9vh;
     padding-right: 0;
     padding-left: 0;
 }
@@ -8,7 +8,9 @@ nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #96a2a8;
+    background-color: #3b6d56;
+    border-bottom: 1px solid #478f6f;
+    /* background-color: #96a2a8; */
 }
 
 .nav-links {
@@ -23,10 +25,6 @@ button.trash-can.btn {
     background-color: transparent;
     border: none;
 }
-
-/* .login-page {
-    background-color: teal;
-} */
 
 .login-page,
 .landing-page {
@@ -63,10 +61,11 @@ a.new-account-link {
 
 .sidebar {
     height: 100vh;
+    background-color: #214233;
     /* background-color: rgba(255, 255, 255, 0.55); */
     /* background-color: red; */
     /* background-color: rgba(158, 133, 100, 0.1); */
-    background-color: rgba(73, 85, 92, 0.75);
+    /* background-color: rgba(73, 85, 92, 0.75); */
     /* border-right: 1px solid rgba(158, 133, 100, 0.2); */
 }
 
@@ -83,6 +82,9 @@ a.new-account-link {
     text-transform: capitalize;
 }
 
+.gear-sidebar {
+    color: rgba(255, 255, 255, 0.7);
+}
 .list-item-form {
     /* background-color: #6edbaa; */
     /* width: 72vw; */
@@ -111,13 +113,14 @@ a.nav-link.selected,
 }
 
 a.nav-links {
-    color: rgba(255, 255, 255, 0.55) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .list-row a,
 .gear-item a,
-.nav-link a {
-    color: rgba(255, 255, 255, 0.55);
+.nav-link a,
+.landing-page-links a {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .card-body {
@@ -131,16 +134,52 @@ a.nav-links {
 
 .add-list-form {
     margin-right: 0.75rem;
-}
-/* .list-container {
-    display: flex;
-} */
-
-/* .sidebar {
-    background-color: sandybrown;
-    display: inline-block;
+    border-top: 1px solid #478f6f;
+    color: rgba(255, 255, 255, 0.55);
 }
 
-.main-panel {
-    display: inline-block;
-} */
+.list-item-form {
+    margin-left: 10px;
+    background-color: rgba(150, 162, 168, 0.1);
+}
+
+/*Bootstrap button styles override */
+.btn-primary {
+    background-color: #63c498;
+    border-color: #63c498;
+}
+
+.btn-primary:hover {
+    background-color: #5eb990;
+    border-color: #5eb990;
+}
+
+.btn-outline-primary {
+    border-color: #63c498;
+    color: #63c498;
+}
+
+.btn-outline-primary:hover {
+    background-color: #63c498;
+    border-color: #63c498;
+}
+
+.btn-link {
+    color: #5eb990;
+}
+
+.btn-link:hover {
+    color: #428466;
+}
+
+.btn-dark {
+    background-color: #214233;
+    border-color: #214233;
+}
+
+.btn-dark:hover {
+    background-color: #2f5e49;
+    border-color: #2f5e49;
+}
+
+/*Bootstrap button styles override */
