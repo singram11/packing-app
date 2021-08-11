@@ -33,11 +33,12 @@ function App() {
                         <ReactRouterDOM.Route exact path="/">
                             <LandingPage />
                         </ReactRouterDOM.Route>
-                        <ReactBootstrap.Container
-                            className="content-container"
-                            fluid
-                        >
-                            <ReactRouterDOM.Route path="/lists">
+
+                        <ReactRouterDOM.Route path="/lists">
+                            <ReactBootstrap.Container
+                                className="content-container"
+                                fluid
+                            >
                                 <ReactBootstrap.Row className="list-container-height">
                                     <ReactBootstrap.Col
                                         className="pr-4 sidebar pads"
@@ -53,8 +54,13 @@ function App() {
                                         </ReactRouterDOM.Route>
                                     </ReactBootstrap.Col>
                                 </ReactBootstrap.Row>
-                            </ReactRouterDOM.Route>
-                            <ReactRouterDOM.Route path="/gear">
+                            </ReactBootstrap.Container>
+                        </ReactRouterDOM.Route>
+                        <ReactRouterDOM.Route path="/gear">
+                            <ReactBootstrap.Container
+                                className="content-container"
+                                fluid
+                            >
                                 <ReactBootstrap.Row className="list-container-height">
                                     <ReactBootstrap.Col
                                         xs={4}
@@ -71,8 +77,9 @@ function App() {
                                         </ReactBootstrap.Col>
                                     </ReactRouterDOM.Route>
                                 </ReactBootstrap.Row>
-                            </ReactRouterDOM.Route>
-                        </ReactBootstrap.Container>
+                            </ReactBootstrap.Container>
+                        </ReactRouterDOM.Route>
+
                         {/* </ReactBootstrap.Container> */}
                         {/* </ReactRouterDOM.Switch> */}
                     </div>
