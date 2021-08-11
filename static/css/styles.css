@@ -41,16 +41,9 @@ button.trash-can.btn {
 
 .login-overlay {
     background: rgba(16, 10, 4, 0.6);
+    /* background: rgba(33, 66, 51, 0.6); */
     min-height: 50%;
     max-width: 60%;
-    /* line-height: 1.3;
-    position: fixed;
-    /*height: 100%;*/
-    /* top: auto;
-    bottom: auto; */
-    /*bottom: 40px;
-    left: 40px;
-    right: 40px; */
     color: #ffffff;
     border-radius: 3px;
 }
@@ -60,13 +53,19 @@ a.new-account-link {
 }
 
 .sidebar {
-    height: 100vh;
+    /* height: 100vh; */
+    /* height: 100%; */
     background-color: #214233;
     /* background-color: rgba(255, 255, 255, 0.55); */
     /* background-color: red; */
     /* background-color: rgba(158, 133, 100, 0.1); */
     /* background-color: rgba(73, 85, 92, 0.75); */
     /* border-right: 1px solid rgba(158, 133, 100, 0.2); */
+}
+
+.content-container,
+.list-container-height {
+    height: 100%;
 }
 
 .item-name {
@@ -133,6 +132,10 @@ a.nav-links {
     margin-right: auto;
 }
 
+.item-card.card {
+    filter: drop-shadow(1px 1px 1px rgba(33, 66, 51, 0.25));
+}
+
 .add-list-form {
     margin-right: 0.75rem;
     border-top: 1px solid #478f6f;
@@ -158,8 +161,7 @@ a.nav-links {
     border-color: #63c498;
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:hover {
     background-color: #5eb990;
     border-color: #5eb990;
 }
@@ -169,10 +171,16 @@ a.nav-links {
     color: #63c498;
 }
 
-.btn-outline-primary:hover,
-.btn-outline-primary:focus {
+.btn-outline-primary:hover {
     background-color: #63c498;
     border-color: #63c498;
+}
+
+.btn-outline-primary:focus,
+.btn-primary:focus {
+    border-color: #63c498;
+    box-shadow: inset 0 1px 1px rgba(99, 196, 152, 0.075),
+        0 0 8px rgba(99, 196, 152, 0.6);
 }
 
 .btn-link {
@@ -191,6 +199,12 @@ a.nav-links {
 .btn-dark:hover {
     background-color: #2f5e49;
     border-color: #2f5e49;
+}
+
+.form-control:focus {
+    border-color: #63c498;
+    box-shadow: inset 0 1px 1px rgba(99, 196, 152, 0.075),
+        0 0 8px rgba(99, 196, 152, 0.6);
 }
 
 /*Bootstrap button styles override */

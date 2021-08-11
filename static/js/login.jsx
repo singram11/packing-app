@@ -87,7 +87,7 @@ function LoginForm(props) {
                 if (jsonResponse.success) {
                     localStorage.setItem('loggedIn', true);
                     props.onSubmit(true);
-                    props.setShowEmail();
+                    // props.setShowEmail();
                 } else {
                     console.log('noooope');
                     props.message(jsonResponse.message);

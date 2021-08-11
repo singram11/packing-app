@@ -74,7 +74,7 @@ function AddListItemForm(props) {
                 {/* <ReactBootstrap.Container fluid className="list-item-form"> */}
                 <ReactBootstrap.Form
                     fluid
-                    className="my-2"
+                    // className="my-2"
                     onSubmit={handleSubmit}
                 >
                     <ReactBootstrap.Form.Group>

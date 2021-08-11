@@ -138,7 +138,7 @@ function ItemCard(props) {
 
     return (
         // <div className="list-item">
-        <ReactBootstrap.Card className="mb-2">
+        <ReactBootstrap.Card className="mb-2 item-card">
             <ReactBootstrap.Card.Body className="p-1">
                 <ReactBootstrap.Row className="justify-content-between">
                     <ReactBootstrap.Col>

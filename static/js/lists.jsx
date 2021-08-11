@@ -19,6 +19,11 @@ function ListsPage(props) {
         renderLists();
     }, []);
 
+    // if (Object.keys(lists).length > 0 && !id) {
+    //     console.log('butts');
+    //     return <ReactRouterDOM.Redirect to="/lists/44" />;
+    // }
+
     return (
         <div className="mt-2 lists-sidebar">
             <p>My Lists:</p>

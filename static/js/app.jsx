@@ -37,33 +37,33 @@ function App() {
                             className="content-container"
                             fluid
                         >
-                            <ReactBootstrap.Row>
+                            <ReactBootstrap.Row className="list-container-height">
                                 <ReactRouterDOM.Route path="/lists">
                                     <ReactBootstrap.Col
-                                        className="pr-4 sidebar pads align-items-stretch"
+                                        className="pr-4 sidebar pads"
                                         fluid
                                         xs={3}
                                     >
                                         <ListsPage />
                                     </ReactBootstrap.Col>
                                 </ReactRouterDOM.Route>
-                                <ReactRouterDOM.Route path="/lists/:id">
-                                    <ReactBootstrap.Col>
+                                <ReactBootstrap.Col>
+                                    <ReactRouterDOM.Route path="/lists/:id">
                                         <ListDetailsPage />
-                                    </ReactBootstrap.Col>
-                                </ReactRouterDOM.Route>
+                                    </ReactRouterDOM.Route>
+                                </ReactBootstrap.Col>
                             </ReactBootstrap.Row>
                             <ReactBootstrap.Row>
                                 <ReactRouterDOM.Route path="/gear">
                                     <ReactBootstrap.Col
                                         xs={4}
-                                        className="pr-4 sidebar pads align-items-stretch"
+                                        // className="pr-4 sidebar pads align-items-stretch"
+                                        className="sidebar pr-4"
                                         fluid
                                     >
                                         <ShowGear />
                                     </ReactBootstrap.Col>
                                 </ReactRouterDOM.Route>
-
                                 <ReactRouterDOM.Route path="/gear/:id">
                                     <ReactBootstrap.Col>
                                         <ShowGearDetails />
