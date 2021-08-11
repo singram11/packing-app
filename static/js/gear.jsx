@@ -19,16 +19,31 @@ function ShowGearDetails() {
 function ShowGear(props) {
     const [gear, setGear] = React.useState({});
 
+    const history = ReactRouterDOM.useHistory();
+
     function renderGear() {
-        fetch('/api/gear')
+        return fetch('/api/gear')
             .then((response) => response.json())
             .then((result) => {
                 setGear(result);
+                return result;
             });
     }
 
+    function renderGearOnMount() {
+        renderGear().then((result) => {
+            if (
+                Object.keys(result).length > 0 &&
+                history.location.pathname === '/gear'
+            ) {
+                const key = Object.keys(result)[0];
+                history.push(`/gear/${key}`);
+            }
+        });
+    }
+
     React.useEffect(() => {
-        renderGear();
+        renderGearOnMount();
     }, []);
 
     return (

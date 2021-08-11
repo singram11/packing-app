@@ -5,24 +5,37 @@ function ListsPage(props) {
 
     const [lists, setLists] = React.useState({});
 
-    const { id } = ReactRouterDOM.useParams();
     const history = ReactRouterDOM.useHistory();
 
     function renderLists() {
-        fetch('/api/lists')
+        return fetch('/api/lists')
             .then((response) => response.json())
             .then((result) => {
                 setLists(result);
+                return result;
             });
     }
 
+    function renderListsOnMount() {
+        renderLists().then((result) => {
+            if (
+                Object.keys(result).length > 0 &&
+                history.location.pathname === '/lists'
+            ) {
+                const key = Object.keys(result)[0];
+                history.push(`/lists/${key}`);
+            }
+        });
+    }
+
     React.useEffect(() => {
-        renderLists();
-        if (Object.keys(lists).length > 0 && !id) {
-            console.log('butts');
-            history.push('/lists/44');
-        }
+        renderListsOnMount();
     }, []);
+
+    //   if (Object.keys(lists).length > 0 && !id) {
+    //     console.log('butts');
+    //     history.push('/lists/44');
+    // }
 
     return (
         <div className="mt-2 lists-sidebar">

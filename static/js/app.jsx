@@ -37,8 +37,8 @@ function App() {
                             className="content-container"
                             fluid
                         >
-                            <ReactBootstrap.Row className="list-container-height">
-                                <ReactRouterDOM.Route path="/lists">
+                            <ReactRouterDOM.Route path="/lists">
+                                <ReactBootstrap.Row className="list-container-height">
                                     <ReactBootstrap.Col
                                         className="pr-4 sidebar pads"
                                         fluid
@@ -46,15 +46,16 @@ function App() {
                                     >
                                         <ListsPage />
                                     </ReactBootstrap.Col>
-                                </ReactRouterDOM.Route>
-                                <ReactBootstrap.Col>
-                                    <ReactRouterDOM.Route path="/lists/:id">
-                                        <ListDetailsPage />
-                                    </ReactRouterDOM.Route>
-                                </ReactBootstrap.Col>
-                            </ReactBootstrap.Row>
-                            <ReactBootstrap.Row>
-                                <ReactRouterDOM.Route path="/gear">
+
+                                    <ReactBootstrap.Col>
+                                        <ReactRouterDOM.Route path="/lists/:id">
+                                            <ListDetailsPage />
+                                        </ReactRouterDOM.Route>
+                                    </ReactBootstrap.Col>
+                                </ReactBootstrap.Row>
+                            </ReactRouterDOM.Route>
+                            <ReactRouterDOM.Route path="/gear">
+                                <ReactBootstrap.Row className="list-container-height">
                                     <ReactBootstrap.Col
                                         xs={4}
                                         // className="pr-4 sidebar pads align-items-stretch"
@@ -63,13 +64,14 @@ function App() {
                                     >
                                         <ShowGear />
                                     </ReactBootstrap.Col>
-                                </ReactRouterDOM.Route>
-                                <ReactRouterDOM.Route path="/gear/:id">
-                                    <ReactBootstrap.Col>
-                                        <ShowGearDetails />
-                                    </ReactBootstrap.Col>
-                                </ReactRouterDOM.Route>
-                            </ReactBootstrap.Row>
+
+                                    <ReactRouterDOM.Route path="/gear/:id">
+                                        <ReactBootstrap.Col>
+                                            <ShowGearDetails />
+                                        </ReactBootstrap.Col>
+                                    </ReactRouterDOM.Route>
+                                </ReactBootstrap.Row>
+                            </ReactRouterDOM.Route>
                         </ReactBootstrap.Container>
                         {/* </ReactBootstrap.Container> */}
                         {/* </ReactRouterDOM.Switch> */}
