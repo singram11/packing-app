@@ -5,7 +5,8 @@ function ListsPage(props) {
 
     const [lists, setLists] = React.useState({});
 
-    // const { id } = ReactRouterDOM.useParams();
+    const { id } = ReactRouterDOM.useParams();
+    const history = ReactRouterDOM.useHistory();
 
     function renderLists() {
         fetch('/api/lists')
@@ -17,12 +18,11 @@ function ListsPage(props) {
 
     React.useEffect(() => {
         renderLists();
+        if (Object.keys(lists).length > 0 && !id) {
+            console.log('butts');
+            history.push('/lists/44');
+        }
     }, []);
-
-    // if (Object.keys(lists).length > 0 && !id) {
-    //     console.log('butts');
-    //     return <ReactRouterDOM.Redirect to="/lists/44" />;
-    // }
 
     return (
         <div className="mt-2 lists-sidebar">

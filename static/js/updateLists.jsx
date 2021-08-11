@@ -137,6 +137,7 @@ function AddListForm(props) {
 
     const [listName, setName] = React.useState('');
     const [category, setCategory] = React.useState('');
+    const history = ReactRouterDOM.useHistory();
 
     // function onResponse(){
     //     props.renderLists();
@@ -160,9 +161,17 @@ function AddListForm(props) {
             body: JSON.stringify({ name: listName, category: category }),
         };
 
-        fetch('/api/lists', postBody).then(
-            () => props.renderLists && props.renderLists()
-        );
+        // fetch('/api/lists', postBody).then(
+        //     () => props.renderLists && props.renderLists()
+        // );
+
+        fetch('/api/lists', postBody)
+            .then((response) => response.json())
+            .then((jsonResponse) => {
+                const newListId = jsonResponse['id'];
+                history.push(`/lists/${newListId}`);
+                props.renderLists();
+            });
 
         props.showForm(false);
         setName('');

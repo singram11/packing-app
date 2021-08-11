@@ -174,8 +174,9 @@ def create_new_list():
 
     new_list = crud.create_list(user, name, category_obj)
 
-    new_list_data ={}
-    new_list_data[new_list.list_id] = {'name':new_list.name}
+    new_list_data ={'id':new_list.list_id,
+                    'name':new_list.name }
+    # new_list_data[new_list.list_id] = {'name':new_list.name}
 
     return jsonify(new_list_data)
 
