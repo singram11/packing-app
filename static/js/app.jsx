@@ -26,52 +26,48 @@ function App() {
                         login={login}
                         setLoginStatus={setLogin}
                     />
-                    {/* <ContainerTest/> */}
                     {/* <ReactRouterDOM.Switch> */}
-                    <div className="offset">
-                        {/* <ReactBootstrap.Container fluid> */}
-                        <ReactRouterDOM.Route exact path="/">
+                    <div className='offset'>
+                        <ReactRouterDOM.Route exact path='/'>
                             <LandingPage />
                         </ReactRouterDOM.Route>
-
-                        <ReactRouterDOM.Route path="/lists">
+                        <ReactRouterDOM.Route path='/lists'>
                             <ReactBootstrap.Container
-                                className="content-container"
+                                className='content-container'
                                 fluid
                             >
-                                <ReactBootstrap.Row className="list-container-height">
+                                <ReactBootstrap.Row className='list-container-height'>
                                     <ReactBootstrap.Col
-                                        className="pr-4 sidebar pads"
+                                        className='pr-4 sidebar pads'
                                         fluid
                                         xs={3}
                                     >
                                         <ListsPage />
                                     </ReactBootstrap.Col>
-
                                     <ReactBootstrap.Col>
-                                        <ReactRouterDOM.Route path="/lists/:id">
+                                        <ReactRouterDOM.Route path='/lists/:id'>
                                             <ListDetailsPage />
                                         </ReactRouterDOM.Route>
                                     </ReactBootstrap.Col>
                                 </ReactBootstrap.Row>
                             </ReactBootstrap.Container>
                         </ReactRouterDOM.Route>
-                        <ReactRouterDOM.Route path="/gear">
+                        <ReactRouterDOM.Route path='/gear'>
                             <ReactBootstrap.Container
-                                className="content-container"
+                                className='content-container'
                                 fluid
                             >
-                                <ReactBootstrap.Row className="list-container-height">
+                                <ReactBootstrap.Row className='list-container-height'>
                                     <ReactBootstrap.Col
                                         xs={4}
                                         // className="pr-4 sidebar pads align-items-stretch"
-                                        className="sidebar pr-4"
+                                        className='sidebar pr-4'
                                         fluid
                                     >
                                         <ShowGear />
                                     </ReactBootstrap.Col>
 
-                                    <ReactRouterDOM.Route path="/gear/:id">
+                                    <ReactRouterDOM.Route path='/gear/:id'>
                                         <ReactBootstrap.Col>
                                             <ShowGearDetails />
                                         </ReactBootstrap.Col>
@@ -79,8 +75,6 @@ function App() {
                                 </ReactBootstrap.Row>
                             </ReactBootstrap.Container>
                         </ReactRouterDOM.Route>
-
-                        {/* </ReactBootstrap.Container> */}
                         {/* </ReactRouterDOM.Switch> */}
                     </div>
                 </ReactRouterDOM.BrowserRouter>

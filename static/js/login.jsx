@@ -13,15 +13,14 @@ function LoginPage(props) {
         setToggleReg(true);
     }
 
-    // toggle what screen is show by the toggle reg button?
     return (
-        <section className="login-page d-flex align-items-center justify-content-center">
+        <section className='login-page d-flex align-items-center justify-content-center'>
             <ReactBootstrap.Container
-                md="auto"
-                className="login-overlay mx-auto align-middle flex-column"
+                md='auto'
+                className='login-overlay mx-auto align-middle flex-column'
             >
-                <ReactBootstrap.Row className="align-items-center">
-                    <ReactBootstrap.Col className="align-self-center align-items-center">
+                <ReactBootstrap.Row className='align-items-center'>
+                    <ReactBootstrap.Col className='align-self-center align-items-center'>
                         {toggleReg ? (
                             <React.Fragment>
                                 <CreateNewAccountForm
@@ -43,7 +42,7 @@ function LoginPage(props) {
                                     <AlertMessage message={alertMessage} />
                                 ) : null}
                                 <a
-                                    className="m-4 new-account-link"
+                                    className='m-4 new-account-link'
                                     onClick={handleClick}
                                     style={{ cursor: 'pointer' }}
                                     href={void 0}
@@ -87,59 +86,49 @@ function LoginForm(props) {
                 if (jsonResponse.success) {
                     localStorage.setItem('loggedIn', true);
                     props.onSubmit(true);
-                    // props.setShowEmail();
                 } else {
-                    console.log('noooope');
                     props.message(jsonResponse.message);
                 }
             });
     }
 
     return (
-        // <form onSubmit={handleSubmit}>
-        //     <label>Email:</label>
-        //     <input type='email' required='required' value={email} onChange={handleEmailChange}/>
-        //     <label>Password:</label>
-        //     <input type='password' required='required' value={password} onChange={handlePasswordChange}/>
-        //     <input type="submit" value="Log In"/>
-        // </form>
-
-        <ReactBootstrap.Form onSubmit={handleSubmit} className="m-4">
+        <ReactBootstrap.Form onSubmit={handleSubmit} className='m-4'>
             <ReactBootstrap.Form.Group
-                className="mb-3 mt-3"
+                className='mb-3 mt-3'
                 as={ReactBootstrap.Row}
-                controlId="email"
+                controlId='email'
             >
                 <ReactBootstrap.Form.Label column sm={3}>
                     Email:
                 </ReactBootstrap.Form.Label>
                 <ReactBootstrap.Col sm={9}>
                     <ReactBootstrap.Form.Control
-                        type="email"
-                        required="required"
+                        type='email'
+                        required='required'
                         value={email}
                         onChange={handleEmailChange}
                     />
                 </ReactBootstrap.Col>
             </ReactBootstrap.Form.Group>
             <ReactBootstrap.Form.Group
-                className="mb-3"
+                className='mb-3'
                 as={ReactBootstrap.Row}
-                controlId="password"
+                controlId='password'
             >
                 <ReactBootstrap.Form.Label column sm={3}>
                     Password:
                 </ReactBootstrap.Form.Label>
                 <ReactBootstrap.Col sm={9}>
                     <ReactBootstrap.Form.Control
-                        type="password"
-                        required="required"
+                        type='password'
+                        required='required'
                         value={password}
                         onChange={handlePasswordChange}
                     />
                 </ReactBootstrap.Col>
             </ReactBootstrap.Form.Group>
-            <ReactBootstrap.Button variant="primary" type="submit">
+            <ReactBootstrap.Button variant='primary' type='submit'>
                 Log In
             </ReactBootstrap.Button>
         </ReactBootstrap.Form>
@@ -191,82 +180,68 @@ function CreateNewAccountForm(props) {
                     props.logIn(true);
                 } else {
                     props.message(jsonResponse.message);
-                    console.log('jsonResponse.message');
                 }
             });
-
-        // maybe a way to make a better toggle ??
     }
 
     return (
         <React.Fragment>
-            {/* <form onSubmit={handleSubmit}>
-                <label>Email:</label>
-                <input type='email' required='required' value={email} onChange={handleEmailChange}/>
-                <label>Password:</label>
-                <input type='password' required='required' value={password} onChange={handlePasswordChange}/>
-                <label>First Name:</label>
-                <input type='text' required='required' value={fname} onChange={handleFnameChange}/>
-                <label>Last Name</label>
-                <input value={lname} onChange={handleLnameChange}/>
-                <input type="submit" value="Create Account"/>
-            </form> */}
-            <ReactBootstrap.Form onSubmit={handleSubmit} className="m-4">
+            <ReactBootstrap.Form onSubmit={handleSubmit} className='m-4'>
                 <ReactBootstrap.Form.Group
-                    className="mt-3 mb-3"
+                    className='mt-3 mb-3'
                     as={ReactBootstrap.Row}
-                    controlId="email"
+                    controlId='email'
                 >
                     <ReactBootstrap.Form.Label column sm={3}>
                         Email:
                     </ReactBootstrap.Form.Label>
                     <ReactBootstrap.Col sm={9}>
                         <ReactBootstrap.Form.Control
-                            type="email"
-                            required="required"
+                            type='email'
+                            required='required'
                             // value={email}
                             onChange={handleEmailChange}
                         />
                     </ReactBootstrap.Col>
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Group
-                    className="mb-3"
+                    className='mb-3'
                     as={ReactBootstrap.Row}
-                    controlId="password"
+                    controlId='password'
                 >
                     <ReactBootstrap.Form.Label column sm={3}>
                         Password:
                     </ReactBootstrap.Form.Label>
                     <ReactBootstrap.Col sm={9}>
                         <ReactBootstrap.Form.Control
-                            type="password"
-                            required="required"
+                            type='password'
+                            required='required'
                             value={password}
                             onChange={handlePasswordChange}
                         />
                     </ReactBootstrap.Col>
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Group
-                    className="mb-3"
+                    className='mb-3'
                     as={ReactBootstrap.Row}
-                    controlId="first-name"
+                    controlId='first-name'
                 >
                     <ReactBootstrap.Form.Label column sm={3}>
                         First Name:
                     </ReactBootstrap.Form.Label>
                     <ReactBootstrap.Col sm={9}>
                         <ReactBootstrap.Form.Control
-                            type="text"
-                            required="required"
+                            type='text'
+                            required='required'
                             value={fname}
                             onChange={handleFnameChange}
                         />
                     </ReactBootstrap.Col>
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Group
-                    className="mb-3"
+                    className='mb-3'
                     as={ReactBootstrap.Row}
-                    controlId="last-name"
+                    controlId='last-name'
                 >
                     <ReactBootstrap.Form.Label column sm={3}>
                         Last Name:
@@ -280,13 +255,13 @@ function CreateNewAccountForm(props) {
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Row>
                     <ReactBootstrap.Col>
-                        <ReactBootstrap.Button type="submit">
+                        <ReactBootstrap.Button type='submit'>
                             Create Account
                         </ReactBootstrap.Button>
                     </ReactBootstrap.Col>
                 </ReactBootstrap.Row>
                 <ReactBootstrap.Row>
-                    <ReactBootstrap.Col className="mt-3">
+                    <ReactBootstrap.Col className='mt-3'>
                         <CloseFormButton
                             as={ReactBootstrap.Col}
                             showForm={props.closeForm}
@@ -306,10 +281,9 @@ function AlertMessage(props) {
     //props message
     return (
         <ReactBootstrap.Container>
-            <ReactBootstrap.Alert variant="warning">
+            <ReactBootstrap.Alert variant='warning'>
                 {props.message}
             </ReactBootstrap.Alert>
         </ReactBootstrap.Container>
     );
-    // return <p >{props.message}</p>
 }

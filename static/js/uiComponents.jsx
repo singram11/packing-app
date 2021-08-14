@@ -10,7 +10,7 @@ function GearList(props) {
         gear.push(gearCard);
     }
 
-    return <div className="all-gear">{gear}</div>;
+    return <div className='all-gear'>{gear}</div>;
 }
 
 function GearItem(props) {
@@ -18,8 +18,8 @@ function GearItem(props) {
 
     const url = `/gear/${id}`;
     return (
-        <div className="gear-item">
-            <ReactRouterDOM.NavLink activeClassName="selected" to={url}>
+        <div className='gear-item'>
+            <ReactRouterDOM.NavLink activeClassName='selected' to={url}>
                 {gearName}
             </ReactRouterDOM.NavLink>
         </div>
@@ -38,17 +38,17 @@ function GearItemDetails(props) {
     }, [weight]);
 
     // const noShowWeight = weight != null;
-    console.log(`weight: ${weight}`);
-    console.log(`showWeight: ${showWeight}`);
+    // console.log(`weight: ${weight}`);
+    // console.log(`showWeight: ${showWeight}`);
 
     return (
         <ReactBootstrap.Card
-            md="auto"
-            className="mt-2 gear-card"
+            md='auto'
+            className='mt-2 gear-card'
             style={{ width: '25rem' }}
         >
             <ReactBootstrap.Card.Img
-                variant="top"
+                variant='top'
                 src={img}
                 style={{ width: 'auto' }}
             />
@@ -58,7 +58,7 @@ function GearItemDetails(props) {
                     {description}
                 </ReactBootstrap.Card.Text>
             </ReactBootstrap.Card.Body>
-            <ReactBootstrap.ListGroup className="list-group-flush">
+            <ReactBootstrap.ListGroup className='list-group-flush'>
                 {{ showWeight } ? (
                     <ReactBootstrap.ListGroupItem>
                         Weight: {weight} oz
@@ -71,30 +71,6 @@ function GearItemDetails(props) {
     );
 }
 
-// function GearItemDetailCard(props) {
-//     const { gearName, weight, description, url } = props;
-
-//     return (
-//         <div className="gear-item">
-//             <p>{gearName}</p>
-//             <p>{weight}</p>
-//             <p>{description}</p>
-//             <p>{url}</p>
-//         </div>
-//     );
-// }
-
-// function Navbar() {
-//     // const { logo, brand, children, className } = props;
-
-//     const navLinks = children.map((el, i) => {
-//       return (
-//         <div key={i} className="nav-item">
-//           {el}
-//         </div>
-//       );
-//     });
-
 function AddButton(props) {
     //props.handleClick = setShowForm
     //props.name
@@ -105,7 +81,7 @@ function AddButton(props) {
     return (
         <ReactBootstrap.Button
             variant={props.buttonVariant}
-            size="sm"
+            size='sm'
             onClick={handleClick}
         >
             Add {props.name}
@@ -192,7 +168,7 @@ function NewGearButton(props) {
         props.onClick(true);
     }
     return (
-        <ReactBootstrap.Button variant="link" size="sm" onClick={onClick}>
+        <ReactBootstrap.Button variant='link' size='sm' onClick={onClick}>
             Add New Gear
         </ReactBootstrap.Button>
     );
@@ -245,13 +221,13 @@ function AddGearDropDown(props) {
 
     return (
         <ReactBootstrap.Row>
-            <ReactBootstrap.Col md="auto">Select Gear:</ReactBootstrap.Col>
-            <ReactBootstrap.Col md="auto">
+            <ReactBootstrap.Col md='auto'>Select Gear:</ReactBootstrap.Col>
+            <ReactBootstrap.Col md='auto'>
                 <ReactBootstrap.Form.Select
-                    className="mb-2"
+                    className='mb-2'
                     onChange={handleGearChange}
                 >
-                    <option value="Select Your Gear">
+                    <option value='Select Your Gear'>
                         --Select Your Gear--
                     </option>
                     {gearArr.map((gearArr) => (
@@ -262,7 +238,7 @@ function AddGearDropDown(props) {
                 </ReactBootstrap.Form.Select>
             </ReactBootstrap.Col>
             <ReactBootstrap.Col>
-                <ReactBootstrap.Button type="submit" onClick={handleSubmit}>
+                <ReactBootstrap.Button type='submit' onClick={handleSubmit}>
                     Select
                 </ReactBootstrap.Button>
             </ReactBootstrap.Col>
@@ -339,14 +315,14 @@ function AddGearForm(props) {
     return (
         <React.Fragment>
             <ReactBootstrap.Form onSubmit={handleSubmit}>
-                <ReactBootstrap.Row className="mb-2">
+                <ReactBootstrap.Row className='mb-2'>
                     <ReactBootstrap.Form.Group as={ReactBootstrap.Col}>
                         <ReactBootstrap.Form.Label>
                             Gear Name:
                         </ReactBootstrap.Form.Label>
                         <ReactBootstrap.Form.Control
-                            type="text"
-                            required="required"
+                            type='text'
+                            required='required'
                             value={gearName}
                             onChange={handleNameChange}
                         />
@@ -356,41 +332,41 @@ function AddGearForm(props) {
                             Weight (oz):
                         </ReactBootstrap.Form.Label>
                         <ReactBootstrap.Form.Control
-                            type="number"
+                            type='number'
                             value={weight}
                             onChange={handleWeightChange}
                         />
                     </ReactBootstrap.Form.Group>
                 </ReactBootstrap.Row>
-                <ReactBootstrap.Form.Group className="mb-2">
+                <ReactBootstrap.Form.Group className='mb-2'>
                     <ReactBootstrap.Form.Label>
                         Description:
                     </ReactBootstrap.Form.Label>
                     <ReactBootstrap.Form.Control
-                        as="textarea"
+                        as='textarea'
                         rows={3}
                         value={description}
                         onChange={handleDescriptionChange}
                     />
                 </ReactBootstrap.Form.Group>
-                <ReactBootstrap.Form.Group className="mb-2">
+                <ReactBootstrap.Form.Group className='mb-2'>
                     <ReactBootstrap.Form.Label>
                         Upload Image:
                     </ReactBootstrap.Form.Label>
                     <ReactBootstrap.Form.Control
-                        type="file"
+                        type='file'
                         onChange={handleImageChange}
                     />
                     {preview && (
                         <img
-                            className="mt-2 image-preview"
+                            className='mt-2 image-preview'
                             src={preview}
                             style={{ height: '150px' }}
                         />
                     )}
                 </ReactBootstrap.Form.Group>
 
-                <ReactBootstrap.Button className="mt-2" type="submit">
+                <ReactBootstrap.Button className='mt-2' type='submit'>
                     Submit
                 </ReactBootstrap.Button>
             </ReactBootstrap.Form>
@@ -400,7 +376,7 @@ function AddGearForm(props) {
 
 function ToastMessage(props) {
     return (
-        <ReactBootstrap.ToastContainer className="p-3" position="top-end">
+        <ReactBootstrap.ToastContainer className='p-3' position='top-end'>
             <ReactBootstrap.Toast
                 // bg="success"
                 onClose={() => props.setShow(false)}
@@ -409,12 +385,7 @@ function ToastMessage(props) {
                 autohide
             >
                 <ReactBootstrap.Toast.Header>
-                    {/* <img
-        src="holder.js/20x20?text=%20"
-        className="rounded me-2"
-        alt=""
-      /> */}
-                    <strong className="toast-text me-auto">Item Added!</strong>
+                    <strong className='toast-text me-auto'>Item Added!</strong>
                 </ReactBootstrap.Toast.Header>
                 <ReactBootstrap.Toast.Body></ReactBootstrap.Toast.Body>
             </ReactBootstrap.Toast>

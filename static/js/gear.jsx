@@ -1,6 +1,5 @@
 function ShowGearDetails() {
     const { id } = ReactRouterDOM.useParams();
-    console.log(id);
     const [gearDetail, setGearDetail] = React.useState({});
 
     const url = `/api/gear/${id}`;
@@ -47,7 +46,7 @@ function ShowGear(props) {
     }, []);
 
     return (
-        <div className="mt-4 gear-sidebar">
+        <div className='mt-4 gear-sidebar'>
             <p>My Gear:</p>
             <GearList gear={gear} />
         </div>

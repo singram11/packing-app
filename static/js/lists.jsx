@@ -32,13 +32,8 @@ function ListsPage(props) {
         renderListsOnMount();
     }, []);
 
-    //   if (Object.keys(lists).length > 0 && !id) {
-    //     console.log('butts');
-    //     history.push('/lists/44');
-    // }
-
     return (
-        <div className="mt-2 lists-sidebar">
+        <div className='mt-2 lists-sidebar'>
             <p>My Lists:</p>
             <Lists refreshLists={renderLists} lists={lists} />
             <AddList renderLists={renderLists} />
@@ -67,13 +62,13 @@ function ListDetailsPage(props) {
 
     return (
         <React.Fragment>
-            <ReactBootstrap.Row className="justify-content-between mt-2">
+            <ReactBootstrap.Row className='justify-content-between mt-2'>
                 <ReactBootstrap.Col>
                     <h4 style={{ color: '#214233' }}>
                         {listDetails['list_name']}
                     </h4>
                 </ReactBootstrap.Col>
-                <ReactBootstrap.Col md="auto">
+                <ReactBootstrap.Col md='auto'>
                     <AddListItems onSubmit={renderListItems} id={id} />
                 </ReactBootstrap.Col>
             </ReactBootstrap.Row>

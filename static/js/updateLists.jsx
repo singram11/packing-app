@@ -4,11 +4,6 @@ function DeleteListItemButton(props) {
     function deleteListItem(id, event) {
         event.preventDefault();
 
-        // const postBody = {
-        //     method: 'POST',
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: JSON.stringify({id:id})
-        // };
         const url = `/api/list-item/${id}`;
         fetch(url, { method: 'DELETE' })
             .then((response) => response.json())
@@ -17,10 +12,10 @@ function DeleteListItemButton(props) {
 
     return (
         <ReactBootstrap.Button
-            className="trash-can"
+            className='trash-can'
             onClick={(event) => deleteListItem(id, event)}
         >
-            <img src="/static/images/icons/trash-fill.svg" />
+            <img src='/static/images/icons/trash-fill.svg' />
         </ReactBootstrap.Button>
     );
 }
@@ -67,23 +62,18 @@ function AddListItemForm(props) {
         <React.Fragment>
             <ToastMessage setShow={setShowToast} show={showToast} />
             <ReactBootstrap.Card
-                className="ml-3 list-item-form"
+                className='ml-3 list-item-form'
                 style={{ width: '70vw' }}
-                md="auto"
+                md='auto'
             >
-                {/* <ReactBootstrap.Container fluid className="list-item-form"> */}
-                <ReactBootstrap.Form
-                    fluid
-                    // className="my-2"
-                    onSubmit={handleSubmit}
-                >
+                <ReactBootstrap.Form fluid onSubmit={handleSubmit}>
                     <ReactBootstrap.Form.Group>
                         <ReactBootstrap.Form.Label>
                             Item Name:
                         </ReactBootstrap.Form.Label>
                         <ReactBootstrap.Form.Control
-                            type="text"
-                            required="required"
+                            type='text'
+                            required='required'
                             value={itemName}
                             onChange={handleListNameChange}
                         />
@@ -99,20 +89,20 @@ function AddListItemForm(props) {
                     </ReactBootstrap.Form.Group>
                     <ReactBootstrap.Row>
                         <ReactBootstrap.Col
-                            className="justify-content-start"
-                            md="auto"
+                            className='justify-content-start'
+                            md='auto'
                         >
                             <ReactBootstrap.Button
-                                size="sm"
-                                className="mt-2"
-                                type="submit"
+                                size='sm'
+                                className='mt-2'
+                                type='submit'
                             >
                                 Submit
                             </ReactBootstrap.Button>
                         </ReactBootstrap.Col>
                         <ReactBootstrap.Col
-                            className="justify-content-start"
-                            md="auto"
+                            className='justify-content-start'
+                            md='auto'
                         >
                             <CloseFormButton
                                 buttonClass={'mt-2'}
@@ -124,8 +114,6 @@ function AddListItemForm(props) {
                         </ReactBootstrap.Col>
                     </ReactBootstrap.Row>
                 </ReactBootstrap.Form>
-
-                {/* </ReactBootstrap.Container> */}
             </ReactBootstrap.Card>
         </React.Fragment>
     );
@@ -139,11 +127,6 @@ function AddListForm(props) {
     const [category, setCategory] = React.useState('');
 
     const history = ReactRouterDOM.useHistory();
-
-    // function onResponse(){
-    //     props.renderLists();
-    //     props.showForm(false);
-    // }
 
     function handleListNameChange(event) {
         setName(event.target.value);
@@ -162,10 +145,6 @@ function AddListForm(props) {
             body: JSON.stringify({ name: listName, category: category }),
         };
 
-        // fetch('/api/lists', postBody).then(
-        //     () => props.renderLists && props.renderLists()
-        // );
-
         fetch('/api/lists', postBody)
             .then((response) => response.json())
             .then((jsonResponse) => {
@@ -182,43 +161,43 @@ function AddListForm(props) {
     return (
         <ReactBootstrap.Form
             onSubmit={handleSubmit}
-            className="mr-4 mt-3 pt-3 add-list-form"
+            className='mr-4 mt-3 pt-3 add-list-form'
         >
-            <ReactBootstrap.Form.Group as={ReactBootstrap.Row} className="pr-5">
+            <ReactBootstrap.Form.Group as={ReactBootstrap.Row} className='pr-5'>
                 <ReactBootstrap.Col>
                     <ReactBootstrap.Form.Label>
                         List Name:
                     </ReactBootstrap.Form.Label>
                     <ReactBootstrap.Form.Control
-                        type="text"
-                        required="required"
+                        type='text'
+                        required='required'
                         value={listName}
                         onChange={handleListNameChange}
                     />
                 </ReactBootstrap.Col>
             </ReactBootstrap.Form.Group>
-            <ReactBootstrap.Form.Group className="mb-2">
+            <ReactBootstrap.Form.Group className='mb-2'>
                 <ReactBootstrap.Form.Label>Category:</ReactBootstrap.Form.Label>
                 <ReactBootstrap.Form.Control
                     value={category}
-                    className="mr-2"
+                    className='mr-2'
                     onChange={handleCategoryChange}
                 />
                 <ReactBootstrap.Form.Text>Optional</ReactBootstrap.Form.Text>
             </ReactBootstrap.Form.Group>
             <ReactBootstrap.Row>
-                <ReactBootstrap.Col className="justify-content-start" md="auto">
+                <ReactBootstrap.Col className='justify-content-start' md='auto'>
                     <ReactBootstrap.Button
-                        className="mr-2 mb-2"
-                        type="submit"
-                        size="sm"
+                        className='mr-2 mb-2'
+                        type='submit'
+                        size='sm'
                     >
                         Submit
                     </ReactBootstrap.Button>
                 </ReactBootstrap.Col>
-                <ReactBootstrap.Col className="justify-content-start" md="auto">
+                <ReactBootstrap.Col className='justify-content-start' md='auto'>
                     <CloseFormButton
-                        buttonClass="close-list-form"
+                        buttonClass='close-list-form'
                         buttonVariant={'outline-primary'}
                         buttonSize={'sm'}
                         showForm={props.showForm}
@@ -259,7 +238,7 @@ function AddListItems(props) {
     return (
         <React.Fragment>
             {showForm ? (
-                <ReactBootstrap.Row md="auto" fluid>
+                <ReactBootstrap.Row md='auto' fluid>
                     <AddListItemForm
                         onSubmit={props.onSubmit}
                         id={props.id}

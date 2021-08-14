@@ -16,7 +16,7 @@ function Lists(props) {
         listsArr.push(listCard);
     }
 
-    return <div className="list-container mb-3">{listsArr}</div>;
+    return <div className='list-container mb-3'>{listsArr}</div>;
 }
 
 function ListCard(props) {
@@ -24,8 +24,8 @@ function ListCard(props) {
     const url = `/lists/${id}`;
 
     return (
-        <div className="list-row">
-            <ReactRouterDOM.NavLink activeClassName="selected" to={url}>
+        <div className='list-row'>
+            <ReactRouterDOM.NavLink activeClassName='selected' to={url}>
                 {name}
             </ReactRouterDOM.NavLink>
             <DeleteListButton
@@ -42,11 +42,6 @@ function DeleteListButton(props) {
     function deleteList(id, event) {
         event.preventDefault();
 
-        // const postBody = {
-        //     method: 'POST',
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: JSON.stringify({id:id})
-        // };
         const url = `/api/lists/${id}`;
 
         fetch(url, { method: 'DELETE' })
@@ -56,10 +51,10 @@ function DeleteListButton(props) {
 
     return (
         <ReactBootstrap.Button
-            className="trash-can"
+            className='trash-can'
             onClick={(event) => deleteList(id, event)}
         >
-            <img src="/static/images/icons/trash-fill.svg" />
+            <img src='/static/images/icons/trash-fill.svg' />
         </ReactBootstrap.Button>
     );
 }
@@ -68,7 +63,6 @@ function ShowItemCategories(props) {
     // renderListItems, listDetails, gear, renderGear
     const listDetails = props.listDetails['list_content'];
 
-    console.log(listDetails);
     const listCategories = [];
 
     for (const category in listDetails) {
@@ -87,7 +81,7 @@ function ShowItemCategories(props) {
     }
     return (
         <React.Fragment>
-            <div className="category-container">{listCategories}</div>
+            <div className='category-container'>{listCategories}</div>
         </React.Fragment>
     );
 }
@@ -96,8 +90,6 @@ function ShowListItems(props) {
     // props renderListItems, ListItems
     const listItems = props.listItems;
     const listItemsArr = [];
-
-    console.log(listItems);
 
     for (const listItem in listItems) {
         let listItemCard = '';
@@ -127,8 +119,8 @@ function ShowListItems(props) {
 
     return (
         <React.Fragment>
-            <div className="category-name font-weight-bold">{props.name}</div>
-            <div className="list-item-container">{listItemsArr}</div>
+            <div className='category-name font-weight-bold'>{props.name}</div>
+            <div className='list-item-container'>{listItemsArr}</div>
         </React.Fragment>
     );
 }
@@ -138,13 +130,13 @@ function ItemCard(props) {
 
     return (
         // <div className="list-item">
-        <ReactBootstrap.Card className="mb-2 item-card">
-            <ReactBootstrap.Card.Body className="p-1">
-                <ReactBootstrap.Row className="justify-content-between">
+        <ReactBootstrap.Card className='mb-2 item-card'>
+            <ReactBootstrap.Card.Body className='p-1'>
+                <ReactBootstrap.Row className='justify-content-between'>
                     <ReactBootstrap.Col>
-                        <div className="item-name font-weight-bold">{name}</div>
+                        <div className='item-name font-weight-bold'>{name}</div>
                     </ReactBootstrap.Col>
-                    <ReactBootstrap.Col sm="auto">
+                    <ReactBootstrap.Col sm='auto'>
                         <DeleteListItemButton
                             renderListItems={props.renderListItems}
                             id={id}
@@ -155,13 +147,13 @@ function ItemCard(props) {
                 </ReactBootstrap.Row>
 
                 {gear ? (
-                    <ReactBootstrap.Row className="justify-content-between">
+                    <ReactBootstrap.Row className='justify-content-between'>
                         <ReactBootstrap.Col>
-                            <div className="item-details">{gear}</div>
+                            <div className='item-details'>{gear}</div>
                         </ReactBootstrap.Col>
-                        <ReactBootstrap.Col sm="auto">
+                        <ReactBootstrap.Col sm='auto'>
                             <img
-                                className="gear-image-sm"
+                                className='gear-image-sm'
                                 src={gear_img}
                                 style={{ width: '50px' }}
                             />
