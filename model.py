@@ -7,204 +7,187 @@ db = SQLAlchemy()
 
 
 class User(db.Model):
-    """ A generic list item"""
+    """A generic list item"""
 
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
-    user_id = db.Column(db.Integer,
-                        autoincrement=True,
-                        primary_key=True)
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String, nullable=False)
     lname = db.Column(db.String)
     email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)   ## hash this 
+    password = db.Column(db.String, nullable=False)  ## hash this
 
-    lists = db.relationship('List', back_populates='user')
+    lists = db.relationship("List", back_populates="user")
 
     def json_format(self):
         """return user information in a JSON serializable format"""
 
-        return {'email': self.email,
-                'first_name': self.fname,
-                'last_name':self.lname}
-
+        return {"email": self.email, "first_name": self.fname, "last_name": self.lname}
 
     def __repr__(self):
-        return f'<User user_id={self.user_id} email={self.email}>'
+        return f"<User user_id={self.user_id} email={self.email}>"
 
 
 class List_category(db.Model):
-    """ A list category """
+    """A list category"""
 
-    __tablename__ = 'list_categories'
+    __tablename__ = "list_categories"
 
-    cat_id = db.Column(db.Integer,
-                    autoincrement=True,
-                    primary_key=True,
-                    nullable=False)
+    cat_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
     name = db.Column(db.String, nullable=False)
 
-    lists = db.relationship('List', back_populates='category')
-
+    lists = db.relationship("List", back_populates="category")
 
     def __repr__(self):
-        return f'<List_category cat_id={self.cat_id} name={self.name}>'
-
+        return f"<List_category cat_id={self.cat_id} name={self.name}>"
 
 
 class List(db.Model):
-    """ A list """
+    """A list"""
 
-    __tablename__ = 'lists'
+    __tablename__ = "lists"
 
-    list_id = db.Column(db.Integer,
-                        autoincrement=True,
-                        primary_key=True,
-                        nullable=False)
+    list_id = db.Column(
+        db.Integer, autoincrement=True, primary_key=True, nullable=False
+    )
     name = db.Column(db.String, nullable=False)
-    cat_id = db.Column(db.Integer, db.ForeignKey('list_categories.cat_id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    
-    category = db.relationship('List_category', back_populates='lists')
-    items = db.relationship('Item', secondary='list_items', back_populates='lists')
-    user = db.relationship('User', back_populates="lists")
+    cat_id = db.Column(db.Integer, db.ForeignKey("list_categories.cat_id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
+
+    category = db.relationship("List_category", back_populates="lists")
+    items = db.relationship("Item", secondary="list_items", back_populates="lists")
+    user = db.relationship("User", back_populates="lists")
 
     def json_format(self):
         """return list information in a JSON serializable format"""
 
-        return {'name': self.name,
-                'category': self.category.name}
-    
-    def __repr__(self):
-        return f'<List list_id={self.list_id} name={self.name}>'
+        return {"name": self.name, "category": self.category.name}
 
+    def __repr__(self):
+        return f"<List list_id={self.list_id} name={self.name}>"
 
 
 class Item(db.Model):
-    """ A generic list item"""
+    """A generic list item"""
 
-    __tablename__ = 'items'
+    __tablename__ = "items"
 
-    item_id = db.Column(db.Integer,
-                        autoincrement=True,
-                        primary_key=True,
-                        nullable=False)
+    item_id = db.Column(
+        db.Integer, autoincrement=True, primary_key=True, nullable=False
+    )
     name = db.Column(db.String, nullable=False)
-    cat_id = db.Column(db.Integer, db.ForeignKey('item_categories.cat_id'), nullable=False)
-    
-    item_category = db.relationship('Item_category',
-                                    back_populates='items')
-    lists = db.relationship('List', 
-                            secondary='list_items',
-                            back_populates='items')
-    gear = db.relationship('Gear', 
-                            secondary='list_items',
-                            backref='items')
-    
+    cat_id = db.Column(
+        db.Integer, db.ForeignKey("item_categories.cat_id"), nullable=False
+    )
+
+    item_category = db.relationship("Item_category", back_populates="items")
+    lists = db.relationship("List", secondary="list_items", back_populates="items")
+    gear = db.relationship("Gear", secondary="list_items", backref="items")
+
     def json_format(self):
         """Return the Item information in a JSON serializable format"""
 
-        return {'id':self.item_id,
-                'name': self.name,
-                'category': self.item_category.name,}
-
+        return {
+            "id": self.item_id,
+            "name": self.name,
+            "category": self.item_category.name,
+        }
 
     def __repr__(self):
-        return f'<Item item_id={self.item_id} name={self.name}>'
+        return f"<Item item_id={self.item_id} name={self.name}>"
 
 
 class List_item(db.Model):
     """relational table between lists, items and gear"""
-    
-    __tablename__ = 'list_items'
 
-    list_item_id = db.Column(db.Integer,
-                                autoincrement=True,
-                                primary_key=True,
-                                nullable=False)
-    list_id = db.Column(db.Integer, db.ForeignKey('lists.list_id'))
-    item_id = db.Column(db.Integer, db.ForeignKey('items.item_id'))
-    gear_id = db.Column(db.Integer, db.ForeignKey('gear.gear_id'))
+    __tablename__ = "list_items"
 
-    lst = db.relationship('List')
-    item = db.relationship('Item')
-    gear = db.relationship('Gear')
-    
+    list_item_id = db.Column(
+        db.Integer, autoincrement=True, primary_key=True, nullable=False
+    )
+    list_id = db.Column(db.Integer, db.ForeignKey("lists.list_id"))
+    item_id = db.Column(db.Integer, db.ForeignKey("items.item_id"))
+    gear_id = db.Column(db.Integer, db.ForeignKey("gear.gear_id"))
+
+    lst = db.relationship("List")
+    item = db.relationship("Item")
+    gear = db.relationship("Gear")
+
     def json_format(self):
         """Return List_item information in jsonable format"""
-        if self.gear: 
-            return {'id': self.list_item_id,
-                    'list': self.lst.name,
-                    'gear': self.gear.name}
-        else: 
-            return {'id': self.list_item_id,
-                    'list': self.lst.name}
-            
+        if self.gear:
+            return {
+                "id": self.list_item_id,
+                "list": self.lst.name,
+                "gear": self.gear.name,
+            }
+        else:
+            return {"id": self.list_item_id, "list": self.lst.name}
 
     def __repr__(self):
-        return f'<List_item list_item_id={self.list_item_id}>'
+        return f"<List_item list_item_id={self.list_item_id}>"
 
 
 class Item_category(db.Model):
-    """ List item category """
+    """List item category"""
 
-    __tablename__ = 'item_categories'
+    __tablename__ = "item_categories"
 
-    cat_id = db.Column(db.Integer,
-                        autoincrement=True,
-                        primary_key=True,
-                        nullable=False)
+    cat_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
     name = db.Column(db.String, nullable=False)
 
-    items= db.relationship('Item', back_populates='item_category')
-    
+    items = db.relationship("Item", back_populates="item_category")
 
     def __repr__(self):
-        return f'<Item_category cat_id={self.cat_id} name={self.name}>'
+        return f"<Item_category cat_id={self.cat_id} name={self.name}>"
 
 
 class Gear(db.Model):
-    """ A piece of gear """
+    """A piece of gear"""
 
-    __tablename__ = 'gear'
+    __tablename__ = "gear"
 
-    gear_id = db.Column(db.Integer,
-                        autoincrement=True,
-                        primary_key=True,
-                        nullable=False)
+    gear_id = db.Column(
+        db.Integer, autoincrement=True, primary_key=True, nullable=False
+    )
     name = db.Column(db.String, nullable=False)
     weight = db.Column(db.Integer)
-    description = db.Column(db.Text)  
+    description = db.Column(db.Text)
     img = db.Column(db.String)
 
-    # items = db.relationship('Item', 
+    # items = db.relationship('Item',
     #                         secondary='list_items',
     #                         back_populates='gear')
 
     def json_format(self):
         """Return gear information in json serializable format"""
 
-        return {'id': self.gear_id,
-                'name': self.name,
-                'weight': self.weight,
-                'description': self.description,
-                'img': self.img}
+        return {
+            "id": self.gear_id,
+            "name": self.name,
+            "weight": self.weight,
+            "description": self.description,
+            "img": self.img,
+        }
 
     def __repr__(self):
-        return f'<Gear gear_id={self.gear_id} name={self.name}>'
+        return f"<Gear gear_id={self.gear_id} name={self.name}>"
 
 
-def connect_to_db(flask_app, db_uri='postgresql:///packme', echo=True):  #naming convention 
-    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
-    flask_app.config['SQLALCHEMY_ECHO'] = echo
-    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+def connect_to_db(
+    flask_app, db_uri="postgresql:///packme", echo=True
+):  # naming convention
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+    flask_app.config["SQLALCHEMY_ECHO"] = echo
+    flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.app = flask_app
     db.init_app(flask_app)
 
-    print('Connected to DB')
+    print("Connected to DB")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from server import app
+
     connect_to_db(app)
