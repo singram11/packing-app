@@ -270,4 +270,5 @@ def remove_list_items(list_item_id):
 
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run(host="127.0.0.1", debug=True)
+    # app.run(host="127.0.0.1", debug=True)
+    app.run()
