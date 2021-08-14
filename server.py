@@ -10,7 +10,7 @@ import os
 
 
 app = Flask(__name__)
-app.secret_key = "dev"
+app.secret_key = os.environ["FLASK_SECRET_KEY"]
 
 CLOUDINARY_KEY = os.environ["CLOUDINARY_KEY"]
 CLOUDINARY_KEY_SECRET = os.environ["CLOUDINARY_SECRET"]
