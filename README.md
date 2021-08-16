@@ -7,7 +7,6 @@ PackMe is an application that allows users to create, modify and store a variety
 -   [Features](#features)
 -   [Technologies & Stack](#techandstack)
 -   [Setup & Installation](#setup)
--   [About the Developer](#about)<br>
 
 ## <a name="features"></a> Features
 
@@ -16,21 +15,29 @@ PackMe is an application that allows users to create, modify and store a variety
 #### User registration and login
 
 <br>
-
-#### Add/Delete Lists
-
+<br>
+![](static/images/gifs/login.gif)
 <br>
 
-#### Add/Delete Items
+#### Add and Edit Lists and Items
 
+<br>
+<br>
+![](static/images/gifs/add-lists-items.gif)
 <br>
 
 #### Select/Add Gear
 
 <br>
+<br>
+![](static/images/gifs/add-gear.gif)
+<br>
 
 #### View Gear Details
 
+<br>
+<br>
+![](static/images/gifs/gear-details.gif)
 <br>
 
 ## <a name="techandstack"><a> Technologies & Stack
@@ -40,8 +47,6 @@ PackMe is an application that allows users to create, modify and store a variety
 **Backend:** Python, Flask, SQLAlchemy, PostgreSQL<br>
 **FrontEnd:** React, Javascript, Babel, ReactRouter, ReactBootstrap, HTML, CSS<br>
 **API's:** Cloudinary<br>
-
-**Data Model:**
 
 ## <a name="setup"><a> Set-Up and Installation
 
@@ -95,6 +100,8 @@ Make an account with [Cloudinary](https://cloudinary.com/documentation) & get yo
 
 You will also need to create your own [Flask Session](https://flask-session.readthedocs.io/en/latest/) key.
 
+Both the Cloudinary and Flask Session keys should be stored in a secrets.sh file.
+
 ```
 export FLASK_SECRET_KEY="yourKeyHere"
 
@@ -102,21 +109,19 @@ export CLOUDINARY_KEY="yourCloudinaryKeyHere"
 export CLOUDINARY_SECRET="yourCloudinarySecretHere"
 ```
 
-Both the Cloudinary and Flask Session keys should be stored in a secrets.sh file
-
-Load the variables from your secrets.sh into your shell
+Load the variables from your secrets.sh into your shell.
 
 ```
 $ source secrets.sh
 ```
 
-With PostgreSQL installed create a database to store the user information:
+With PostgreSQL installed create a database to store the user information.
 
 ```
 $ createdb packme
 ```
 
-If you want some test users and sample data you can run the seed_database.py file:
+If you want some test users and sample data you can run the seed_database.py file.
 
 ```
 $ python3 seed_database.py
@@ -129,5 +134,3 @@ Then run the server from the command line:
 ```
 $ python3 server.py
 ```
-
-## <a name="about"><a>About the Developer
