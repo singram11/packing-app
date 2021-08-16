@@ -1,6 +1,6 @@
 # PackMe - Packing App
 
-PackMe is an application that allows users to create, modify and store a variety of packing lists all in one place so they can reuse them each time they take a trip. It also allows users to associate specific gear they own with the items on their list so that they can track the details of the gear they own as well as make their lists specific to whatever type of adventure they want to go on.
+PackMe is an application that allows users to create, modify and store a variety of packing lists all in one place so they can reuse them each time they take a trip. It also allows users to associate specific gear they own with the items on their list so that they can track the details of the gear they have as well as make their lists specific to whatever type of adventure they want to go on.
 
 ## Contents
 
@@ -45,8 +45,6 @@ PackMe is an application that allows users to create, modify and store a variety
 
 ## <a name="setup"><a> Set-Up and Installation
 
-<br>
-
 ### Requirements
 
 <br>
@@ -59,7 +57,7 @@ You must have installed:
 -   Cloundinary
     <br>
 
-You will also need (included via CDN):
+You will also need (included via CDN in app.html):
 
 -   React
 -   ReactRouter
@@ -93,9 +91,20 @@ Install dependencies:
 $ pip3 install -r requirements.txt
 ```
 
-Make an account with [Cloudinary](https://cloudinary.com/documentation) & get your API key
+Make an account with [Cloudinary](https://cloudinary.com/documentation) & get your API key.
 
-Store the keys in a file named 'secrets.sh':
+You will also need to create your own [Flask Session](https://flask-session.readthedocs.io/en/latest/) key.
+
+```
+export FLASK_SECRET_KEY="yourKeyHere"
+
+export CLOUDINARY_KEY="yourCloudinaryKeyHere"
+export CLOUDINARY_SECRET="yourCloudinarySecretHere"
+```
+
+Both the Cloudinary and Flask Session keys should be stored in a secrets.sh file
+
+Load the variables from your secrets.sh into your shell
 
 ```
 $ source secrets.sh
@@ -113,7 +122,7 @@ If you want some test users and sample data you can run the seed_database.py fil
 $ python3 seed_database.py
 ```
 
-Note this will DROP the database and recreate it with the demo information - once you have data in your DB you will NOT want to run this unless you want to clear the DB.
+Note: this will drop the database and recreate it with the demo information - once you have data in your DB you will not want to run this unless you want to clear the DB.
 
 Then run the server from the command line:
 
