@@ -12,37 +12,43 @@ PackMe is an application that allows users to create, modify and store a variety
 
 <br>
 
-#### User registration and login
+#### User registration and login:
+
+<br>
+
+<img src="static/gifs/login.gif" width="800" >
 
 <br>
 <br>
-![](/static/gifs/login.gif)
-<br>
 
-#### Add and Edit Lists and Items
+#### Add and Edit Lists and Items:
 
 <br>
-<br>
-![](/static/gifs/add-lists-items.gif)
-<br>
 
-#### Select/Add Gear
+<img src="static/gifs/add-lists-items.gif" width="800" >
 
 <br>
 <br>
-![](/static/gifs/add-gear.gif)
-<br>
 
-#### View Gear Details
+#### Select and Add Gear:
 
 <br>
+
+<img src="static/gifs/add-gear.gif" width="800" >
+
 <br>
-![](/static/gifs/gear-details.gif)
+<br>
+
+#### View Gear Details:
+
+<br>
+
+<img src="static/gifs/gear-details.gif" width="800" >
+
+<br>
 <br>
 
 ## <a name="techandstack"><a> 🌲 Technologies & Stack
-
-<br>
 
 **Backend:** Python, Flask, SQLAlchemy, PostgreSQL<br>
 **FrontEnd:** React, Javascript, Babel, ReactRouter, ReactBootstrap, HTML, CSS<br>
@@ -109,19 +115,19 @@ export CLOUDINARY_KEY="yourCloudinaryKeyHere"
 export CLOUDINARY_SECRET="yourCloudinarySecretHere"
 ```
 
-Load the variables from your secrets.sh into your shell.
+Load the variables from your secrets.sh into your shell:
 
 ```
 $ source secrets.sh
 ```
 
-With PostgreSQL installed create a database to store the user information.
+With PostgreSQL installed create a database to store the user information:
 
 ```
 $ createdb packme
 ```
 
-If you want some test users and sample data you can run the seed_database.py file.
+If you want some test users and sample data you can run the seed_database.py file:
 
 ```
 $ python3 seed_database.py
