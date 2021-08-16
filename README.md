@@ -2,13 +2,13 @@
 
 PackMe is an application that allows users to create, modify and store a variety of packing lists all in one place so they can reuse them each time they take a trip. It also allows users to associate specific gear they own with the items on their list so that they can track the details of the gear they have as well as make their lists specific to whatever type of adventure they want to go on.
 
-## Contents
+## 🌲 Contents
 
 -   [Features](#features)
 -   [Technologies & Stack](#techandstack)
 -   [Setup & Installation](#setup)
 
-## <a name="features"></a> Features
+## <a name="features"></a> 🌲 Features
 
 <br>
 
@@ -16,31 +16,31 @@ PackMe is an application that allows users to create, modify and store a variety
 
 <br>
 <br>
-![](static/images/gifs/login.gif)
+![](/static/images/gifs/login.gif)
 <br>
 
 #### Add and Edit Lists and Items
 
 <br>
 <br>
-![](static/images/gifs/add-lists-items.gif)
+![](/static/images/gifs/add-lists-items.gif)
 <br>
 
 #### Select/Add Gear
 
 <br>
 <br>
-![](static/images/gifs/add-gear.gif)
+![](/static/images/gifs/add-gear.gif)
 <br>
 
 #### View Gear Details
 
 <br>
 <br>
-![](static/images/gifs/gear-details.gif)
+![](/static/images/gifs/gear-details.gif)
 <br>
 
-## <a name="techandstack"><a> Technologies & Stack
+## <a name="techandstack"><a> 🌲 Technologies & Stack
 
 <br>
 
@@ -48,7 +48,7 @@ PackMe is an application that allows users to create, modify and store a variety
 **FrontEnd:** React, Javascript, Babel, ReactRouter, ReactBootstrap, HTML, CSS<br>
 **API's:** Cloudinary<br>
 
-## <a name="setup"><a> Set-Up and Installation
+## <a name="setup"><a> 🌲 Set-Up and Installation
 
 ### Requirements
 
