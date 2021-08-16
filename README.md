@@ -16,28 +16,28 @@ PackMe is an application that allows users to create, modify and store a variety
 
 <br>
 <br>
-![](/static/images/gifs/login.gif)
+![](/static/gifs/login.gif)
 <br>
 
 #### Add and Edit Lists and Items
 
 <br>
 <br>
-![](/static/images/gifs/add-lists-items.gif)
+![](/static/gifs/add-lists-items.gif)
 <br>
 
 #### Select/Add Gear
 
 <br>
 <br>
-![](/static/images/gifs/add-gear.gif)
+![](/static/gifs/add-gear.gif)
 <br>
 
 #### View Gear Details
 
 <br>
 <br>
-![](/static/images/gifs/gear-details.gif)
+![](/static/gifs/gear-details.gif)
 <br>
 
 ## <a name="techandstack"><a> 🌲 Technologies & Stack
